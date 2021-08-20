@@ -2,12 +2,12 @@
 
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
-import { Login } from '../Login';
-import {Registration} from "../Registration";
-import {Profile} from "../Profile";
-import {PasswordRecovery} from "../PasswordRecovery";
-import {PasswordChange} from "../PasswordChange";
-import {Error404} from "../Error404";
+import { Login } from '../Login/Login';
+import {Registration} from "../Registration/Registration";
+import {Profile} from "../Profile/Profile";
+import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
+import {PasswordChange} from "../PasswordChange/PasswordChange";
+import {Error404} from "../Error404/Error404";
 import {SuperComponents} from "../SuperComponents";
 
 export const Routes = () => {

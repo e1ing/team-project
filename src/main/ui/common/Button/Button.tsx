@@ -5,7 +5,7 @@ type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonE
 type ButtonPropsType = DefaultButtonPropsType & {red?: boolean}
 
 export const Button: FC<ButtonPropsType> = ({red, className, ...restProps}) => {
-    const finalClassName = `${red ? styles.red : styles.default} ${className}`
+    const finalClassName = `${red ? styles.button : styles.default} ${className}`
     return (
         <button
             className={finalClassName}
