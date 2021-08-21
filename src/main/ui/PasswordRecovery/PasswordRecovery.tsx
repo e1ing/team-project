@@ -35,13 +35,16 @@ export const RecoveryPassword: React.FC<RecoveryPassPropsType> = (props) => {
                         <h4>Recovery password</h4>
                         <form onSubmit={submit}>
                             <div className={s.fields}>
-                            <Input type="email"/>
+                                <Input 
+                                    id='email'
+                                    type='email'
+                                    placeholder='email' />
                             </div>
                             <span className={s.instruction}>
                                 Enter your email address and we wil send you furher instructions
                             </span>
-                            <div className={s.button}>
-                                <Button type="submit" onClick={() => alert(isSand)}>Send Instructions</Button>
+                            <div className={s.buttonR}>
+                                <Button type="submit" onClick={() => alert('email')}>Send Instructions</Button>
                             </div>
                         </form>
                         <div className={s.blokLink}>

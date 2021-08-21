@@ -37,7 +37,7 @@ export const PasswordRecoveryContainer: React.FC = () => {
             },
             onSubmit: values => {
                 // @ts-ignore
-                dispatch(forgotPass({email: values.email, from: "kelek", message}))
+                dispatch(forgotPass({email: values.email, from, message}))
             }
         }
     )

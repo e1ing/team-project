@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import thunkMiddleware from 'redux-thunk'
+import thunkMiddleware, { ThunkAction } from 'redux-thunk'
 import { recoveryPasswordReducer } from './recovery-password-rebucer';
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
@@ -11,6 +11,13 @@ const rootReducer = combineReducers({
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 export type AppStoreType = ReturnType<typeof rootReducer>
+
+
+
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStoreType, unknown, AllAppActionsType>
+
+
+export type AllAppActionsType = any
 
 
 // чтобы можно было в консоли браузера обращаться к store в любой момент
