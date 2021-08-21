@@ -122,6 +122,44 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
     }
 
 
+    // Generator Form
+
+    const formGenerator = () => {
+        switch(type) {
+            case 'Login':
+                return (
+                    <>
+                    
+                    </>
+                )
+            case 'Register':
+                return (
+                    <>
+
+                    </>
+                )
+            case 'Recovery password':
+                return (
+                    <>
+
+                    </>
+                )
+            case 'New password':
+                return (
+                    <>
+
+                    </>
+                )
+            default:
+                return (
+                    <>
+                    
+                    </>
+                )
+        }
+    }
+
+
     return (
         <>
 
