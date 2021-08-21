@@ -1,5 +1,5 @@
 import { Formik, useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 import { combineReducers } from 'redux';
@@ -21,6 +21,11 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
         type,
         callBack
     } = props;
+
+    const [typeIcon, setTypeIcon] = useState<string>('password')
+    const hideShow = () => {
+        setTypeIcon(typeIcon === "text" ? "password" : "text")
+    }; // I don't know yet or need it
 
 
     // Set initial values for Formik start
@@ -106,7 +111,7 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
     // Reusable Email Field
 
     const emailField = () => {
-        return(
+        return (
             <div>
                 <label htmlFor='email' />
                 <Input
@@ -114,10 +119,51 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
                     type='email'
                     placeholder='email'
                     {...formik.getFieldProps('email')}
-                    />
-                    {formik.errors.confirmPassword && formik.touched.confirmPassword &&
+                />
+                {formik.errors.confirmPassword && formik.touched.confirmPassword &&
                     <div>{formik.errors.confirmPassword}</div>}
             </div>
+        )
+    };
+
+    // Reusable Password Field
+
+    const passwordField = () => {
+        return (
+            <>
+                <div>
+                    <label htmlFor='password' />
+                    <Input
+                        id='password'
+                        placeholder="password"
+                        type={typeIcon}
+                        {...formik.getFieldProps("password")}
+                    />
+                    <span
+                        onClick={hideShow}
+                    >
+                        {typeIcon === "text" ? "🔒" : "🔑"}
+                    </span>
+                    {formik.errors.password && formik.touched.password &&
+                    <div>{formik.errors.password}</div>}
+                </div>
+            </>
+        )
+    };
+
+    //  Confirm Password Field
+
+    const confirmPasswordField = () => {
+        return (
+            <>
+                <div>
+                    <label htmlFor="password" />
+                    <Input
+                        id="password"
+
+                    />
+                </div>
+            </>
         )
     }
 
@@ -125,16 +171,18 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
     // Generator Form
 
     const formGenerator = () => {
-        switch(type) {
+        switch (type) {
             case 'Login':
                 return (
                     <>
-                    
+
                     </>
                 )
             case 'Register':
                 return (
                     <>
+                        {emailField()}
+                        {submitButton()}
 
                     </>
                 )
@@ -153,7 +201,7 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
             default:
                 return (
                     <>
-                    
+
                     </>
                 )
         }
