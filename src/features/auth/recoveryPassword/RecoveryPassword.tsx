@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { passwordReducer } from '../recoveryPassword/recoveryPassword-reducer';
 import { CommonFrom } from '../../../main/ui/common/CommonFrom/CommonFrom';
 
 export const RecoveryPassword = () => {
@@ -17,7 +18,7 @@ export const RecoveryPassword = () => {
         `;
 
         const recoveryHandler = (value: any) => {
-            dispatch(passwordRecovery(value.email, from, message))
+            dispatch(passwordReducer(value.email, from, message))
         }
 
         return (
