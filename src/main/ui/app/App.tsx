@@ -19,6 +19,5 @@ function App() {
   );
 }
 
-// dima
 
 export default App;

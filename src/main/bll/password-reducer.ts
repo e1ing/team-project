@@ -1,14 +1,16 @@
-import { Dispatch } from "redux";
-import { recoveryPasswordApi } from "../dall/api/api-cards";
 
 
-export const passwordReducer = (email: string, from: string, message: {}) => (dispatch: Dispatch) => {
-    recoveryPasswordApi.passwordRecovery(email, from, message)
-        .then(res => {
+type InitialStateType = typeof initialState
+type ActionType = {}
 
-        })
-        .catch(err => {
+const initialState = {}
 
-        })
+export const passwordReducer = (state: InitialStateType = initialState, action: ActionType):InitialStateType => {
+    switch (action){
+        /*case: ""
+            return {...state}*/
+        default:
+            return {...state}
+    }
 }
 

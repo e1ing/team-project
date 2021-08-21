@@ -24,6 +24,7 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
     const [typeIcon, setTypeIcon] = useState<string>('password')
     const hideShow = () => {
         setTypeIcon(typeIcon === "text" ? "password" : "text")
+        alert('ok')
     }; // I don't know yet or need it
 
 

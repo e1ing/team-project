@@ -8,7 +8,7 @@ import {Profile} from "../Profile/Profile";
 import {PasswordChange} from "../PasswordChange/PasswordChange";
 import {Error404} from "../Error404/Error404";
 import {SuperComponents} from "../SuperComponents";
-import { RecoveryPassword } from '../PasswordRecovery/PasswordRecovery';
+import { PasswordRecoveryContainer } from '../PasswordRecovery/PasswordRecoveryContainer';
 
 export const Routes = () => {
     return (
@@ -19,8 +19,8 @@ export const Routes = () => {
                 <Route path={"/registration"} render={() => <Registration/>}/>
                 <Route path={"/profile"} render={() => <Profile/>}/>
 
-                <Route path={"/password-recovery"} render={() => <RecoveryPassword/>}/>
-                
+                <Route path={"/password-recovery"} render={() => <PasswordRecoveryContainer/>}/>
+
                 <Route path={"/password-change"} render={() => <PasswordChange/>}/>
                 <Route path={"/404"} render={() => <Error404/>}/>
                 <Redirect from={"*"} to={"/404"}/>
