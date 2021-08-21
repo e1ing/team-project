@@ -13,8 +13,13 @@ export const Login = () => {
                     <input/>
                     <input/>
                 </div>
+                <a>Forgot Password</a>
+                <button className={style.button}>
+                    login
+                </button>
+                <div style={{color: "gray"}}>Don't have an account?</div>
+                <a style={{color: "#232480", fontWeight: "bold"}}>Sign Up</a>
 
-                <Button>login</Button>
             </div>
 
         </div>
