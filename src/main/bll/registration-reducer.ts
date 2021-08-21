@@ -14,3 +14,9 @@ export const registrationReducer = (state: InitialStateType = initialState, acti
     }
 }
 
+
+//action creators
+export const registerUserAC = () => ({} as const )
+
+
+//thunks creators

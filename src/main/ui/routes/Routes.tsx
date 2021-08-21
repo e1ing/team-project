@@ -8,22 +8,27 @@ import {Profile} from "../Profile/Profile";
 import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
 import {PasswordChange} from "../PasswordChange/PasswordChange";
 import {Error404} from "../Error404/Error404";
-import {SuperComponents} from "../SuperComponents";
+
+const login = "/login";
+const registration = "/registration";
+const profile = "/profile";
+const passwordRecovery = "/password-recovery";
+const passwordChange = "/password-change";
+const error404 = "/404";
+
 
 export const Routes = () => {
     return (
         <div>
             <Switch>
                 <Route path={"/"} exact render={() => <Redirect to={"/"}/>}/>
-                <Route path={"/login"} render={() => <Login/>}/>
-                <Route path={"/registration"} render={() => <Registration/>}/>
-                <Route path={"/profile"} render={() => <Profile/>}/>
-                <Route path={"/password-recovery"} render={() => <PasswordRecovery/>}/>
-                <Route path={"/password-change"} render={() => <PasswordChange/>}/>
-                <Route path={"/404"} render={() => <Error404/>}/>
+                <Route path={login} render={() => <Login/>}/>
+                <Route path={registration} render={() => <Registration/>}/>
+                <Route path={profile} render={() => <Profile/>}/>
+                <Route path={passwordRecovery} render={() => <PasswordRecovery/>}/>
+                <Route path={passwordChange} render={() => <PasswordChange/>}/>
+                <Route path={error404} render={() => <Error404/>}/>
                 <Redirect from={"*"} to={"/404"}/>
-
-                <Route path={"/supercomponents"} render={() => <SuperComponents/>}/>
             </Switch>
         </div>
     )
