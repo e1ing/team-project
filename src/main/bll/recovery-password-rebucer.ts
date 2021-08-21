@@ -34,6 +34,7 @@ type ForgotPasswordData =  {
     message: string
 }
 
+//test
 
 // export const forgotPass = (email: string, from: string, message: string): AppThunk => async dispatch => {
 //     try {
