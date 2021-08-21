@@ -97,7 +97,6 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
         return <>
             <div>
                 <Button
-                    disabled={status === 'loading'}
                     type='submit'
                     className=''
                 >
