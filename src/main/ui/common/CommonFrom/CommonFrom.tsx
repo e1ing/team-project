@@ -1,6 +1,8 @@
 import { Formik, useFormik } from 'formik';
 import React from 'react';
 import { Button } from '../Button/Button';
+import { Input } from '../Input/Input';
+import { combineReducers } from 'redux';
 
 type FormikErrorType = {
     email?: string
@@ -106,7 +108,15 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
     const emailField = () => {
         return(
             <div>
-                
+                <label htmlFor='email' />
+                <Input
+                    id='email'
+                    type='email'
+                    placeholder='email'
+                    {...formik.getFieldProps('email')}
+                    />
+                    {formik.errors.confirmPassword && formik.touched.confirmPassword &&
+                    <div>{formik.errors.confirmPassword}</div>}
             </div>
         )
     }
