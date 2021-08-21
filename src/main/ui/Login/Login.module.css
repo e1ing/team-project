@@ -1,4 +1,32 @@
+.form{
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    border-radius: 2%;
+    padding-top: 20px;
+    padding-inline: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.input {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 60px;
+
+}
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
 .container{
+
     min-height: 100vh;
     background: linear-gradient(180deg, #E6D4DE 0%, #9890C7 100%);
     display: flex;

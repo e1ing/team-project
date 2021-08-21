@@ -4,11 +4,19 @@ import {Button} from "../common/Button/Button";
 export const Login = () => {
     return (
         <div className={style.container}>
-            <div style={{fontSize: "50px", textAlign: "center"}}>It-incubator</div>
-            <div>login</div>
-            <input/>
-            <input/>
-            <Button>login</Button>
+            <div className={style.form}>
+                <div className={style.title}>
+                    <h1>It-incubator</h1>
+                    <h3>Sign In</h3>
+                </div>
+                <div className={style.input}>
+                    <input/>
+                    <input/>
+                </div>
+
+                <Button>login</Button>
+            </div>
+
         </div>
     )
 }
