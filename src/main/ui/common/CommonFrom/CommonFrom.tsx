@@ -2,7 +2,6 @@ import { Formik, useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
-import { combineReducers } from 'redux';
 
 type FormikErrorType = {
     email?: string
@@ -208,8 +207,25 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
                     </>
                 )
         }
+    };
+
+    // Form Title
+
+    const formTitle = (typeTitle: string) => {
+        switch(typeTitle){
+            case "Login":
+                return "Sing in"
+            case "Register":
+                return "Sing ip"
+            case "Recover Password":
+                return "New password"
+            case "New password":
+                return "New password"
+            default:
+                return ''
+        }
     }
-// d
+
 
     return (
         <>
