@@ -224,19 +224,37 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
             default:
                 return ''
         }
-    }
+    };
+
+    //  Form Desctiption
+
+    const formDescription = (type: string) => {
+        switch (type) {
+            case "Register":
+                return "Please fill in the form below"
+            case "Recovery password":
+                return "Please, enter your email";
+            case "New password":
+                return "Please, enter and confirm your new password"
+            default:
+                return ""
+        }
+    };
 
 
     return (
         <>
 
             {/* Form Title */}
+            <span>{formTitle(type)}</span>
 
             {/* Form Discription */}
-
+            <span >{formDescription(type)}</span>
+            <form onSubmit={formik.handleSubmit}/>
             {/* Form generato function */}
-
+                {formGenerator()}
             {/* Form additional field */}
+
 
         </>
     )
