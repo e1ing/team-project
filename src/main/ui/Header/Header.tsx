@@ -1,15 +1,17 @@
-import React, { FC } from 'react';
+import React from 'react'
 import { NavLink } from 'react-router-dom';
-
-type HeaderPropsType = {}
-
-const Header: FC<HeaderPropsType> = ({}) => {
+import {PATH} from "../routes/Routes";
+import style from "./Header.module.css"
+function Header() {
     return (
-        <header>
-            <div>
-                <NavLink to={"/login"}>Profile</NavLink>
-
-            </div>
-        </header>
+        <div className={style.container}>
+            <NavLink to={PATH.SIGN_UP}>sign Up</NavLink>
+            <NavLink to={PATH.LOGIN}>login</NavLink>
+            <NavLink to={PATH.PROFILE}>profile</NavLink>
+            <NavLink to={PATH.PASSWORD_CHANGE}>new password</NavLink>
+            <NavLink to={PATH.SUPER_COMPONENTS}>superComponents</NavLink>
+        </div>
     )
 }
+
+export default Header

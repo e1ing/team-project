@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import {HashRouter} from "react-router-dom";
 import {SuperComponents} from "../SuperComponents";
 import {Routes} from "../routes/Routes";
-import Header from "../routes/Header";
+import Header from "../Header/Header";
 
 function App() {
   return (
