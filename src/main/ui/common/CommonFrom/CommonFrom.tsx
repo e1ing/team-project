@@ -145,7 +145,7 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
                         {typeIcon === "text" ? "🔒" : "🔑"}
                     </span>
                     {formik.errors.password && formik.touched.password &&
-                    <div>{formik.errors.password}</div>}
+                        <div>{formik.errors.password}</div>}
                 </div>
             </>
         )
@@ -157,15 +157,18 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
         return (
             <>
                 <div>
-                    <label htmlFor="password" />
+                    <label htmlFor="confirmPassword" />
                     <Input
-                        id="password"
-
+                        type="password"
+                        placeholder="confirm password"
+                        {...formik.getFieldProps("comnirmPassword")}
                     />
+                    {formik.errors.confirmPassword && formik.touched.confirmPassword &&
+                        <div>{formik.errors.confirmPassword}</div>}
                 </div>
             </>
         )
-    }
+    };
 
 
     // Generator Form
@@ -181,15 +184,15 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
             case 'Register':
                 return (
                     <>
-                        {emailField()}
-                        {submitButton()}
+
 
                     </>
                 )
             case 'Recovery password':
                 return (
                     <>
-
+                        {emailField()}
+                        {submitButton()}
                     </>
                 )
             case 'New password':
