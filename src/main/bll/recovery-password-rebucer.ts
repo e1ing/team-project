@@ -3,6 +3,8 @@ import { recoveryPasswordApi } from "../dall/api/api-cards";
 import { AppThunk } from "./store";
 
 
+export type StatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+
 const initialState = {
     massages: false,
     passIsRecovered: false,
@@ -16,17 +18,19 @@ export const recoveryPasswordReducer = (state: any = initialState, action: any):
 }
 
 export const passwordRecovery = (email: string, from: string, message: {}) => (dispatch: Dispatch) => {
-    debugger
     recoveryPasswordApi.passwordRecovery(email, from, message)
         .then(response => {
-            console.log(email)
-            
-        })
-        .catch((e) => {
 
         })
-    
+        .catch((e) => {
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console');
+        })
 }
+
+
+export const changeStatusAC = (satus: StatusType) => ({type: "CHANGE-STATUS", status} as const)
 
 type ForgotPasswordData =  {
     email: string
