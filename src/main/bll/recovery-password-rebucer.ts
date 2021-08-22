@@ -1,51 +1,43 @@
-import {Dispatch} from "redux";
-import { recoveryPasswordApi } from "../dall/api/api-cards";
-import { changeStatusAC } from "./auth-reducer";
-import { AppThunk } from "./store";
-
+import { ThunkAction } from "redux-thunk"
+import { authAPI } from "../dall/api/api-cards"
+import { AppActionsType, AppRootStateType } from "./store"
 
 
 
 const initialState = {
-    massages: false,
-    passIsRecovered: false,
+    errorMessage: null
 }
 
-export const recoveryPasswordReducer = (state: any = initialState, action: any): any => {
+type InitialStateType = {
+    errorMessage: string | null
+}
+
+export const restorePasswordReducer = (state: InitialStateType = initialState, action: AppActionsType): InitialStateType => {
     switch (action.type) {
+        case "SET-ERROR-MESSAGE":
+            return { ...state, errorMessage: action.errorMessage }
         default:
-            return {...state}
+            return state
     }
 }
 
-export const passwordRecovery = (email: string, from: string, message: {}) => (dispatch: Dispatch) => {
-    recoveryPasswordApi.passwordRecovery(email, from, message)
-        .then(res => {
-            dispatch(changeStatusAC("succeeded"))
-        })
-        .catch((e) => {
-            const error = e.res
-                ? e.res.data.error
-                : (e.message + ', more details in the console');
+// actions
+export const setErrorMessageAC = (errorMessage: string) => (
+    { type: "SET-ERROR-MESSAGE", errorMessage })
 
-                dispatch(changeStatusAC("failed"))
-        })
-}
+// thunks
+export const restorePasswordTC = (email: string): ThunkAction<void, AppRootStateType, unknown, AppActionsType> =>
+    async (dispatch) => {
+        try {
+            const res = await authAPI.restorePassword(email)
+            dispatch(setErrorMessageAC(`Recovery instructions was sent to email: ${email}`))
+        } catch (e) {
+            const error = e.response ? e.response.data.error : (`Restore password failed: ${e.message}.`)
+            alert(error)
+        } finally {
+            // some code...
+        }
+    }
 
-
-
-
-type ForgotPasswordData =  {
-    email: string
-    from: string
-    message: string
-}
-
-//test
-
-// export const forgotPass = (email: string, from: string, message: string): AppThunk => async dispatch => {
-//     try {
-//         await recoveryPasswordApi.passwordRecovery(email, from, message)
-//     }
-// }
-  
+// types
+export type RestorePasswordReducerActionsType = ReturnType<typeof setErrorMessageAC>

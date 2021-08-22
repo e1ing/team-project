@@ -1,81 +1,98 @@
 import React from 'react';
 import { Button } from '../common/Button/Button';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { Input } from '../common/Input/Input';
 import s from "./PasswordRecovery.module.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { AppRootStateType } from '../../bll/store';
+import { useFormik } from "formik";
+import { RequestStatusType } from '../../bll/auth-reducer';
+import { restorePasswordTC } from '../../bll/recovery-password-rebucer';
 
-type RecoveryPassPropsType = {
-    submit: any
-    changeHandler: any
-    emailValue: any
-    status: any
-    errors: any
-    isSand: boolean
+type FormikErrorType = {
+    email?: string
 }
 
-export const RecoveryPassword: React.FC<RecoveryPassPropsType> = (props) => {
+export const RestorePassword = React.memo(() => {
 
-    const {
-        submit,
-        changeHandler,
-        emailValue,
-        status,
-        errors,
-        isSand,
-    } = props
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.loginReducer.isLoggedIn)
+    const errorMessage = useSelector<AppRootStateType, string | null>(message => message.recoveryPassword.errorMessage)
+    // const status = useSelector<AppRootStateType, RequestStatusType>(state => state.appReducer.status)
+    const dispatch = useDispatch()
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+        },
+        validate: (values) => {
 
+            const error: FormikErrorType = {}
+            if (!values.email) {
+                error.email = "Required"
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                error.email = "Invalid email address"
+            }
+            return error
+        },
+        onSubmit: values => {
+            dispatch(restorePasswordTC(values.email))
+            formik.resetForm()
+        }
+    })
 
+    if (errorMessage?.slice(0, 8) === "Recovery") {
+        return <Redirect to={"/checkEmail"} />
+    }
+
+    if (isLoggedIn) {
+        return <Redirect to={"/"} />
+    }
 
     return (
         <div className={s.container}>
-            <div className={s.block}>
-                <h3>It-incubator</h3>
-                {!isSand
-                    ? <div>
-                        <h4>Recovery password</h4>
-                        <form onSubmit={submit}>
-                            <div className={s.fields}>
-                                <Input 
-                                    id='email'
-                                    type='email'
-                                    placeholder='email'
-                                    onChange={changeHandler}
-                                    value={emailValue}
-                                    />
-                            </div>
-                            <span className={s.instruction}>
-                                Enter your email address and we wil send you furher instructions
-                            </span>
-                            <div className={s.buttonR}>
-                                <Button type="submit" >Send Instructions</Button>
-                            </div>
-                        </form>
-                        <div className={s.blokLink}>
-                            <span className={s.question}>Did you remember your password ?</span>
-                            <NavLink to="/login"><span className={s.link}>Try logging in</span></NavLink>
-                        </div>
-
-                    </div> : <Message email={emailValue} />
-                }
-            </div>
+            <form onSubmit={formik.handleSubmit}>
+                <div className={s.block}>
+                    <MainTitle title={"It-Incubator"} />
+                    <h4 >Forgot your password?</h4>
+                    <div className={s.inputWrap}>
+                        <Input
+                            type={"email"}
+                            {...formik.getFieldProps("email")}
+                            // label={"Email"}
+                            autoComplete="off"
+                        />
+                        {formik.touched.email && formik.errors.email
+                            ? <div>{formik.errors.email}</div>
+                            : <div>&nbsp;</div>
+                        }
+                    </div>
+                    <p className={s.instruction}>
+                        Enter your email address and we will send you further instructions
+                    </p>
+                    <Button
+                        type={"submit"}
+                        // disabled={status === "loading"}
+                        className={s.button}>
+                        Send Instructions
+                    </Button>
+                    <div className={s.blokLink}>
+                        <span className={s.question}>Did you remember your password?</span>
+                        <NavLink to={"/login"} ><span className={s.link}>Try logging in</span></NavLink>
+                    </div>
+                </div>
+            </form>
         </div>
-
     )
+})
+
+type MainTitlePropsType = {
+    title: string
+    textStyle?: string
 }
 
-type MessagePropsType = {
-    email: string
-}
-
-const Message = (props: MessagePropsType) => {
+export const MainTitle = React.memo((props: MainTitlePropsType) => {
     return (
-        <div>
-            <h4>
-                Chec your Email
-            </h4>
-            <span>
-                We sent an email with instructions to the address {props.email}
-            </span>
-        </div>
+        <h2 className={s.titleT}>
+            {props.title}
+        </h2>
     )
-}
+})
