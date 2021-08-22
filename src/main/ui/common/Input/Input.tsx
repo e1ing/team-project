@@ -40,10 +40,9 @@ export const Input: React.FC<SuperInputTextPropsType> = (
     return (
         <>
             <input
-                type={'text'}
                 onChange={onChangeCallback}
                 onKeyPress={onKeyPressCallback}
-                className={finalInputClassName}
+                className={styles.input}
 
                 {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
             />

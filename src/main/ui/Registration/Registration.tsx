@@ -1,7 +1,8 @@
 import React, {FC} from 'react';
 import {useFormik} from 'formik'
-import { Input } from '../common/Input/Input';
+import {Input} from '../common/Input/Input';
 import styles from './Registartion.module.css'
+import commonStyles from '../app/App.module.css'
 
 type RegistrationPropsType = {}
 type FormikErrorType = {
@@ -11,10 +12,9 @@ type FormikErrorType = {
 }
 
 
-
 export const Registration: FC<RegistrationPropsType> = () => {
 
-  /*  const dispatch = useDispatch()*/
+    /*  const dispatch = useDispatch()*/
 
     const regForm = useFormik({
         initialValues: {
@@ -33,19 +33,19 @@ export const Registration: FC<RegistrationPropsType> = () => {
 
             if (!values.password) {
                 errors.password = 'Password required';
-            } else if (values.password.length <7) {
+            } else if (values.password.length < 7) {
                 errors.password = 'Must be more then 7 characters';
             }
 
             if (!values.confirmation) {
                 errors.confirmation = 'Password required';
-            } else if (values.password.length <7) {
+            } else if (values.password.length < 7) {
                 errors.confirmation = 'Must be more then 7 characters';
             }
             return errors;
         },
         onSubmit: values => {
-           /* dispatch({})*/
+            /* dispatch({})*/
             regForm.resetForm();
         }
     })
@@ -53,23 +53,29 @@ export const Registration: FC<RegistrationPropsType> = () => {
     return (
         <div className={styles.container}>
             <div className={styles.form}>
-            <h1>it-incubator</h1>
-            <h2>Sign Up</h2>
 
-            <form onSubmit={regForm.handleSubmit} autoComplete={"off"}></form>
-            <div>
-                <Input   placeholder={"Email"}/>
-            </div>
-            <div>
-                <Input  type={"password"} placeholder={"Password"}/>
-            </div>
-            <div>
-                <Input  type={"password"} placeholder={"Confirm password"}/>
-            </div>
-            <div>
-                <button>Cancel</button>
-                <button type={"submit"}>Register</button>
-            </div>
+                <div className={styles.content}>
+                    <h1 className={commonStyles.h1}>it-incubator</h1>
+                    <h2>Sign Up</h2>
+                </div>
+
+                <div className={styles.content}>
+                    <form onSubmit={regForm.handleSubmit} autoComplete={"off"}></form>
+                    <div>
+                        <Input type={"email"} placeholder={"Email"}/>
+                    </div>
+                    <div>
+                        <Input type={"password"} placeholder={"Password"}/>
+                    </div>
+                    <div>
+                        <Input type={"confirmation"} placeholder={"Confirm password"}/>
+                    </div>
+                </div>
+
+                <div className={styles.btnContainer}>
+                    <button>Cancel</button>
+                    <button type={"submit"}>Register</button>
+                </div>
             </div>
 
         </div>
