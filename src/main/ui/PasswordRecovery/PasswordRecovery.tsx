@@ -8,7 +8,7 @@ type RecoveryPassPropsType = {
     submit: any
     changeHandler: any
     emailValue: any
-    // status: any
+    status: any
     errors: any
     isSand: boolean
 }
@@ -19,7 +19,7 @@ export const RecoveryPassword: React.FC<RecoveryPassPropsType> = (props) => {
         submit,
         changeHandler,
         emailValue,
-        // status,
+        status,
         errors,
         isSand,
     } = props
@@ -38,13 +38,16 @@ export const RecoveryPassword: React.FC<RecoveryPassPropsType> = (props) => {
                                 <Input 
                                     id='email'
                                     type='email'
-                                    placeholder='email' />
+                                    placeholder='email'
+                                    onChange={changeHandler}
+                                    value={emailValue}
+                                    />
                             </div>
                             <span className={s.instruction}>
                                 Enter your email address and we wil send you furher instructions
                             </span>
                             <div className={s.buttonR}>
-                                <Button type="submit" onClick={() => alert('email')}>Send Instructions</Button>
+                                <Button type="submit" >Send Instructions</Button>
                             </div>
                         </form>
                         <div className={s.blokLink}>

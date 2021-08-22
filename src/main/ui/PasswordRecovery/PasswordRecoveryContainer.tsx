@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppStoreType } from "../../bll/store";
 import {useFormik} from "formik";
 import { RecoveryPassword } from "./PasswordRecovery";
+import { passwordRecovery } from "../../bll/recovery-password-rebucer";
 
 export const PasswordRecoveryContainer: React.FC = () => {
     const dispatch = useDispatch();
-    // @ts-ignore
-    // const status = useSelector<AppStoreType, any>(state => state.app.status);
+    const status = useSelector<AppStoreType, any>(state => state.auth.status);
     const isSand = useSelector<AppStoreType, boolean>(state => state.recoveryPassword.messages);
 
 
@@ -23,10 +23,12 @@ export const PasswordRecoveryContainer: React.FC = () => {
         `;
 
         const formik = useFormik({
+            
             initialValues: {
                 email: "",
             },
             validate: (values) => {
+                debugger
                 const errors: any = {};
                 if (!values.email) {
                     errors.email = "Email is required"
@@ -36,8 +38,8 @@ export const PasswordRecoveryContainer: React.FC = () => {
                 return errors;
             },
             onSubmit: values => {
-                // @ts-ignore
-                dispatch(forgotPass({email: values.email, from, message}))
+                debugger
+                dispatch(passwordRecovery(values.email, from, message))
             }
         }
     )
@@ -48,7 +50,7 @@ export const PasswordRecoveryContainer: React.FC = () => {
             errors={formik.errors}
             emailValue={formik.values.email}
             submit={formik.handleSubmit}
-            // status={status}
+            status={status}
             changeHandler={formik.handleChange}
             isSand={isSand}
         />
