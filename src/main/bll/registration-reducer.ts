@@ -1,6 +1,6 @@
 import { Dispatch } from "redux"
 import {authAPI} from "../dal/api";
-import {setAppStatusAC} from "./app-reducer";
+import {setAppErrorAC, setAppStatusAC} from "./app-reducer";
 
 type InitialStateType = typeof initialState
 type ActionType = ReturnType<typeof registerUserAC>
@@ -40,5 +40,7 @@ export const registerUserTC = (regData: RegistrationDataType) => (dispatch: Disp
            const error = e.response
             ?e.response.data.error
                : (e.message+ ', more details in the console')
+            dispatch(setAppErrorAC(error))
+            dispatch(setAppStatusAC("failed"))
         })
 }

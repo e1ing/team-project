@@ -7,7 +7,8 @@ import {registerUserTC} from "../../bll/registration-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {AppRootStateType} from "../../bll/store";
-import {RequestStatusType} from "../../bll/app-reducer";
+import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
+import {Preloader} from "../common/Preloader/Preloader";
 
 type FormikErrorType = {
     email?: string
@@ -16,7 +17,8 @@ type FormikErrorType = {
 }
 
 export const Registration: FC = () => {
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+
+    const error = useSelector<AppRootStateType, null | string>(state => state.app.error)
     const isRegistered = useSelector<AppRootStateType, boolean>(state => state.registation.isRegistered)
     const dispatch = useDispatch()
 
@@ -69,24 +71,33 @@ export const Registration: FC = () => {
                     <h2>Sign Up</h2>
                 </div>
 
-                <form onSubmit={regForm.handleSubmit} autoComplete={"off"}>
-                    <div className={styles.content}>
-                        <div>
-                            <Input type={"email"} placeholder={"Email"}
-                                   {...regForm.getFieldProps("email")}
-                            />
-                        </div>
-                        <div>
-                            <Input type={"password"} placeholder={"Password"}
-                                   {...regForm.getFieldProps("password")}
-                            />
-                        </div>
-                        <div>
-                            <Input type={"password"} placeholder={"Confirm password"}
-                                   {...regForm.getFieldProps("confirmation")}
-                            />
-                        </div>
+                <form className={styles.content} onSubmit={regForm.handleSubmit} autoComplete={"off"}>
+                    <div className={commonStyles.error}>{error}</div>
+                    <div>
+                        <Input type={"email"} placeholder={"Email"}
+                               {...regForm.getFieldProps("email")}
+                        />
+                        {regForm.touched.email &&
+                        regForm.errors.email &&
+                        <div className={commonStyles.error}>{regForm.errors.email}</div>}
                     </div>
+                    <div>
+                        <Input type={"password"} placeholder={"Password"}
+                               {...regForm.getFieldProps("password")}
+                        />
+                        {regForm.touched.password &&
+                        regForm.errors.password &&
+                        <div className={commonStyles.error}>{regForm.errors.password}</div>}
+                    </div>
+                    <div>
+                        <Input type={"password"} placeholder={"Confirm password"}
+                               {...regForm.getFieldProps("confirmation")}
+                        />
+                        {regForm.touched.confirmation &&
+                        regForm.errors.confirmation &&
+                        <div className={commonStyles.error}>{regForm.errors.confirmation}</div>}
+                    </div>
+
                     <div className={styles.btnContainer}>
                         <NavLink to={"/login"}>
                             <button>Cancel</button>
@@ -95,7 +106,7 @@ export const Registration: FC = () => {
                     </div>
                 </form>
             </div>
-
+            <Preloader/>
         </div>
     )
 }
