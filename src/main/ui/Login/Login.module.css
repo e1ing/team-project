@@ -34,6 +34,14 @@
     align-items: center;
 }
 
+.bottom {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 120px;
+}
+
 .button {
     min-width: 250px;
     font-family: inherit;
