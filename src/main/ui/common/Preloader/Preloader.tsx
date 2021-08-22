@@ -1,4 +1,4 @@
-import loader from "../../assets/22DX.gif";
+import loader from "../../assets/loader.gif";
 import React from "react";
 
 export const Preloader = () => {

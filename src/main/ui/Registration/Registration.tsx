@@ -3,18 +3,22 @@ import {useFormik} from 'formik'
 import {Input} from '../common/Input/Input';
 import styles from './Registartion.module.css'
 import commonStyles from '../app/App.module.css'
+import {registerUserTC} from "../../bll/registration-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {NavLink, Redirect} from "react-router-dom";
+import {AppRootStateType} from "../../bll/store";
+import {RequestStatusType} from "../../bll/app-reducer";
 
-type RegistrationPropsType = {}
 type FormikErrorType = {
     email?: string
     password?: string
     confirmation?: string
 }
 
-
-export const Registration: FC<RegistrationPropsType> = () => {
-
-    /*  const dispatch = useDispatch()*/
+export const Registration: FC = () => {
+    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const isRegistered = useSelector<AppRootStateType, boolean>(state => state.registation.isRegistered)
+    const dispatch = useDispatch()
 
     const regForm = useFormik({
         initialValues: {
@@ -37,18 +41,24 @@ export const Registration: FC<RegistrationPropsType> = () => {
                 errors.password = 'Must be more then 7 characters';
             }
 
-            if (!values.confirmation) {
-                errors.confirmation = 'Password required';
-            } else if (values.password.length < 7) {
-                errors.confirmation = 'Must be more then 7 characters';
+            if (values.password && !values.confirmation) {
+                errors.confirmation = 'Confirm password';
+            } else if (values.password !== values.confirmation) {
+                errors.confirmation = 'Password mismatch';
             }
             return errors;
         },
         onSubmit: values => {
-            /* dispatch({})*/
-            regForm.resetForm();
+            if (values.password === values.confirmation) {
+                dispatch(registerUserTC({email: values.email, password: values.password}))
+                regForm.resetForm();
+            }
         }
     })
+
+    if (isRegistered) {
+        return <Redirect to={'/login'}/>
+    }
 
     return (
         <div className={styles.container}>
@@ -59,23 +69,31 @@ export const Registration: FC<RegistrationPropsType> = () => {
                     <h2>Sign Up</h2>
                 </div>
 
-                <div className={styles.content}>
-                    <form onSubmit={regForm.handleSubmit} autoComplete={"off"}></form>
-                    <div>
-                        <Input type={"email"} placeholder={"Email"}/>
+                <form onSubmit={regForm.handleSubmit} autoComplete={"off"}>
+                    <div className={styles.content}>
+                        <div>
+                            <Input type={"email"} placeholder={"Email"}
+                                   {...regForm.getFieldProps("email")}
+                            />
+                        </div>
+                        <div>
+                            <Input type={"password"} placeholder={"Password"}
+                                   {...regForm.getFieldProps("password")}
+                            />
+                        </div>
+                        <div>
+                            <Input type={"password"} placeholder={"Confirm password"}
+                                   {...regForm.getFieldProps("confirmation")}
+                            />
+                        </div>
                     </div>
-                    <div>
-                        <Input type={"password"} placeholder={"Password"}/>
+                    <div className={styles.btnContainer}>
+                        <NavLink to={"/login"}>
+                            <button>Cancel</button>
+                        </NavLink>
+                        <button type={"submit"}>Register</button>
                     </div>
-                    <div>
-                        <Input type={"confirmation"} placeholder={"Confirm password"}/>
-                    </div>
-                </div>
-
-                <div className={styles.btnContainer}>
-                    <button>Cancel</button>
-                    <button type={"submit"}>Register</button>
-                </div>
+                </form>
             </div>
 
         </div>
