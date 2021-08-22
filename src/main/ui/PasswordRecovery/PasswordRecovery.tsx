@@ -40,7 +40,7 @@ export const RestorePassword = React.memo(() => {
     })
 
     if (errorMessage?.slice(0, 8) === "Recovery") {
-        return <Redirect to={"/checkEmail"} />
+        return <Redirect to={"/password-change"} />
     }
 
     if (isLoggedIn) {
