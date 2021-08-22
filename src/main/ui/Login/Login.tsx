@@ -15,7 +15,7 @@ export const Login = () => {
                     <input/>
                     <input/>
                 </div>
-                <a>Forgot Password</a>
+                <NavLink to={PATH.PASSWORD_CHANGE} style={{textDecoration: "none"}}>Forgot Password</NavLink>
                 <button className={style.button}>
                     login
                 </button>
