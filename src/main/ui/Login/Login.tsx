@@ -48,14 +48,17 @@ export const Login = () => {
                         name="rememberMe"
                         onChange={formik.handleChange}
                         checked={formik.values.rememberMe}
+
                     />
 
                 </form>
                 <NavLink to={PATH.PASSWORD_CHANGE} style={{textDecoration: "none"}}>Forgot Password</NavLink>
                 <div className={style.bottom}>
-                    <button className={style.button}>
-                        login
-                    </button>
+                    <form onSubmit={formik.handleSubmit}>
+                        <button className={style.button}>
+                            login
+                        </button>
+                    </form>
                     <div style={{color: "gray"}}>Don't have an account?</div>
                     <NavLink to={PATH.SIGN_UP} style={{color: "#232480", fontWeight: "bold", textDecoration: "none"}}>Sign
                         Up</NavLink>
