@@ -1,6 +1,8 @@
 import React from 'react';
 import style from './Login.module.css'
 import {Button} from "../common/Button/Button";
+import {PATH} from "../routes/Routes";
+import {NavLink} from "react-router-dom";
 export const Login = () => {
     return (
         <div className={style.container}>
@@ -18,7 +20,7 @@ export const Login = () => {
                     login
                 </button>
                 <div style={{color: "gray"}}>Don't have an account?</div>
-                <a style={{color: "#232480", fontWeight: "bold"}}>Sign Up</a>
+                <NavLink to={PATH.SIGN_UP} style={{color: "#232480", fontWeight: "bold", textDecoration: "none"}}>Sign Up</NavLink>
 
             </div>
 
