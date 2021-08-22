@@ -22,6 +22,8 @@ export const Routes = () => {
                 <Route path={"/password-recovery"} render={() => <RestorePassword />} />
 
                 <Route path={"/password-change"} render={() => <PasswordChange />} />
+
+                
                 <Route path={"/404"} render={() => <Error404 />} />
                 <Redirect from={"*"} to={"/404"} />
 
