@@ -23,11 +23,12 @@ export const setIsLoggedInAC = (value: boolean) =>
 
 
 
-export const loginThunk = (email: string, password: string, rememberMe: boolean): ThunkAction <void, AppRootStateType, unknown, ActionType>=> async (dispatch) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean): ThunkAction <void, AppRootStateType, unknown, ActionType>=> async (dispatch) => {
     try {
         const result = await authAPI.login(email, password, rememberMe)
-        //dispatch(setIsLoggedInAC(value))
+        dispatch(setIsLoggedInAC(true))
         console.log(result)
+
     } catch(e) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         console.log(error)

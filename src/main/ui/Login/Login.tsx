@@ -10,7 +10,7 @@ import {Input} from "../common/Input/Input";
 import {Button} from "../common/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../bll/store";
-import {loginThunk} from "../../bll/auth-reducer";
+import {loginTC} from "../../bll/auth-reducer";
 
 
 export const Login = () => {
@@ -20,7 +20,7 @@ export const Login = () => {
         rememberMe?: boolean
     }
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-    const dispatch = useDispatch()
+   const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {
@@ -44,9 +44,8 @@ export const Login = () => {
         },
         onSubmit: values => {
             alert(JSON.stringify(values));
-            dispatch(loginThunk(values.email, values.password, values.rememberMe))
+            dispatch(loginTC(values.email, values.password, values.rememberMe))
             formik.resetForm()
-
         },
 
     })
@@ -72,6 +71,7 @@ export const Login = () => {
                     <label htmlFor="password">Password</label>
                     <Input
                         className={styleInput.input}
+                        type={"password"}
                         {...formik.getFieldProps('password')}
                     />
                     {formik.touched.password && formik.errors.password ? <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
