@@ -17,10 +17,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 
 }
+
 .title {
     display: flex;
     flex-direction: column;
@@ -42,26 +42,4 @@
     flex-direction: column;
     justify-content: space-around;
     height: 120px;
-}
-
-.button {
-    min-width: 250px;
-    font-family: inherit;
-    appearance: none;
-    border: 0;
-    border-radius: 40px;
-    background: #232480;
-    color: #fff;
-    padding: 10px 16px;
-    font-size: 1rem;
-    cursor: auto;
-}
-
-.button:hover {
-    background: #1d49aa;
-}
-
-.button:focus {
-    outline: none;
-    box-shadow: 0 0 0 4px #cbd6ee;
 }

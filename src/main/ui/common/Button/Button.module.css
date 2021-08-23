@@ -1,37 +1,29 @@
 
 .button {
-    color: #d027f1;
-    border: 2px;
-    border-radius: 5px;
-    font-size: 14px;
+    min-width: 250px;
     font-family: inherit;
-    height: 50px;
-    min-width: 50px;
-    position: relative;
-    margin: 10px;
-    overflow: hidden;
-
+    appearance: none;
+    border: 0;
+    border-radius: 40px;
+    background: #232480;
+    color: #fff;
+    padding: 10px 16px;
+    font-size: 1rem;
+    cursor: auto;
 }
 
-.button:hover{   /*при наведении*/
-    cursor: pointer;
-  /*  animation: blink 0.35s ease;*/
+.button:hover {
+    background: #1d49aa;
 }
 
-.button:focus{
-    outline: solid 1px;
+.button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px #cbd6ee;
 }
 
-.button:active{
-    background: #c0d4ec;
-}
 
-button:disabled{
-    color: #c88ce7;
-    cursor:auto;
-}
 
-.button:disabled::after{
-    z-index: -1;
-}
+
+
+
 
