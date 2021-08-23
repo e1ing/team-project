@@ -30,7 +30,7 @@ const initialState: InitialStateType  = {
 }
 
 const instance = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+    baseURL: 'https://neko-back.herokuapp.com/2.0',
     withCredentials: true,
 });
 
