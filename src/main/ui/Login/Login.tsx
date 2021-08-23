@@ -3,11 +3,14 @@ import style from './Login.module.css';
 import styleButton from './../common/Button/Button.module.css';
 import styleInput from './../common/Input/Input.module.css';
 import {PATH} from "../routes/Routes";
-import {NavLink} from "react-router-dom";
+import {NavLink, Redirect} from "react-router-dom";
 import {useFormik} from "formik";
 import Checkbox from "../common/Checkbox/Checkbox";
 import {Input} from "../common/Input/Input";
 import {Button} from "../common/Button/Button";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "../../bll/store";
+import {loginThunk} from "../../bll/auth-reducer";
 
 
 export const Login = () => {
@@ -16,9 +19,10 @@ export const Login = () => {
         password?: string
         rememberMe?: boolean
     }
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const dispatch = useDispatch()
 
     const formik = useFormik({
-
         initialValues: {
             email: '',
             password: '',
@@ -31,19 +35,25 @@ export const Login = () => {
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
                 errors.email = 'Invalid email address';
             }
-            if(!values.password) {
+            if (!values.password) {
                 errors.password = 'Incorrect password'
-            } else if(values.password.length < 3) {
+            } else if (values.password.length < 3) {
                 errors.password = 'Please enter your password'
             }
             return errors;
         },
         onSubmit: values => {
             alert(JSON.stringify(values));
+            dispatch(loginThunk(values.email, values.password, values.rememberMe))
             formik.resetForm()
+
         },
 
     })
+
+    if (isLoggedIn) {
+        return <Redirect to={"/profile"} />
+    }
 
     return (
         <div className={style.container}>

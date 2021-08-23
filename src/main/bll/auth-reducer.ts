@@ -1,41 +1,37 @@
-//type InitialStateType = typeof initialState
-type ActionType = {}
+import {authAPI} from "../dal/api";
+import {AppRootStateType} from "./store";
+import {ThunkAction} from "redux-thunk";
 
-type InitialStateType = {
-    email: string
-    _id: string
-    name: string
-    avatar?: string
-    publicCardPacksCount: number
+type ActionType = ReturnType<typeof setIsLoggedInAC>
 
-    created: number
-    updated: number
-    isAdmin: boolean
-    verified: boolean
-    rememberMe: boolean
-
-    error?: string
-}
-const initialState: InitialStateType  = {
-    email: "",
-    _id: "",
-    name: "",
-    avatar: "",
-    publicCardPacksCount: 0,
-
-    created: 0,
-    updated: 0,
-    isAdmin: false,
-    verified: false,
-    rememberMe: false
+const initialState = {
+    isLoggedIn: false
 }
 
-export const authReducer = (state: InitialStateType = initialState, action: ActionType):InitialStateType => {
-    switch (action){
-        /*case: ""
-            return {...state}*/
+type InitialStateType = typeof initialState
+export const authReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+    switch (action.type) {
+        case 'login/SET-IS-LOGGED-IN':
+            return {...state, isLoggedIn: action.value}
         default:
-            return {...state}
+            return state
     }
 }
+
+export const setIsLoggedInAC = (value: boolean) =>
+    ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+
+
+
+export const loginThunk = (email: string, password: string, rememberMe: boolean): ThunkAction <void, AppRootStateType, unknown, ActionType>=> async (dispatch) => {
+    try {
+        const result = await authAPI.login(email, password, rememberMe)
+        //dispatch(setIsLoggedInAC(value))
+        console.log(result)
+    } catch(e) {
+        const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+        console.log(error)
+    }
+}
+
 
