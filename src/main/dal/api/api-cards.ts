@@ -1,4 +1,5 @@
 import axios from "axios";
+import {RegistrationDataType} from "../../bll/registration-reducer";
 
 export type UserDataType = {
     _id: string
@@ -24,7 +25,8 @@ type RestorePasswordResponseType = {
 };
 
 export type SignUpResponseType = {
-    addedUser: UserDataType
+    addedUser: UserDataType //{}
+    error?: string
 };
 
 export type LoginUserResponseType = UserDataType
@@ -49,7 +51,10 @@ const instance = axios.create({
 // APi
 
 export const authAPI = {
-    login(email: string, password: string, rememberMe: boolean) {
+    me() {
+        return instance.post<UserDataType>(`auth/me`, {})
+    },
+    login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post<LoginUserResponseType>(`auth/login`, { email, password, rememberMe })
     },
     logout() {
@@ -64,18 +69,17 @@ export const authAPI = {
                       </div>`
         })
     },
-    signUp(email: string, password: string) {
-        return instance.post<SignUpResponseType>(`auth/register`, { email, password })
+    signUp(regData: RegistrationDataType) {
+        return instance.post<SignUpResponseType>(`auth/register`, regData)
     },
+
     setNewPassword(newPassword: string, resetPasswordToken: string) {
         return instance.post(`/auth/set-new-password`, {
             password: newPassword,
             resetPasswordToken
         })
     },
-    me() {
-        return instance.post<UserDataType>(`auth/me`, {})
-    },
+
     updateUserData(name: string, avatar: string | undefined | null) {
         return instance.put<UpdateUserDataResponseType>(`auth/me`, { name, avatar })
     }

@@ -1,6 +1,7 @@
-import {authAPI} from "../dal/api";
+
 import {AppRootStateType} from "./store";
 import {ThunkAction} from "redux-thunk";
+import {authAPI} from "../dal/api/api-cards";
 
 type ActionType = ReturnType<typeof setIsLoggedInAC>
 

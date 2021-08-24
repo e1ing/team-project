@@ -1,6 +1,7 @@
 import { Dispatch } from "redux"
-import {authAPI} from "../dal/api";
+
 import {setAppErrorAC, setAppStatusAC} from "./app-reducer";
+import {authAPI} from "../dal/api/api-cards";
 
 type InitialStateType = typeof initialState
 type ActionType = ReturnType<typeof registerUserAC>
@@ -30,7 +31,7 @@ export const registerUserAC = (isRegistered: boolean) => ({type:"registration/RE
 //thunks creators
 export const registerUserTC = (regData: RegistrationDataType) => (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
-    authAPI.registration(regData)
+    authAPI.signUp(regData)
         .then(res => {
             console.log('Res', res)
         dispatch(registerUserAC(true))

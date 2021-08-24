@@ -6,16 +6,15 @@ import s from "./PasswordRecovery.module.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from '../../bll/store';
 import { useFormik } from "formik";
-import { RequestStatusType } from '../../bll/auth-reducer';
 import { restorePasswordTC } from '../../bll/recovery-password-rebucer';
 
 type FormikErrorType = {
     email?: string
 }
 
-export const RestorePassword = React.memo(() => {
+export const PasswordRecovery = React.memo(() => {
 
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.loginReducer.isLoggedIn);
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     const recovered = useSelector<AppRootStateType, boolean>(state => state.recoveryPassword.isRecovered);
     // const status = useSelector<AppRootStateType, RequestStatusType>(state => state.appReducer.status)
     const dispatch = useDispatch()

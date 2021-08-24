@@ -7,7 +7,7 @@ import icon from '../../../assets/images/email.svg'
 
 export const PasswordChange: React.FC = React.memo(() => {
 
-    const isloggenIn = useSelector<AppRootStateType, boolean>(state => state.loginReducer.isLoggedIn)
+    const isloggenIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
 
     if (isloggenIn) {

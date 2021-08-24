@@ -15,7 +15,7 @@ type FormikErrorType = {
 export const UpdatePassword: React.FC = React.memo(() => {
 
     const isSuccess = useSelector<AppRootStateType, boolean>(state => state.updatePasswordReducer.isSuccess);
-    const isloggenIn = useSelector<AppRootStateType, boolean>(state => state.loginReducer.isLoggedIn);
+    const isloggenIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     const dispatch = useDispatch();
 
     const [showPassword, setShowPassword] = useState<boolean>(false);

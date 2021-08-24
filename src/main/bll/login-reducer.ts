@@ -1,5 +1,5 @@
 import { ThunkAction } from "redux-thunk"
-import { authAPI } from "../dall/api/api-cards"
+import { authAPI } from "../dal/api/api-cards"
 import { AppActionsType, AppRootStateType } from "./store"
 
 enum LOGIN_ACTIONS_TYPES {
