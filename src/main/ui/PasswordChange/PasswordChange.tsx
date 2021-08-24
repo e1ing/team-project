@@ -9,6 +9,7 @@ export const PasswordChange: React.FC = React.memo(() => {
 
     const isloggenIn = useSelector<AppRootStateType, boolean>(state => state.loginReducer.isLoggedIn)
 
+
     if (isloggenIn) {
         return <Redirect to={"/"} />
     }
@@ -19,7 +20,7 @@ export const PasswordChange: React.FC = React.memo(() => {
                     <img src={icon} />
                 </div>
                 <h2 className={s.caption}>Check Email</h2>
-                <p className={s.text}>We've sent an Email with instructions to example to @mail.com</p>
+                <p className={s.text}>We've sent an Email with instructions to example to dimla.carpov2013@yandex.ru</p>
             </div>
 
         </div>
