@@ -9,6 +9,7 @@ import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
 import {PasswordChange} from "../PasswordChange/PasswordChange";
 import {Error404} from "../Error404/Error404";
 import {SuperComponents} from "../SuperComponents";
+import { UpdatePassword } from '../UpdatePassword/UpdatePassword';
 
 export const PATH = {
     LOGIN: "/login",
@@ -17,7 +18,8 @@ export const PATH = {
     SIGN_UP: "/sign-up",
     SUPER_COMPONENTS: "/superComponents",
     PASSWORD_RECOVERY: "/password-recovery",
-    ERROR_404: "/404"
+    ERROR_404: "/404",
+    UPDATE_PASSWORD: "/updatePassword/:token"
     // add paths
 }
 export const Routes = () => {
@@ -32,9 +34,10 @@ export const Routes = () => {
                 <Route path={PATH.PASSWORD_CHANGE} render={() => <PasswordChange/>}/>
                 <Route path={PATH.ERROR_404} render={() => <Error404/>}/>
                 <Route path={PATH.SUPER_COMPONENTS} render={() => <SuperComponents/>}/>
+                <Route path={UPDATE_PASSWORD} render={() => <UpdatePassword/>} />
                 <Redirect from={"*"} to={"/404"}/>
-
             </Switch>
         </div>
+
     )
 }
