@@ -39,7 +39,7 @@ export const RestorePassword = React.memo(() => {
         }
     })
 
-    if (errorMessage?.slice(0, 8) === "Recovery") {
+    if (errorMessage?.slice(0, 8) === "  ") {
         return <Redirect to={"/password-change"} />
     }
 
@@ -56,6 +56,7 @@ export const RestorePassword = React.memo(() => {
                     <div className={s.inputWrap}>
                         <Input
                             type={"email"}
+                            placeholder={"Email"}
                             {...formik.getFieldProps("email")}
                             // label={"Email"}
                             autoComplete="off"
@@ -95,4 +96,4 @@ export const MainTitle = React.memo((props: MainTitlePropsType) => {
             {props.title}
         </h2>
     )
-})
+});

@@ -9,6 +9,7 @@ import { PasswordChange } from "../PasswordChange/PasswordChange";
 import { Error404 } from "../Error404/Error404";
 import { SuperComponents } from "../SuperComponents";
 import { RestorePassword } from '../PasswordRecovery/PasswordRecovery';
+import { UpdatePassword } from '../UpdatePassword/UpdatePassword';
 
 export const Routes = () => {
     return (
@@ -22,6 +23,8 @@ export const Routes = () => {
                 <Route path={"/password-recovery"} render={() => <RestorePassword />} />
 
                 <Route path={"/password-change"} render={() => <PasswordChange />} />
+
+                <Route path={"/updatePassword/:token"} render={() => <UpdatePassword/>} />
 
                 
                 <Route path={"/404"} render={() => <Error404 />} />
