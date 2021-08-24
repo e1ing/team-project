@@ -1,4 +1,5 @@
 import axios from "axios";
+import {RegistrationDataType} from "../bll/registration-reducer";
 
 type InitialStateType = {
     email: string
@@ -45,4 +46,8 @@ export const authAPI = {
     logout() {
         return instance.delete(`auth/login`);
     },
+    registration(regData: RegistrationDataType){
+        return instance.post<RegistrationResponseType>(`auth/register`, regData)
+    },
 }
+

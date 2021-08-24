@@ -3,6 +3,7 @@ import './App.css';
 import {HashRouter} from "react-router-dom";
 import {Routes} from "../routes/Routes";
 import Header from "../Header/Header";
+import {Preloader} from "../common/Preloader/Preloader";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
        {/* <Provider>*/}
       {/*<Main/>*/}
        {/* </Provider>*/}
+          <Preloader/>
         </HashRouter>
     </div>
   );
