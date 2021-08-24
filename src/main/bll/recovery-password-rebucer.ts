@@ -23,7 +23,7 @@ export const restorePasswordReducer = (state: InitialStateType = initialState, a
 
 // actions
 export const setErrorMessageAC = (errorMessage: string) => (
-    { type: "SET-ERROR-MESSAGE", errorMessage })
+    { type: "SET-ERROR-MESSAGE", errorMessage } as const)
 
 // thunks
 export const restorePasswordTC = (email: string): ThunkAction<void, AppRootStateType, unknown, AppActionsType> =>
