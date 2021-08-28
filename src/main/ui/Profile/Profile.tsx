@@ -4,12 +4,12 @@ import s from './Profile.module.css';
 import { AppRootStateType } from '../../bll/store';
 import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ProfileResponseType } from '../../bll/login-reducer';
+import { ProfileResponseType } from '../../bll/auth-reducer';
 
 export const Profile: React.FC = React.memo(() => {
 
-    const profile = useSelector<AppRootStateType, ProfileResponseType>(state => state.login.profile);
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn);
+    const profile = useSelector<AppRootStateType, ProfileResponseType>(state => state.auth.profile);
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
 
 
     const avatar = profile.avatar ? profile.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYiH8tkuj5i6qW1Vg9W1FlDPTbgg1rDpUNdA&usqp=CAU"
@@ -18,7 +18,6 @@ export const Profile: React.FC = React.memo(() => {
     //       return <Redirect to={"/login"} />
     //   };
 
-debugger
     return (
         <>
             {/* status */}
