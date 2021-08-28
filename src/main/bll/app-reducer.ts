@@ -24,6 +24,8 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
     }
 }
 
-export const setAppStatusAC = (status: RequestStatusType) => ({type: 'app/SET-STATUS', status} as const)
-export const setAppErrorAC = (error: string | null) => ({type: 'app/SET-ERROR', error} as const)
-export const setIsInitializedAC = (isInitialized: boolean) => ({type: "app/SET-INITIALIZED", isInitialized} as const)
+export const setAppStatusAC = (status: RequestStatusType) => ({type: 'app/SET-STATUS', status} as const);
+export const setAppErrorAC = (error: string | null) => ({type: 'app/SET-ERROR', error} as const);
+export const setIsInitializedAC = (isInitialized: boolean) => ({type: "app/SET-INITIALIZED", isInitialized} as const);
+
+
