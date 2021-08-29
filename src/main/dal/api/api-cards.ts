@@ -105,22 +105,22 @@ export const authAPI = {
 
 
 export const packsApi = {
-    getPacks(pageCoutn: number = 5, page: number = 1, packName: string = "", min: number, max: number, id: string){
+    getPacks(pageCoutn: number = 5, page: number = 1, packName: string = "", min: number, max: number, id: string) {
         return instance.get<ResponseDataType>(`/cards/pack/?packName=${packName}&pageCount=${pageCoutn}&page${page}&sortPacks=&min=${min}&max=${max}&user_id=${id}`)
     },
-    createPacks(title: string){
+    createPacks(title: string) {
         return instance.post(`cards/pack`, {
             cardsPack: {
                 name: title
             }
         })
     },
-    deletePacks(id: string){
-        return instance.put(`cards/pack?id=${id}`)
+    deletePacks(id: string) {
+        return instance.delete(`cards/pack?id=${id}`)
     },
-    updatePacks(_id: string, name: string){
+    updatePacks(_id: string, name: string) {
         return instance.put(`cards/pask`, {
-            cardsPack: {_id, name}
+            cardsPack: { _id, name }
         })
     },
 };

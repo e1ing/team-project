@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { AppRootStateType } from "../../../bll/store";
 import { CardPacksDataType } from "../../../dal/api/api-cards";
+import { DeletCardModalWindow } from "../../common/ModalWIndow/DeletCardModalWindow/DeletCardModalWindow";
 import { PATH } from "../../routes/Routes";
 import s from "./Pack.module.css";
 
@@ -14,8 +15,8 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
 
     const userLoginID = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
 
-    const [activeModal, setActiveModal] = useState<boolean>(false);
-    const [activeDeletPackModal, setActiveDeletPackModal] = useState<boolean>(false);
+    const [activeUpdateModal, setUpdateActiveModal] = useState<boolean>(false);
+    const [activeDeletPackModal, setDeletActivePackModal] = useState<boolean>(false);
 
     const formet = new Intl.DateTimeFormat("ru", {
         hour: "numeric",
@@ -26,8 +27,8 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
 
     const time = formet.format(date);
 
-    const openUpdateModalWindow = () => setActiveModal(true);
-    const openDeletModalWindow = () => setActiveDeletPackModal(true);
+    const openUpdateModalWindow = () => setUpdateActiveModal(true);
+    const openDeletModalWindow = () => setDeletActivePackModal(true);
 
     return (
         <>
@@ -52,7 +53,7 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
                 {
                     userLoginID !== props.pack.user_id
                         ? null
-                        : <> 
+                        : <>
                             <button
                                 className={s.Button}
                                 onClick={openUpdateModalWindow}
@@ -67,7 +68,13 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
                         </>
                 }
             </td>
+            {/* delet pack modal window */}
+            {activeDeletPackModal && <DeletCardModalWindow
+                activeDeletPackModal={activeDeletPackModal}
+                packID={props.pack._id}
+                setActiveModal={setDeletActivePackModal}
+            />}
         </>
 
     )
-})
+});

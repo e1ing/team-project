@@ -28,7 +28,7 @@
     font-weight: 500;
 }
 
-.allButton {
+.button {
     width: 100%;
     display: flex;
     justify-content: space-between;
