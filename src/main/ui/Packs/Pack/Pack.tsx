@@ -50,7 +50,7 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
             <td>
 
                 {
-                    userLoginID === props.pack.user_id
+                    userLoginID !== props.pack.user_id
                         ? null
                         : <> 
                             <button

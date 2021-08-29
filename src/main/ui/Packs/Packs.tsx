@@ -109,6 +109,7 @@ export const Packs: React.FC = React.memo(() => {
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {cards}
                 </tbody>
             </table>
