@@ -1,0 +1,16 @@
+.link {
+    text-decoration: none;
+    font-size: 1.3em;
+}
+
+.Button {
+    background: none;
+    border: none;
+    transition: transform 0.7s ease-in-out;
+    font-size: 1.3em;
+}
+
+.Button:hover {
+    cursor: pointer;
+    transform: rotate(20deg);
+}
