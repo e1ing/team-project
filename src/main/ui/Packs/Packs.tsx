@@ -73,19 +73,12 @@ export const Packs: React.FC = React.memo(() => {
                     setActive={setActiveModalAdd}
                 />
             }
-
-
             <div className={s.navBlock}>
-
-               
-
                 <div className={s.allPack}>
                 <Button onClick={openModelWindow}>Add pack</Button>
                     <Button onClick={allPacks}>All packs</Button>
                     <Button onClick={myPacks}>My packs</Button>
                 </div>
-
-
                 <div className={s.serachBlock}>
                     <Input
                         onChangeText={setInputValuse}
@@ -102,17 +95,16 @@ export const Packs: React.FC = React.memo(() => {
                     </button>
                 </div>
             </div>
-
             {/* Table */}
             <table>
                 <thead className={s.packsHeader}>
                     <tr>
                         <th>username</th>
                         <th>name</th>
-                        <th>count</th>
-                        <th>time</th>
                         <th>cards</th>
+                        <th>time</th>
                         <th>learn</th>
+                        <th></th>
                         <th>actions</th>
                     </tr>
                 </thead>
@@ -120,7 +112,7 @@ export const Packs: React.FC = React.memo(() => {
                     {cards}
                 </tbody>
             </table>
-
+        {/* Pagination */}
             {cardPacksTotalCoutn}
 
 
