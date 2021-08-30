@@ -9,8 +9,10 @@ import Checkbox from "../common/Checkbox/Checkbox";
 import {Input} from "../common/Input/Input";
 import {Button} from "../common/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {AppRootStateType} from "../../bll/store";
 import {loginTC} from "../../bll/auth-reducer";
+import {AppRootStateType} from "../../bll/store";
+
+
 
 
 export const Login = () => {
