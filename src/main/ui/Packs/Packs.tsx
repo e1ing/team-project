@@ -19,7 +19,7 @@ export const Packs: React.FC = React.memo(() => {
     const page = useSelector<AppRootStateType, number>(state => state.packs.page);
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
-    const cardPacksTotalCoutn = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
+    const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
 
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
@@ -114,7 +114,7 @@ export const Packs: React.FC = React.memo(() => {
                 </tbody>
             </table>
         {/* Pagination */}
-            {cardPacksTotalCoutn}
+            {cardPacksTotalCount}
 
 
         </div>
