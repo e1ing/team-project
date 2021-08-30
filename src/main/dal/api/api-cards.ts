@@ -1,5 +1,6 @@
 import axios from "axios";
-import {RegistrationDataType} from "../../bll/registration-reducer";
+import { ProfileResponseType } from "../../bll/auth-reducer";
+import { RegistrationDataType } from "../../bll/registration-reducer";
 
 export type UserDataType = {
     _id: string
@@ -25,11 +26,11 @@ type RestorePasswordResponseType = {
 };
 
 export type SignUpResponseType = {
-    addedUser: UserDataType //{}
+    addedUser: ProfileResponseType //{}
     error?: string
 };
 
-export type LoginUserResponseType = UserDataType
+export type LoginUserResponseType = ProfileResponseType
 export type LogoutResponseType = {
     info: string
 };
@@ -37,7 +38,26 @@ export type LogoutResponseType = {
 export type UpdateUserDataResponseType = {
     token: string
     tokenDeathTime: number
-    updatedUser: UserDataType
+    updatedUser: ProfileResponseType
+};
+export type EntityStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+export type CardPacksDataType = {
+    _id: string
+    user_id: string
+    user_name: string
+    name: string
+    cardsCount: number
+    created: string
+    updated: Date
+    entityStatus: EntityStatusType
+};
+export type ResponseDataType = {
+    cardPacks: Array<CardPacksDataType>
+    cardPacksTotalCount: number
+    maxCardsCount: number
+    minCardsCount: number
+    page: number
+    pageCount: number
 };
 
 // http://localhost:7542/2.0/
@@ -82,5 +102,27 @@ export const authAPI = {
 
     updateUserData(name: string, avatar: string | undefined | null) {
         return instance.put<UpdateUserDataResponseType>(`auth/me`, { name, avatar })
-    }
-}
+    },
+};
+
+
+export const packsApi = {
+    getPacks(pageCoutn: number = 5, page: number = 1, packName: string = "", min: number, max: number, id: string) {
+        return instance.get<ResponseDataType>(`/cards/pack/?packName=${packName}&pageCount=${pageCoutn}&page${page}&sortPacks=&min=${min}&max=${max}&user_id=${id}`)
+    },
+    deletePacks(id: string) {
+        return instance.delete(`cards/pack?id=${id}`)
+    },
+    updatePacks(_id: string, name: string) {
+        return instance.put(`cards/pack`, {
+            cardsPack: {_id, name}
+        })
+    },
+    createPacks(title: string) {
+        return instance.post(`cards/pack`, {
+            cardsPack: {
+                name: title
+            }
+        })
+    },
+};

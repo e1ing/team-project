@@ -12,5 +12,5 @@ export const passwordReducer = (state: InitialStateType = initialState, action: 
         default:
             return {...state}
     }
-}
+};
 

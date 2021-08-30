@@ -1,0 +1,74 @@
+.packsContainer {
+    color: #120f36;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.navBlock {
+    min-width: 250px;
+    max-width: 350px;
+    padding: 10px 0 40px 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.allPack {
+    margin: 15px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.serachBlock {
+    margin: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border: 1px white solid;
+    border-radius: 20px;
+}
+.searchButton {
+    padding-right: 15px;
+    background: none;
+    border: none;
+    transition: transform 0.7s ease-in-out;
+    font-size: 1.3em;
+}
+.searchButton:hover {
+    cursor: pointer;
+    transform: rotate(20deg);
+}
+
+.searchInput {
+    margin: 0;
+    width: 190px;
+    border: none;
+}
+
+.packsContainer table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+}
+
+.packsHeader th {
+    font-weight: 600;
+    text-align: center;
+    background-color: #9890C7;
+    text-transform: uppercase;
+    color: #000;
+    font-family: 'Dosis', sans-serif;
+}
+
+.packsContainer td,
+.packsContainer th {
+    border-bottom: 1px solid #3b5781;
+    text-align: center;
+    padding: 10px;
+}
