@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { AppRootStateType } from "../../../bll/store";
 import { CardPacksDataType } from "../../../dal/api/api-cards";
-import { DeletCardModalWindow } from "../../common/ModalWIndow/DeletCardModalWindow/DeletCardModalWindow";
+import { DeletCardModalWindow } from "../../common/ModalWIndow/ModalAdd/DeletCardModalWindow/DeletCardModalWindow";
+import { UpdatePacksModalWindow } from "../../common/ModalWIndow/ModalAdd/UpdatePacksModalWindow/UpdatePacksModalWindow";
 import { PATH } from "../../routes/Routes";
 import s from "./Pack.module.css";
 
@@ -13,10 +14,14 @@ type PackPT = {
 
 export const Pack: React.FC<PackPT> = React.memo((props) => {
 
+    const {
+        pack
+    } = props;
+
     const userLoginID = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
 
-    const [activeUpdateModal, setUpdateActiveModal] = useState<boolean>(false);
-    const [activeDeletPackModal, setDeletActivePackModal] = useState<boolean>(false);
+    const [updateActiveModal, setUpdateActiveModal] = useState<boolean>(false);
+    const [deletActivPackModal, setDeletActivePackModal] = useState<boolean>(false);
 
     const formet = new Intl.DateTimeFormat("ru", {
         hour: "numeric",
@@ -32,26 +37,26 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
 
     return (
         <>
-            <td>{props.pack.user_name}</td>
-            <td>{props.pack.name}</td>
-            <td>{props.pack.cardsCount}</td>
+            <td>{pack.user_name}</td>
+            <td>{pack.name}</td>
+            <td>{pack.cardsCount}</td>
             <td>{time}</td>
             <td>
                 <NavLink
                     className={s.link}
-                    to={PATH.CARDS + `/${props.pack._id}`}>
+                    to={PATH.CARDS + `/${pack._id}`}>
                 </NavLink>
             </td>
             <td>
                 <NavLink
                     className={s.link}
-                    to={PATH.LEARN + `/${props.pack._id}`}>
+                    to={PATH.LEARN + `/${pack._id}`}>
                 </NavLink>
             </td>
             <td>
 
                 {
-                    userLoginID !== props.pack.user_id
+                    userLoginID !== pack.user_id
                         ? null
                         : <>
                             <button
@@ -68,10 +73,16 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
                         </>
                 }
             </td>
+
+            {/* update pack modal window */}
+            {updateActiveModal && <UpdatePacksModalWindow
+                packId={pack._id}
+                name={pack.name}
+                setUpdateActiveModal={setUpdateActiveModal}
+            />}
             {/* delet pack modal window */}
-            {activeDeletPackModal && <DeletCardModalWindow
-                activeDeletPackModal={activeDeletPackModal}
-                packID={props.pack._id}
+            {deletActivPackModal && <DeletCardModalWindow
+                packId={pack._id}
                 setActiveModal={setDeletActivePackModal}
             />}
         </>

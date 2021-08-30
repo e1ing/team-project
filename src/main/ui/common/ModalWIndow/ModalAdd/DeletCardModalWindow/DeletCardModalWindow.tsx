@@ -1,27 +1,25 @@
 import React, { useCallback, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { deletePacksTC } from '../../../../bll/packs-reducer/packs-reduser';
-import { Button } from '../../Button/Button';
-import s from '../ModalWindow.module.css'
+import { deletePacksTC } from '../../../../../bll/packs-reducer/packs-reduser';
+import { Button } from '../../../Button/Button';
+import s from '../../ModalWindow.module.css'
 
 type DeletPacksPT = {
-    activeDeletPackModal: boolean
     setActiveModal: (value: boolean) => void
-    packID: string
+    packId: string
 };
 
 export const DeletCardModalWindow: React.FC<DeletPacksPT> = React.memo((props) => {
 
     const {
-        activeDeletPackModal,
         setActiveModal,
-        packID,
+        packId,
     } = props;
 
     const dispatch = useDispatch();
 
     const deletPack = useCallback(() => {
-        dispatch(deletePacksTC(packID));
+        dispatch(deletePacksTC(packId));
         setActiveModal(false);
     }, [dispatch, props]);
 
