@@ -9,6 +9,7 @@ import {NavLink, Redirect} from "react-router-dom";
 import {AppRootStateType} from "../../bll/store";
 import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
 import {Preloader} from "../common/Preloader/Preloader";
+import styleButton from "../common/Button/Button.module.css";
 
 type FormikErrorType = {
     email?: string
@@ -100,9 +101,9 @@ export const Registration: FC = () => {
 
                     <div className={styles.btnContainer}>
                         <NavLink to={"/login"}>
-                            <button>Cancel</button>
+                            <button className={styleButton.button}>Cancel</button>
                         </NavLink>
-                        <button type={"submit"}>Register</button>
+                        <button type={"submit"} className={styleButton.button}>Register</button>
                     </div>
                 </form>
             </div>

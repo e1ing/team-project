@@ -14,7 +14,7 @@ export const Button: FC<ButtonPropsType> = ({red, className, ...restProps}) => {
             className={finalClassName}
             {...restProps}
         >
-            Button
+
         </button>
     )
 }
