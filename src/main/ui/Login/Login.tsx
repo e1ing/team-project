@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Login.module.css';
 import styleButton from './../common/Button/Button.module.css';
-import styleInput from './../common/Input/Input.module.css';
 import {PATH} from "../routes/Routes";
 import {NavLink, Redirect} from "react-router-dom";
 import {useFormik} from "formik";
@@ -52,10 +51,11 @@ export const Login = () => {
         },
 
     })
-
     if (isLoggedIn) {
         return <Redirect to={"/profile"} />
     }
+
+
 
     return (
         <div className={styles.container}>
@@ -65,7 +65,6 @@ export const Login = () => {
                     <h2>Sign In</h2>
                 </div>
                 <form className={styles.content} onSubmit={formik.handleSubmit}>
-                    {/*<label htmlFor="email">Email Address</label>*/}
                     <Input
                         type={"email"} placeholder={"Email"}
                         {...formik.getFieldProps('email')}

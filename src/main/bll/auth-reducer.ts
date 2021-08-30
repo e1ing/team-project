@@ -57,7 +57,7 @@ export const logoutTC = (): ThunkAction<void, AppRootStateType, unknown, ActionT
     async (dispatch) => {
         try {
             const res = await authAPI.logout()
-            dispatch(setIsLoggedInAC(true))
+            dispatch(setIsLoggedInAC(false))
         } catch (e) {
             const error = e.response ? e.response.data.error : (`Logout failed: ${e.message}.`)
             console.log(error)
