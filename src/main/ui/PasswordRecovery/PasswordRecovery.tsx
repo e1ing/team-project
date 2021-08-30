@@ -7,6 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from '../../bll/store';
 import { useFormik } from "formik";
 import { restorePasswordTC } from '../../bll/recovery-password-rebucer';
+import styles from "../Registration/Registartion.module.css";
+import commonStyles from "../app/App.module.css";
+import styleButton from "../common/Button/Button.module.css";
+import style from "../Login/Login.module.css";
 
 type FormikErrorType = {
     email?: string
@@ -47,39 +51,47 @@ export const PasswordRecovery = React.memo(() => {
     }
 
     return (
-        <div className={s.container}>
-            <form onSubmit={formik.handleSubmit}>
-                <div className={s.block}>
-                    <MainTitle title={"It-Incubator"} />
-                    <h4 >Forgot your password?</h4>
-                    <div className={s.inputWrap}>
-                        <Input
-                            type={"email"}
-                            placeholder={"Email"}
-                            {...formik.getFieldProps("email")}
-                            // label={"Email"}
-                            autoComplete="off"
-                        />
-                        {formik.touched.email && formik.errors.email
-                            ? <div>{formik.errors.email}</div>
-                            : <div>&nbsp;</div>
-                        }
-                    </div>
-                    <p className={s.instruction}>
-                        Enter your email address and we will send you further instructions
-                    </p>
-                    <Button
-                        type={"submit"}
-                        // disabled={status === "loading"}
-                        className={s.button}>
-                        Send Instructions
-                    </Button>
-                    <div className={s.blokLink}>
-                        <span className={s.question}>Did you remember your password?</span>
-                        <NavLink to={"/login"} ><span className={s.link}>Try logging in</span></NavLink>
-                    </div>
+        <div className={styles.container}>
+            <div className={styles.form}>
+                <div className={styles.content}>
+                    <h1 className={commonStyles.h1}>it-incubator</h1>
+                    <h2>Forgot your password?</h2>
                 </div>
-            </form>
+                <form className={styles.content} onSubmit={formik.handleSubmit}>
+
+                    <Input
+                        type={"email"}
+                        placeholder={"Email"}
+                        {...formik.getFieldProps("email")}
+                        // label={"Email"}
+                        autoComplete="off"
+                    />
+                    {formik.touched.email && formik.errors.email
+                        ? <div>{formik.errors.email}</div>
+                        : <div>&nbsp;</div>
+                    }
+                    <div className={style.bottom}>
+                        <p className={s.instruction}>
+                            Enter your email address and we will send you further instructions
+                        </p>
+                        <Button
+                            type={"submit"}
+                            // disabled={status === "loading"}
+                            className={styleButton.button}>
+                            Send Instructions
+                        </Button>
+                        <div className={s.question}>Did you remember your password?</div>
+                        <NavLink to={"/login"}
+                                 style={{
+                                     color: "#232480",
+                                     fontWeight: "bold",
+                                     textDecoration: "none"
+                                 }}>
+
+                            Try logging in</NavLink>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 })
