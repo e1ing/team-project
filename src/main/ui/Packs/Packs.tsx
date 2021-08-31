@@ -11,6 +11,7 @@ import { Input } from "../common/Input/Input";
 import { RequestStatusType } from "../../bll/app-reducer";
 import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
 import styleButton from "../common/Button/Button.module.css";
+import {Pagination} from "../common/Pagination/Pagination";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -28,12 +29,20 @@ export const Packs: React.FC = React.memo(() => {
     const [myPack, setMyPack] = useState<boolean>(false);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [postPerPage, setPostPerPage] = useState<number>(10);
+    const [sizePage] = useState<number>(10);
 
-    const indexOfLastPack = currentPage * postPerPage;
-    const indexOfFirstPack = indexOfLastPack - postPerPage;
+    const indexOfLastPack = currentPage * sizePage;
+    const indexOfFirstPack = indexOfLastPack - sizePage;
 
     const currentPack = packs.slice(indexOfLastPack, indexOfFirstPack)
+
+    const cards = packs.map(p => {
+        return (
+            <tr key={p._id}>
+                <Pack pack={p} />
+            </tr>
+        )
+    });
 
 
     useEffect(() => {
@@ -64,14 +73,9 @@ export const Packs: React.FC = React.memo(() => {
         setSearchValue('')
     };
 
+    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    const cards = packs.map(p => {
-        return (
-            <tr key={p._id}>
-                <Pack pack={p} />
-            </tr>
-        )
-    });
+
 
 
     return (
@@ -119,12 +123,13 @@ export const Packs: React.FC = React.memo(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    
-                    {cards}
+
+                {cards}
                 </tbody>
             </table>
         {/* Pagination */}
-            {cardPacksTotalCount}
+        {/*    {cardPacksTotalCount}*/}
+            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10}/>
 
 
         </div>

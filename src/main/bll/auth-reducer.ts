@@ -67,7 +67,6 @@ export const setInitializedAC = (value: boolean) =>
 export const initializeAppTC = () => async (dispatch: ThunkDispatch<any, unknown, ActionLoginType>) => {
     try {
         const res = await authAPI.me()
-        debugger
         dispatch(setIsLoggedInAC(true))
         dispatch(initializeProfileAC(res))
 
