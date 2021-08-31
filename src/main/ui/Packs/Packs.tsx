@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setPackNameAC, setPacksTC } from "../../bll/packs-reducer/packs-reduser";
-import { AppRootStateType } from "../../bll/store";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setPackNameAC, setPacksTC} from "../../bll/packs-reducer/packs-reduser";
+import {AppRootStateType} from "../../bll/store";
 import s from "./Packs.module.css"
-import { setIdAC } from './../../bll/packs-reducer/packs-reduser';
-import { Pack } from "./Pack/Pack";
-import { CardPacksDataType } from "../../dal/api/api-cards";
-import { Button } from "../common/Button/Button";
-import { Input } from "../common/Input/Input";
-import { RequestStatusType } from "../../bll/app-reducer";
-import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
+import {setIdAC} from './../../bll/packs-reducer/packs-reduser';
+import {Pack} from "./Pack/Pack";
+import {CardPacksDataType} from "../../dal/api/api-cards";
+import {Button} from "../common/Button/Button";
+import {Input} from "../common/Input/Input";
+import {RequestStatusType} from "../../bll/app-reducer";
+import {CreatePackModalWindow} from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
+import {Search} from "../Search/Search";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -49,6 +50,7 @@ export const Packs: React.FC = React.memo(() => {
 
     // отправляем поисковый запрос на сервер //send search request to the server 
     const search = () => {
+        debugger
         dispatch(setPackNameAC(searchValue));
         dispatch(setPacksTC())
         setSearchValue('')
@@ -58,7 +60,7 @@ export const Packs: React.FC = React.memo(() => {
     const cards = packs.map(p => {
         return (
             <tr key={p._id}>
-                <Pack pack={p} />
+                <Pack pack={p}/>
             </tr>
         )
     });
@@ -68,25 +70,26 @@ export const Packs: React.FC = React.memo(() => {
         <div className={s.packsContainer}>
 
             {activeModalAdd &&
-                <CreatePackModalWindow
-                    activeModal={activeModalAdd}
-                    setActive={setActiveModalAdd}
-                />
+            <CreatePackModalWindow
+                activeModal={activeModalAdd}
+                setActive={setActiveModalAdd}
+            />
             }
             <div className={s.navBlock}>
                 <div className={s.allPack}>
-                <Button onClick={openModelWindow}>Add pack</Button>
+                    <Button onClick={openModelWindow}>Add pack</Button>
                     <Button onClick={allPacks}>All packs</Button>
                     <Button onClick={myPacks}>My packs</Button>
                 </div>
                 <div className={s.serachBlock}>
-                    <Input
-                        onChangeText={setInputValuse}
-                        onEnter={search}
-                        value={searchValue}
-                        placeholder="searh packs"
-                        className={s.saerchInput}
-                    />
+                    {/*<Input*/}
+                    {/*    onChangeText={setInputValuse}*/}
+                    {/*    onEnter={search}*/}
+                    {/*    value={searchValue}*/}
+                    {/*    placeholder="searh packs"*/}
+                    {/*    className={s.saerchInput}*/}
+                    {/*/>*/}
+                    <Search/>
                     <button
                         className={s.searchButton}
                         onClick={search}
@@ -98,22 +101,22 @@ export const Packs: React.FC = React.memo(() => {
             {/* Table */}
             <table>
                 <thead className={s.packsHeader}>
-                    <tr>
-                        <th>username</th>
-                        <th>name</th>
-                        <th>cards</th>
-                        <th>time</th>
-                        <th>learn</th>
-                        <th></th>
-                        <th>actions</th>
-                    </tr>
+                <tr>
+                    <th>username</th>
+                    <th>name</th>
+                    <th>cards</th>
+                    <th>time</th>
+                    <th>learn</th>
+                    <th></th>
+                    <th>actions</th>
+                </tr>
                 </thead>
                 <tbody>
-                    
-                    {cards}
+
+                {cards}
                 </tbody>
             </table>
-        {/* Pagination */}
+            {/* Pagination */}
             {cardPacksTotalCount}
 
 

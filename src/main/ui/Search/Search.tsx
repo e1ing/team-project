@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useCallback, useState} from "react";
-import style from "Search.module.css"
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
+import style from "./Search.module.css"
 import debounce from 'lodash.debounce';
 import {setPackNameAC, setPacksTC} from "../../bll/packs-reducer/packs-reduser";
 import {useDispatch} from "react-redux";
@@ -7,13 +7,25 @@ import {useDispatch} from "react-redux";
 export const Search = () => {
     const dispatch = useDispatch();
 
+    // useEffect(() => {
+    //     dispatch(setPackNameAC(searchValue));
+    //     dispatch(setPacksTC());
+    //     setSearchValue('')
+    // })
+
     const [searchValue, setSearchValue] = useState<string>("");
     const [dbValue, saveToDb] = useState('');
 
+    if (searchValue !== "") {
+       // let filteredNames = searchValue.filter((name) => {
+       //      return name.toLowerCase().includes(query.toLowerCase());
+       //  }
 
-    const handleChange = (e: any) => {
-        const {value}  = e.target
-        setSearchValue(e.target.value)
+    }
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+              setSearchValue(e.target.value)
+
         dispatch(setPackNameAC(searchValue));
         dispatch(setPacksTC())
 
@@ -22,9 +34,8 @@ export const Search = () => {
     }
 
     const debouncedHandler = useCallback(
-        debounce(handleChange, 1000),
-        []);
-
+        debounce(handleChange, 3000),
+        [searchValue]);
 
 
     return (
