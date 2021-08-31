@@ -15,6 +15,8 @@ export const Main = () => {
     useEffect(()=> {
         dispatch(initializeAppTC())
     }, [])
+
+
     if (!isInitialized) {
         return <Preloader/>
     }

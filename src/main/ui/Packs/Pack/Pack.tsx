@@ -23,14 +23,14 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
     const [updateActiveModal, setUpdateActiveModal] = useState<boolean>(false);
     const [deletActivPackModal, setDeletActivePackModal] = useState<boolean>(false);
 
-    const formet = new Intl.DateTimeFormat("ru", {
+    const format = new Intl.DateTimeFormat("ru", {
         hour: "numeric",
         minute: "numeric",
         second: "numeric",
     });
     const date = new Date(props.pack.created);
 
-    const time = formet.format(date);
+    const time = format.format(date);
 
     const openUpdateModalWindow = () => setUpdateActiveModal(true);
     const openDeletModalWindow = () => setDeletActivePackModal(true);
