@@ -43,7 +43,7 @@ export const CreatePackModalWindow: React.FC<CreatePacksType> = React.memo((prop
                 onChange={changeTitleHandler}
                 autoFocus
             />
-            <Button type="submit" onClick={createCardsHandler}>Okey</Button>
+            <Button type="submit" onClick={createCardsHandler}>Okay</Button>
             </div>
 
         </div>

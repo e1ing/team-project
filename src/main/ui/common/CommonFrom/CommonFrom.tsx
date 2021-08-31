@@ -1,5 +1,5 @@
 import { Formik, useFormik } from 'formik';
-import React, { useState } from 'react';
+import React, {FC, useState} from 'react';
 import { Button } from '../Button/Button';
 import { Input } from '../Input/Input';
 
@@ -14,12 +14,7 @@ type FormPropsType = {
     callBack: (values: any) => void
 }
 
-export const CommonFrom: React.FC<FormPropsType> = (props) => {
-
-    const {
-        type,
-        callBack
-    } = props;
+export const CommonFrom: FC<FormPropsType> = ({type, callBack}) => {
 
     const [typeIcon, setTypeIcon] = useState<string>('password')
     const hideShow = () => {
@@ -138,9 +133,7 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
                         type={typeIcon}
                         {...formik.getFieldProps("password")}
                     />
-                    <span
-                        onClick={hideShow}
-                    >
+                    <span onClick={hideShow}>
                         {typeIcon === "text" ? "🔒" : "🔑"}
                     </span>
                     {formik.errors.password && formik.touched.password &&
@@ -251,7 +244,7 @@ export const CommonFrom: React.FC<FormPropsType> = (props) => {
             {/* Form Discription */}
             <span >{formDescription(type)}</span>
             <form onSubmit={formik.handleSubmit}/>
-            {/* Form generato function */}
+            {/* Form generator function */}
                 {formGenerator()}
             {/* Form additional field */}
 
