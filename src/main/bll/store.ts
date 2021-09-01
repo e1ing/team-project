@@ -5,12 +5,12 @@ import { updatePasswordReducer, UpdatePasswordReducerAT } from './update-passwor
 import {registrationReducer} from "./registration-reducer";
 import {appReducer} from "./app-reducer";
 import { PacksActionType, packsReduser } from './packs-reducer/packs-reduser';
-import { loginReducer, LoginReducerActionsType } from './auth-reducer';
+import {ActionLoginType, authReducer} from './auth-reducer';
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
-    auth: loginReducer,
+    auth: authReducer,
     recoveryPassword: restorePasswordReducer,
     updatePasswordReducer: updatePasswordReducer,
     app: appReducer,
@@ -28,7 +28,7 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStoreType, 
 
 export type AppActionsType = RestorePasswordReducerActionsType
                             | UpdatePasswordReducerAT
-                            | LoginReducerActionsType
+                            | ActionLoginType
                             | PacksActionType
 
 

@@ -1,41 +1,33 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
+import React, {ChangeEvent, FC, useCallback, useEffect, useMemo, useState} from "react";
 import style from "./Search.module.css"
 import debounce from 'lodash.debounce';
 import {setPackNameAC, setPacksTC} from "../../bll/packs-reducer/packs-reduser";
 import {useDispatch} from "react-redux";
 
-export const Search = () => {
+type SearchPropsType = {
+    name: string
+}
+
+export const Search: FC<SearchPropsType> = ({name}) => {
     const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     dispatch(setPackNameAC(searchValue));
-    //     dispatch(setPacksTC());
-    //     setSearchValue('')
-    // })
-
     const [searchValue, setSearchValue] = useState<string>("");
-    const [dbValue, saveToDb] = useState('');
+
+    let changedName = name;
 
     if (searchValue !== "") {
-       // let filteredNames = searchValue.filter((name) => {
-       //      return name.toLowerCase().includes(query.toLowerCase());
-       //  }
+       changedName = name.toLowerCase();
+       }
 
-    }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-              setSearchValue(e.target.value)
-
+        setSearchValue(e.target.value)
         dispatch(setPackNameAC(searchValue));
         dispatch(setPacksTC())
-
-       /* const debouncedSave = debounce(() => saveToDb(nextValue), 1000);
-        debouncedSave();*/
     }
 
-    const debouncedHandler = useCallback(
-        debounce(handleChange, 3000),
-        [searchValue]);
+    const debouncedHandler = useMemo(() =>
+        debounce(handleChange, 1000),
+        [ ]);
 
 
     return (
