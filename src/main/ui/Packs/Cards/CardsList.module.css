@@ -1,0 +1,57 @@
+.cardsList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #120f36;
+    margin: 10px;
+}
+
+.cardsList table {
+    border-collapse: collapse;
+    font-weight: 400;
+}
+
+.cardsList th {
+   
+    text-align: center;
+    background-color: #9890C7;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #000;
+}
+
+.cardsList td,
+.cardsList th {
+    border-bottom: 1px solid #3b5781;
+    text-align: center;
+    padding: 10px;
+}
+
+.backLink {
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleNoCards {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 35px;
+    font-size: 1.5em;
+    color: #3b5781;
+}
+
+.link {
+    text-decoration: none;
+    color: #120f36;
+    cursor: pointer;
+    margin-right: 5px;
+    background: none;
+    border: none;
+    transition: transform 0.7s ease-in-out;
+    font-size: 1.3em;
+}
+

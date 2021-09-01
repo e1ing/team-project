@@ -20,7 +20,6 @@ export const Packs: React.FC = React.memo(() => {
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
     const cardPacksTotalCoutn = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
 
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>(name);
@@ -54,7 +53,6 @@ export const Packs: React.FC = React.memo(() => {
         setSearchValue('')
     };
 
-
     const cards = packs.map(p => {
         return (
             <tr key={p._id}>
@@ -62,7 +60,6 @@ export const Packs: React.FC = React.memo(() => {
             </tr>
         )
     });
-
 
     return (
         <div className={s.packsContainer}>
@@ -75,7 +72,7 @@ export const Packs: React.FC = React.memo(() => {
             }
             <div className={s.navBlock}>
                 <div className={s.allPack}>
-                <Button onClick={openModelWindow}>Add pack</Button>
+                    <Button onClick={openModelWindow}>Add pack</Button>
                     <Button onClick={allPacks}>All packs</Button>
                     <Button onClick={myPacks}>My packs</Button>
                 </div>
@@ -104,19 +101,17 @@ export const Packs: React.FC = React.memo(() => {
                         <th>cards</th>
                         <th>time</th>
                         <th>learn</th>
-                        <th></th>
+                        <th>watch</th>
                         <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+
                     {cards}
                 </tbody>
             </table>
-        {/* Pagination */}
+            {/* Pagination */}
             {cardPacksTotalCoutn}
-
-
         </div>
     )
 })

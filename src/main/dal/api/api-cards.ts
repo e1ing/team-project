@@ -60,6 +60,53 @@ export type ResponseDataType = {
     pageCount: number
 };
 
+
+
+// cards
+export type SortPacksAndCardsOrderType = 0 | 1 | "default";
+export type CardType = {
+    answer: string
+    cardsPack_id: string
+    comments: string
+    created: string
+    grade: number
+    more_id: string
+    question: string
+    rating: number
+    shots: number
+    type: string
+    updated: string
+    user_id: string
+    __v: number
+    _id: string
+};
+export type AddCardResponseType = {
+    newCard: CardType
+    token: string
+    tokenDeathTime: number
+};
+export type DeleteCardResponseType = {
+    deletedCard: CardType
+    token: string
+    tokenDeathTime: number
+};
+export type UpdateCardResponseType = {
+    updatedCard: CardType
+    token: string
+    tokenDeathTime: number
+};
+export type GetCardsResponseType = {
+    cards: Array<CardType>
+    cardsTotalCount: number
+    maxGrade: number
+    minGrade: number
+    packUserId: string
+    page: number
+    pageCount: number
+    token: string
+    tokenDeathTime: number
+};
+
 // http://localhost:7542/2.0/
 // https://neko-back.herokuapp.com/2.0/
 
@@ -124,3 +171,18 @@ export const packsApi = {
         })
     },
 };
+
+export const cardsApi = {
+    getCards(packId: string, page?: number, pageCount?: number, question?: string, sortCardsOrder?: SortPacksAndCardsOrderType, sortCardsFilter?: string, answer?: string, min?: number, max?:number){
+        return instance.get<GetCardsResponseType>(`cards/card?cardQuestion=${question ? question : ""}&cardsPack_id=${packId}&pageCount=${pageCount}&sortCards=${sortCardsOrder}${sortCardsFilter}`)
+    },
+    addCard(packId: string, question?: string, answer?: string){
+        return instance.post<AddCardResponseType>(`/cards/card`, {card: {cardsPack_id: packId, question, answer,}})
+    }, 
+    deleteCard(cardId: string){
+        return instance.delete<DeleteCardResponseType>(`cards/card?id=${cardId}`)
+    },
+    updateCard(cardId: string, question: string, answer: string){
+        return instance.put<UpdateCardResponseType>(`cards/card`, {card: {_id: cardId, question, answer}})
+    },
+}

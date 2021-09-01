@@ -6,6 +6,7 @@ import {registrationReducer} from "./registration-reducer";
 import {appReducer} from "./app-reducer";
 import { PacksActionType, packsReduser } from './packs-reducer/packs-reduser';
 import { loginReducer, LoginReducerActionsType } from './auth-reducer';
+import { CardsReducerActionType, cardsReducer } from './cards-reducer/cards-reducer';
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     app: appReducer,
     registation: registrationReducer,
     packs: packsReduser,
+    cards: cardsReducer,
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
@@ -30,6 +32,7 @@ export type AppActionsType = RestorePasswordReducerActionsType
                             | UpdatePasswordReducerAT
                             | LoginReducerActionsType
                             | PacksActionType
+                            | CardsReducerActionType
 
 
 // чтобы можно было в консоли браузера обращаться к store в любой момент

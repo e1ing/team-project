@@ -48,7 +48,7 @@ export const UpdatePacksModalWindow: React.FC<UpdatePacksPT> = React.memo((props
             <div className={s.modalBlock} onClick={offActiveModal}>
                 <div className={s.title}> Update name of pack</div>
                 <Input value={title} onChange={updateTitle} autoFocus />
-                <Button type={"submit"} onClick={updatePack}>Okay</Button>
+                <Button onClick={updatePack}>Okay</Button>
             </div>
         </div>
     )

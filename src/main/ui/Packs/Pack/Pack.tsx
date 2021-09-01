@@ -10,7 +10,7 @@ import s from "./Pack.module.css";
 
 type PackPT = {
     pack: CardPacksDataType
-}
+};
 
 export const Pack: React.FC<PackPT> = React.memo((props) => {
 
@@ -23,14 +23,7 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
     const [updateActiveModal, setUpdateActiveModal] = useState<boolean>(false);
     const [deletActivPackModal, setDeletActivePackModal] = useState<boolean>(false);
 
-    const formet = new Intl.DateTimeFormat("ru", {
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
-    });
-    const date = new Date(props.pack.created);
-
-    const time = formet.format(date);
+    const update = new Date(pack.updated).toLocaleDateString(['ban', 'id'])
 
     const openUpdateModalWindow = () => setUpdateActiveModal(true);
     const openDeletModalWindow = () => setDeletActivePackModal(true);
@@ -40,37 +33,33 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
             <td>{pack.user_name}</td>
             <td>{pack.name}</td>
             <td>{pack.cardsCount}</td>
-            <td>{time}</td>
+            <td>{update}</td>
+
+            <td>
+            </td>
             <td>
                 <NavLink
                     className={s.link}
                     to={PATH.CARDS + `/${pack._id}`}>
-                </NavLink>
-            </td>
-            <td>
-                <NavLink
-                    className={s.link}
-                    to={PATH.LEARN + `/${pack._id}`}>
+                    watch
                 </NavLink>
             </td>
             <td>
 
-                {
-                    userLoginID !== pack.user_id
-                        ? null
-                        : <>
-                            <button
-                                className={s.Button}
-                                onClick={openUpdateModalWindow}
-                            >📝
-                            </button>
+                {userLoginID !== pack.user_id ? null
+                    : <>
+                        <button
+                            className={s.Button}
+                            onClick={openUpdateModalWindow}
+                        >📝
+                        </button>
 
-                            <button
-                                className={s.Button}
-                                onClick={openDeletModalWindow}
-                            >🗑
-                            </button>
-                        </>
+                        <button
+                            className={s.Button}
+                            onClick={openDeletModalWindow}
+                        >🗑
+                        </button>
+                    </>
                 }
             </td>
 

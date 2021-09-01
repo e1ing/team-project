@@ -72,7 +72,9 @@ export const packsReduser = (state: InitialPacksStateType = initialState, action
 
 export const setMaxCardsCoutnAC = (maxCount: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX-CARDS-NUMBER", maxCount } as const);
 export const setMinCardsCoutnAC = (minCount: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN-CARDS-NUMBER", minCount } as const);
+
 export const setPacksAC = (cards: Array<CardPacksDataType>) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-PACKS", cards } as const);
+
 export const setPacksTotalCountAC = (count: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-CARDS-TOTAL-COUNT", count } as const);
 export const setEntityStatusPacksAC = (entityStatus: EntityStatusType, id: string) =>
     ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-ENTITY-STATUS-PACKS", entityStatus, id } as const);
@@ -148,8 +150,6 @@ export const deletePacksTC = (_id: string): AppThunk => (dispatch) => {
             alert(error)
         })
 };
-
-// 
 export const updatePacksTC = (_id: string, name: string): AppThunk => (dispatch) => {
     // status
     dispatch(setEntityStatusPacksAC("loading", _id))
