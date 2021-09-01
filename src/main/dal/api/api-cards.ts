@@ -108,7 +108,7 @@ export const authAPI = {
 
 export const packsApi = {
     getPacks(pageCount: number = 5, page: number = 1, packName: string = "", min: number, max: number, id: string) {
-        return instance.get<ResponseDataType>(`/cards/pack/?packName=${packName}&pageCount=${pageCount}&page${page}&sortPacks=&min=${min}&max=${max}&user_id=${id}`)
+        return instance.get<ResponseDataType>(`/cards/pack/?packName=${packName}&pageCount=${pageCount}&page=${page}&sortPacks=&min=${min}&max=${max}&user_id=${id}`)
     },
     deletePacks(id: string) {
         return instance.delete(`cards/pack?id=${id}`)

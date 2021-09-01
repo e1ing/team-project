@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPackNameAC, setPacksTC } from "../../bll/packs-reducer/packs-reduser";
+import {setCurrentPageAC, setPackNameAC, setPacksTC} from "../../bll/packs-reducer/packs-reduser";
 import { AppRootStateType } from "../../bll/store";
 import s from "./Packs.module.css"
 import { setIdAC } from './../../bll/packs-reducer/packs-reduser';
@@ -29,6 +29,7 @@ export const Packs: React.FC = React.memo(() => {
     const [myPack, setMyPack] = useState<boolean>(false);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
+    console.log('currentPage: ', currentPage)
     const [sizePage] = useState<number>(10);
 
     const indexOfLastPack = currentPage * sizePage;
@@ -47,7 +48,7 @@ export const Packs: React.FC = React.memo(() => {
 
     useEffect(() => {
         dispatch(setPacksTC())
-    }, [dispatch, page]);
+    }, [dispatch, currentPage, page]);
 
     const openModelWindow = () => {
         setActiveModalAdd(true);
@@ -73,7 +74,8 @@ export const Packs: React.FC = React.memo(() => {
         setSearchValue('')
     };
 
-    const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+    //const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber))
 
 
 

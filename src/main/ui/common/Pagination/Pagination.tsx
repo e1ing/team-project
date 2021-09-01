@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 type pageType = {
     sizePage: number
     totalPacks: number
-    paginate: any
+    paginate: (pageNumber: number)=> void
     portionSize: number
 }
 export const Pagination = ({sizePage, totalPacks, paginate, portionSize = 10}: pageType)  => {
@@ -27,11 +27,10 @@ export const Pagination = ({sizePage, totalPacks, paginate, portionSize = 10}: p
                 {pageNumbers
                     .filter(p=> p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                     .map(number=> (
-                    <span key={number}>
-                        <a onClick={(e)=>paginate(number)}
-                           href={'!#'}>
-                            {number}
-                        </a>
+                    <span key={number}
+                         onClick={(e)=>paginate(number)}>
+                            {number}-
+
                     </span>
                 ))}
                 {portionCount > portionNumber &&
