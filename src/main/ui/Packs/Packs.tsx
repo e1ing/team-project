@@ -24,7 +24,7 @@ export const Packs: React.FC = React.memo(() => {
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
 
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
-    const [searchValue, setSearchValue] = useState<string>(name);
+    /*const [searchValue, setSearchValue] = useState<string>(name);*/
     const [myPack, setMyPack] = useState<boolean>(false);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -53,17 +53,16 @@ export const Packs: React.FC = React.memo(() => {
         dispatch(setIdAC(userLoginId));
         dispatch(setPacksTC());
     };
-    const setInputValuse = (value: string) => {
+    /*const setInputValuse = (value: string) => {
         setSearchValue(value)
-    };
+    };*/
 
     // отправляем поисковый запрос на сервер //send search request to the server 
-    const search = () => {
-        debugger
+   /* const search = () => {
         dispatch(setPackNameAC(searchValue));
         dispatch(setPacksTC())
         setSearchValue('')
-    };
+    };*/
 
 
     const cards = packs.map(p => {
@@ -92,20 +91,13 @@ export const Packs: React.FC = React.memo(() => {
 
                 </div>
                 <div className={s.serachBlock}>
-                    {/*<Input*/}
-                    {/*    onChangeText={setInputValuse}*/}
-                    {/*    onEnter={search}*/}
-                    {/*    value={searchValue}*/}
-                    {/*    placeholder="searh packs"*/}
-                    {/*    className={s.saerchInput}*/}
-                    {/*/>*/}
-                    <Search/>
-                    <button
+                    <Search names={name}/>
+                    {/*<button
                         className={s.searchButton}
                         onClick={search}
                     >
                         🔍
-                    </button>
+                    </button>*/}
                 </div>
             </div>
             {/* Table */}
