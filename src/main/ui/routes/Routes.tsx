@@ -9,6 +9,7 @@ import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
 import {PasswordChange} from "../PasswordChange/PasswordChange";
 import {Error404} from "../Error404/Error404";
 import { UpdatePassword } from '../UpdatePassword/UpdatePassword';
+import { Packs } from '../Packs/Packs';
 
 export const PATH = {
     LOGIN: "/login",
@@ -17,7 +18,10 @@ export const PATH = {
     SIGN_UP: "/sign-up",
     PASSWORD_RECOVERY: "/password-recovery",
     ERROR_404: "/404",
-    UPDATE_PASSWORD: "/updatePassword/:token"
+    UPDATE_PASSWORD: "/updatePassword/:token",
+    PACKS_LIST: '/packList',
+    CARDS: '/cards',
+    LEARN: '/learn',
     // add paths
 }
 export const Routes = () => {
@@ -32,6 +36,10 @@ export const Routes = () => {
                 <Route path={PATH.PASSWORD_CHANGE} render={() => <PasswordChange/>}/>
                 <Route path={PATH.ERROR_404} render={() => <Error404/>}/>
                 <Route path={PATH.UPDATE_PASSWORD} render={() => <UpdatePassword/>} />
+
+                <Route path={PATH.PACKS_LIST} render={() => <Packs/>}/>
+
+
                 <Redirect from={"*"} to={"/404"}/>
             </Switch>
         </div>
