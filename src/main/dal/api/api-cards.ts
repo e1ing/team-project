@@ -134,7 +134,7 @@ export type GetCardsResponseType = {
 // https://neko-back.herokuapp.com/2.0/
 
 const instance = axios.create({
-    baseURL: 'https://neko-back.herokuapp.com/2.0/',
+    baseURL: 'https://neko-back.herokuapp.com/2.0/', 
     withCredentials: true,
 });
 
@@ -142,7 +142,7 @@ const instance = axios.create({
 
 export const authAPI = {
     me() {
-        return instance.post<ProfileResponseType>(`auth/me`, {})
+        return instance.post<ProfileResponseType>(`auth/me`,{}).then(response => response.data)
     },
     login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post<LoginUserResponseType>(`auth/login`, { email, password, rememberMe })
@@ -162,12 +162,14 @@ export const authAPI = {
     signUp(regData: RegistrationDataType) {
         return instance.post<SignUpResponseType>(`auth/register`, regData)
     },
+
     setNewPassword(newPassword: string, resetPasswordToken: string) {
         return instance.post(`/auth/set-new-password`, {
             password: newPassword,
             resetPasswordToken
         })
     },
+
     updateUserData(name: string, avatar: string | undefined | null) {
         return instance.put<UpdateUserDataResponseType>(`auth/me`, { name, avatar })
     },
