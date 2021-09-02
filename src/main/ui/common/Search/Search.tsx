@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, useCallback, useEffect, useMemo, useState} from "react";
 import style from "./Search.module.css"
 import debounce from 'lodash.debounce';
-import {setPackNameAC, setPacksTC} from "../../bll/packs-reducer/packs-reduser";
+import {setPackNameAC, setPacksTC} from "../../../bll/packs-reducer/packs-reduser";
 import {useDispatch} from "react-redux";
 
 type SearchPropsType = {

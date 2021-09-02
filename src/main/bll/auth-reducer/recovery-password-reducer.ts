@@ -1,6 +1,6 @@
 import { ThunkAction } from "redux-thunk"
-import { authAPI } from "../dal/api/api-cards"
-import { AppActionsType, AppRootStateType } from "./store"
+import { authAPI } from "../../dal/api/api-cards"
+import { AppActionsType, AppRootStateType } from "../store"
 
 
 

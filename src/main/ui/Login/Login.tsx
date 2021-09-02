@@ -8,7 +8,7 @@ import Checkbox from "../common/Checkbox/Checkbox";
 import {Input} from "../common/Input/Input";
 import {Button} from "../common/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {loginTC} from "../../bll/auth-reducer";
+import {loginTC} from "../../bll/auth-reducer/auth-reducer";
 import {AppRootStateType} from "../../bll/store";
 import commonStyles from "../app/App.module.css";
 import styles from "../Registration/Registartion.module.css";

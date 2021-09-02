@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ProfileResponseType } from "../../bll/auth-reducer";
-import { RegistrationDataType } from "../../bll/registration-reducer";
+import { ProfileResponseType } from "../../bll/auth-reducer/auth-reducer";
+import { RegistrationDataType } from "../../bll/auth-reducer/registration-reducer";
 
 export type UserDataType = {
     _id: string

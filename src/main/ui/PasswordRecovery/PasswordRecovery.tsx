@@ -6,7 +6,7 @@ import s from "./PasswordRecovery.module.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from '../../bll/store';
 import { useFormik } from "formik";
-import { restorePasswordTC } from '../../bll/recovery-password-rebucer';
+import { restorePasswordTC } from '../../bll/auth-reducer/recovery-password-reducer';
 import styles from "../Registration/Registartion.module.css";
 import commonStyles from "../app/App.module.css";
 import styleButton from "../common/Button/Button.module.css";
