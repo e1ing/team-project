@@ -8,53 +8,41 @@ import { Pack } from "./Pack/Pack";
 import { CardPacksDataType } from "../../dal/api/api-cards";
 import { Button } from "../common/Button/Button";
 import { Input } from "../common/Input/Input";
-import { RequestStatusType } from "../../bll/app-reducer";
 import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
-import styleButton from "../common/Button/Button.module.css";
 
 export const Packs: React.FC = React.memo(() => {
 
     const dispatch = useDispatch();
 
-    const name = useSelector<AppRootStateType, string>(state => state.packs.name);
-    const page = useSelector<AppRootStateType, number>(state => state.packs.page);
-    const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
+    const page = useSelector<AppRootStateType, number>(state => state.packs.page);
+
+    const name = useSelector<AppRootStateType, string>(state => state.packs.name);
+
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
+
 
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>(name);
     const [myPack, setMyPack] = useState<boolean>(false);
 
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [postPerPage, setPostPerPage] = useState<number>(10);
-
-    const indexOfLastPack = currentPage * postPerPage;
-    const indexOfFirstPack = indexOfLastPack - postPerPage;
-
-    const currentPack = packs.slice(indexOfLastPack, indexOfFirstPack)
-
-
     useEffect(() => {
         dispatch(setPacksTC())
     }, [dispatch, page]);
 
-    const openModelWindow = () => {
+    const openModalWindow = () => {
         setActiveModalAdd(true);
     };
+
     const allPacks = () => {
         setMyPack(false);
         dispatch(setIdAC(''));
         dispatch(setPacksTC());
     };
-    const myPacks = () => {
-        setMyPack(true);
-        dispatch(setIdAC(userLoginId));
-        dispatch(setPacksTC());
-    };
+
     const setInputValuse = (value: string) => {
-        setSearchValue(value)
+        setSearchValue(value);
     };
 
     // отправляем поисковый запрос на сервер //send search request to the server 
@@ -63,12 +51,25 @@ export const Packs: React.FC = React.memo(() => {
         dispatch(setPacksTC())
         setSearchValue('')
     };
-
-
     const cards = packs.map(p => {
         return (
             <tr key={p._id}>
                 <Pack pack={p} />
+            </tr>
+        )
+    });
+
+
+    const myPacks = () => {
+        setMyPack(true);
+        dispatch(setIdAC(userLoginId));
+        dispatch(setPacksTC());
+    };
+
+    const copyPacks = packs.map(c => {
+        return (
+            <tr key={c._id}>
+                <Pack pack={c}/>
             </tr>
         )
     });
@@ -85,9 +86,9 @@ export const Packs: React.FC = React.memo(() => {
             }
             <div className={s.navBlock}>
                 <div className={s.allPack}>
-                <Button onClick={openModelWindow} className={styleButton.button}>Add pack</Button>
-                    <Button onClick={allPacks} className={styleButton.button}>All packs</Button>
-                    <Button onClick={myPacks} className={styleButton.button}>My packs</Button>
+                    <Button onClick={openModalWindow}>Add pack</Button>
+                    <Button onClick={allPacks}>All packs</Button>
+                    <Button onClick={myPacks}>My packs</Button>
                 </div>
                 <div className={s.serachBlock}>
                     <Input
@@ -110,23 +111,20 @@ export const Packs: React.FC = React.memo(() => {
                 <thead className={s.packsHeader}>
                     <tr>
                         <th>username</th>
-                        <th>name</th>
+                        <th>name pack</th>
                         <th>cards</th>
                         <th>time</th>
                         <th>learn</th>
-                        <th></th>
+                        <th>watch</th>
                         <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
                     {cards}
                 </tbody>
             </table>
-        {/* Pagination */}
+            {/* Pagination */}
             {cardPacksTotalCount}
-
-
         </div>
     )
 })
