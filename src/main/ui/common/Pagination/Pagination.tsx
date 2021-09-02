@@ -36,7 +36,7 @@ export const Pagination = ({sizePage, totalPacks, paginate, portionSize = 10}: p
                 {portionCount > portionNumber &&
                 <button onClick={() => {
                     setPortionNumber(portionNumber + 1)
-                }}>next</button>
+                }}><img src={"/right.png"}/></button>
                 }
             </ul>
         </nav>
