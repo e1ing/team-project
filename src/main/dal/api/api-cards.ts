@@ -59,6 +59,28 @@ export type ResponseDataType = {
     page: number
     pageCount: number
 };
+export type PackResponseType = {
+    cardsCount: number
+    created: string
+    grade: number
+    more_id: string
+    name: string
+    path: string
+    private: false
+    rating: number
+    shots: number
+    type: string
+    updated: string
+    user_id: string
+    user_name: string
+    __v: number
+    _id: string
+}
+export type UpdatePackResponseType = {
+    updatedCardsPack: PackResponseType
+    token: string
+    tokenDeathTime: number
+}
 
 
 
@@ -95,6 +117,7 @@ export type UpdateCardResponseType = {
     token: string
     tokenDeathTime: number
 };
+
 export type GetCardsResponseType = {
     cards: Array<CardType>
     cardsTotalCount: number
@@ -152,14 +175,14 @@ export const authAPI = {
 
 
 export const packsApi = {
-    getPacks(pageCoutn: number = 5, page: number = 1, packName: string = "", min: number, max: number, id: string) {
-        return instance.get<ResponseDataType>(`/cards/pack/?packName=${packName}&pageCount=${pageCoutn}&page${page}&sortPacks=&min=${min}&max=${max}&user_id=${id}`)
+    getPacks(pageCoutn: number, page: number, packName: string, min: number, max: number, id: string) {
+        return instance.get<ResponseDataType>(`cards/pack/?packName=${packName}&pageCount=${pageCoutn}&page${page}&sortPacks=&min=${min}&max=${max}&user_id=${id}`)
     },
     deletePacks(id: string) {
         return instance.delete(`cards/pack?id=${id}`)
     },
     updatePacks(_id: string, name: string) {
-        return instance.put(`cards/pack`, {
+        return instance.put<UpdatePackResponseType>(`cards/pack`, {
             cardsPack: {_id, name}
         })
     },
@@ -176,8 +199,9 @@ export const cardsApi = {
     getCards(packId: string, page?: number, pageCount?: number, question?: string, sortCardsOrder?: SortPacksAndCardsOrderType, sortCardsFilter?: string, answer?: string, min?: number, max?:number){
         return instance.get<GetCardsResponseType>(`cards/card?cardQuestion=${question ? question : ""}&cardsPack_id=${packId}&pageCount=${pageCount}&sortCards=${sortCardsOrder}${sortCardsFilter}`)
     },
+    
     addCard(packId: string, question?: string, answer?: string){
-        return instance.post<AddCardResponseType>(`/cards/card`, {card: {cardsPack_id: packId, question, answer,}})
+        return instance.post<AddCardResponseType>(`cards/card`, {card: {cardsPack_id: packId, question, answer,}})
     }, 
     deleteCard(cardId: string){
         return instance.delete<DeleteCardResponseType>(`cards/card?id=${cardId}`)

@@ -19,7 +19,6 @@ export const Card: React.FC<CardPropsType> = React.memo((props) => {
     const [activeUpdateCardModal, setActiveUpdateCardModal] = useState(false);
 
     const update = new Date(card.updated).toLocaleDateString(['ban', 'id']);
-
     const openDeleteCardModalWindow = () => setActiveDeleteCardModal(true);
     const openUpdateCardModalWindow = () => setActiveUpdateCardModal(true);
 
@@ -31,7 +30,7 @@ export const Card: React.FC<CardPropsType> = React.memo((props) => {
                 <td>{update}</td>
                 <td>{card.grade.toFixed(0)}</td>
                 <td>
-                    {userLoginId ? null
+                    {userLoginId !== card.user_id ? null
                         : <>
                             <button
                                 className={s.link}

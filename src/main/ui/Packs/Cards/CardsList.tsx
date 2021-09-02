@@ -24,7 +24,6 @@ export const CardsList: React.FC = React.memo(() => {
     useEffect(() => {
         dispatch(getCardsTC(id))
     }, [dispatch, id, page]);
-
     const openModalWindow = () => setActiveModalAdd(true);
 
     const copyCards = cards.map(el => <tbody key={el._id}>

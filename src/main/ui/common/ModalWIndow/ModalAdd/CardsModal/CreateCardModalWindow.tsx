@@ -18,7 +18,7 @@ export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props)
         activeModalAdd,
         setActive
     } = props;
-
+    debugger
     const dispatch = useDispatch();
     const cardsPackId = useSelector<AppRootStateType, string>(state => state.packs.packCardsId);
 
@@ -26,6 +26,7 @@ export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props)
     const [answer, setAnswer] = useState('');
 
     const addSaveHandler = useCallback(() => {
+
         dispatch(addCardTC(cardsPackId, question, answer));
         setActive(false);
     }, [props, cardsPackId, question, answer]);

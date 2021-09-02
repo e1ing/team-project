@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from 'react-redux';
+import React, { useCallback, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { AppRootStateType } from "../../../bll/store";
 import { CardPacksDataType } from "../../../dal/api/api-cards";
@@ -18,15 +18,26 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
         pack
     } = props;
 
-    const userLoginID = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
+    // const dispatch = useDispatch();
+
+
+    const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
 
     const [updateActiveModal, setUpdateActiveModal] = useState<boolean>(false);
     const [deletActivPackModal, setDeletActivePackModal] = useState<boolean>(false);
 
     const update = new Date(pack.updated).toLocaleDateString(['ban', 'id'])
 
-    const openUpdateModalWindow = () => setUpdateActiveModal(true);
+    const openUpdateModalWindow = () => setUpdateActiveModal(true)
     const openDeletModalWindow = () => setDeletActivePackModal(true);
+
+    // const [title, setTitle] = useState<string>(pack.name);
+
+    // const updatePack = useCallback(() => {
+    //     dispatch(updatePacksTC(packId, title));
+    //     if (title !== '') {
+    //         setTitle('');
+    //     };
 
     return (
         <>
@@ -46,8 +57,8 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
             </td>
             <td>
 
-                {userLoginID !== pack.user_id ? null
-                    : <>
+                {userLoginId === pack.user_id ?
+                     <>
                         <button
                             className={s.Button}
                             onClick={openUpdateModalWindow}
@@ -60,6 +71,7 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
                         >🗑
                         </button>
                     </>
+                    :  null
                 }
             </td>
 
