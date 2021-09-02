@@ -34,13 +34,3 @@ export const setAppErrorAC = (error: string | null) => ({type: 'app/SET-ERROR', 
 
 export const setIsInitializedAC = (isInitialized: boolean) => ({type: "app/SET-INITIALIZED", isInitialized} as const);
 
-
-export const isInitializedTC = (): AppThunk =>
-    (dispatch) => {
-        authAPI.me()
-            .then((res) => {
-                dispatch(setIsInitializedAC(true))
-                dispatch(setIsLoggedInAC(res.data, true))
-            })
-           
-    }
