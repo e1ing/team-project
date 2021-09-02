@@ -1,21 +1,21 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunkMiddleware, { ThunkAction } from 'redux-thunk'
-import { restorePasswordReducer, RestorePasswordReducerActionsType } from './recovery-password-rebucer';
-import { updatePasswordReducer, UpdatePasswordReducerAT } from './update-password-reducer';
-import {registrationReducer} from "./registration-reducer";
+import { restorePasswordReducer, RestorePasswordReducerActionsType } from './auth-reducer/recovery-password-reducer';
+import { updatePasswordReducer, UpdatePasswordReducerAT } from './auth-reducer/update-password-reducer';
+import {registrationReducer} from "./auth-reducer/registration-reducer";
 import {ActionType, appReducer} from "./app-reducer";
 import { PacksActionType, packsReducer } from './packs-reducer/packs-reduser';
-import { loginReducer, LoginReducerActionsType } from './auth-reducer';
 import { CardsReducerActionType, cardsReducer } from './cards-reducer/cards-reducer';
+import {authReducer} from "./auth-reducer/auth-reducer";
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
 const rootReducer = combineReducers({
-    auth: loginReducer,
+    auth: authReducer,
     recoveryPassword: restorePasswordReducer,
     updatePasswordReducer: updatePasswordReducer,
     app: appReducer,
-    registation: registrationReducer,
+    registration: registrationReducer,
     packs: packsReducer,
     cards: cardsReducer,
 })
@@ -30,7 +30,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStoreType, 
 
 export type AppActionsType = RestorePasswordReducerActionsType
                             | UpdatePasswordReducerAT
-                            | LoginReducerActionsType
                             | PacksActionType
                             | CardsReducerActionType
                             | ActionType

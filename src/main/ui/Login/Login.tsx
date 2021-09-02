@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Login.module.css';
 import styleButton from './../common/Button/Button.module.css';
-import styleInput from './../common/Input/Input.module.css';
 import {PATH} from "../routes/Routes";
 import {NavLink, Redirect} from "react-router-dom";
 import {useFormik} from "formik";
@@ -9,8 +8,12 @@ import Checkbox from "../common/Checkbox/Checkbox";
 import {Input} from "../common/Input/Input";
 import {Button} from "../common/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
+import {loginTC} from "../../bll/auth-reducer/auth-reducer";
 import {AppRootStateType} from "../../bll/store";
-import {loginTC} from "../../bll/auth-reducer";
+import commonStyles from "../app/App.module.css";
+import styles from "../Registration/Registartion.module.css";
+
+
 
 
 export const Login = () => {
@@ -48,32 +51,31 @@ export const Login = () => {
         },
 
     })
-
     if (isLoggedIn) {
         return <Redirect to={"/profile"} />
     }
 
+
+
     return (
-        <div className={style.container}>
-            <div className={style.form}>
-                <div className={style.title}>
-                    <h1>It-incubator</h1>
-                    <h3>Sign In</h3>
+        <div className={styles.container}>
+            <div className={styles.form}>
+                <div className={styles.content}>
+                    <h1 className={commonStyles.h1}>it-incubator</h1>
+                    <h2>Sign In</h2>
                 </div>
-                <form className={style.input} onSubmit={formik.handleSubmit}>
-                    <label htmlFor="email">Email Address</label>
+                <form className={styles.content} onSubmit={formik.handleSubmit}>
                     <Input
-                        className={styleInput.input}
+                        type={"email"} placeholder={"Email"}
                         {...formik.getFieldProps('email')}
                     />
-                    {formik.touched.email && formik.errors.email ? <div style={{color: 'red'}}>{formik.errors.email}</div> : null}
-                    <label htmlFor="password">Password</label>
+                    {formik.touched.email && formik.errors.email ? <div className={commonStyles.error}>{formik.errors.email}</div> : null}
                     <Input
-                        className={styleInput.input}
+                        placeholder={"Password"}
                         type={"password"}
                         {...formik.getFieldProps('password')}
                     />
-                    {formik.touched.password && formik.errors.password ? <div style={{color: 'red'}}>{formik.errors.password}</div> : null}
+                    {formik.touched.password && formik.errors.password ? <div className={commonStyles.error}>{formik.errors.password}</div> : null}
                     <label htmlFor="rememberMe">Remember me</label>
                     <Checkbox
                         name="rememberMe"
@@ -84,8 +86,8 @@ export const Login = () => {
                 <NavLink to={PATH.PASSWORD_CHANGE} style={{textDecoration: "none"}}>Forgot Password</NavLink>
                 <div className={style.bottom}>
                     <form onSubmit={formik.handleSubmit}>
-                        <Button className={styleButton.button}>
-                            login
+                        <Button name={"login"} type={"submit"} className={styleButton.button}>
+                            Login
                         </Button>
                     </form>
                     <div style={{color: "gray"}}>Don't have an account?</div>

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppRootStateType } from "../../bll/store";
 import { Redirect, useParams } from "react-router-dom";
 import { useFormik } from "formik";
-import { updatePasswordTC } from "../../bll/update-password-reducer";
+import { updatePasswordTC } from "../../bll/auth-reducer/update-password-reducer";
 
 type FormikErrorType = {
     newPassword?: string

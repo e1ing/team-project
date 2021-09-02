@@ -1,7 +1,7 @@
 import { Dispatch } from "redux"
 
-import {setAppErrorAC, setAppStatusAC} from "./app-reducer";
-import {authAPI} from "../dal/api/api-cards";
+import {setAppErrorAC, setAppStatusAC} from "../app-reducer";
+import {authAPI} from "../../dal/api/api-cards";
 
 type InitialStateType = typeof initialState
 type ActionType = ReturnType<typeof registerUserAC>

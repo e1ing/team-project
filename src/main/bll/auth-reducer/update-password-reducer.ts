@@ -1,6 +1,6 @@
-import { AppActionsType, AppRootStateType } from "./store"
+import { AppActionsType, AppRootStateType } from "../store"
 import { ThunkAction } from 'redux-thunk';
-import { authAPI } from "../dal/api/api-cards";
+import { authAPI } from "../../dal/api/api-cards";
 
 type InitialStateType = {
     isSuccess: boolean
