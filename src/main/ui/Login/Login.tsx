@@ -83,7 +83,7 @@ export const Login = () => {
                         checked={formik.values.rememberMe}
                     />
                 </form>
-                <NavLink to={PATH.PASSWORD_CHANGE} style={{textDecoration: "none"}}>Forgot Password</NavLink>
+                <NavLink to={PATH.PASSWORD_RECOVERY} style={{textDecoration: "none"}}>Forgot Password</NavLink>
                 <div className={style.bottom}>
                     <form onSubmit={formik.handleSubmit}>
                         <Button name={"login"} type={"submit"} className={styleButton.button}>
