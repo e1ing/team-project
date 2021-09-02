@@ -1,7 +1,3 @@
-import { authAPI } from "../dal/api/api-cards"
-import { setIsLoggedInAC } from "./auth-reducer"
-import { AppActionsType, AppThunk } from "./store"
-
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 type InitialStateType = typeof initialState
 export type SetAppStatusAT = ReturnType<typeof setAppStatusAC>
@@ -42,5 +38,5 @@ export const isInitializedTC = (): AppThunk =>
                 dispatch(setIsInitializedAC(true))
                 dispatch(setIsLoggedInAC(res.data, true))
             })
-           
+
     }

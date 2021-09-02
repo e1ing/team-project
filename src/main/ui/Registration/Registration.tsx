@@ -7,7 +7,6 @@ import {registerUserTC} from "../../bll/registration-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {AppRootStateType} from "../../bll/store";
-import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
 import {Preloader} from "../common/Preloader/Preloader";
 import styleButton from "../common/Button/Button.module.css";
 
