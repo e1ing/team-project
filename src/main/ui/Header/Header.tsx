@@ -9,7 +9,7 @@ function Header() {
                 <NavLink to={PATH.SIGN_UP}>sign Up</NavLink>
                 <NavLink to={PATH.LOGIN}>login</NavLink>
                 <NavLink to={PATH.PROFILE}>profile</NavLink>
-                <NavLink to={PATH.PASSWORD_RECOVERY}>recovery</NavLink>
+                <NavLink to={PATH.PACKS_LIST}>packslist</NavLink>
             </div>
         </div>
     )

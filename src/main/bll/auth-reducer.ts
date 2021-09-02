@@ -1,11 +1,22 @@
-import { ThunkAction } from "redux-thunk"
-import { authAPI } from "../dal/api/api-cards"
-import { AppActionsType, AppRootStateType, AppThunk } from "./store"
+import {AppRootStateType} from "./store";
+import {ThunkAction, ThunkDispatch} from "redux-thunk";
+import {authAPI} from "../dal/api/api-cards";
 
-enum LOGIN_ACTIONS_TYPES {
-    SET_IS_LOGGED_IN = "SET_IS_LOGGED_IN",
-};
 
+export type ActionLoginType = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setInitializedAC> | ReturnType<typeof initializeProfileAC>
+
+export const authReducer = (state: InitialStateType = initialState, action: ActionLoginType): InitialStateType => {
+    switch (action.type) {
+        case 'login/SET-IS-LOGGED-IN':
+            return {...state, isLoggedIn: action.value}
+        case 'SET-IS-INITIALIZED':
+            return {...state, isInitialized: action.value}
+        case "SET_PROFILE":
+            return {...state, profile: action.profile}
+        default:
+            return state
+    }
+}
 export type ProfileResponseType = {
     avatar: string
     created: string
@@ -41,41 +52,51 @@ const initialState = {
         _id: ''
     } || null,
     isLoggedIn: false,
+    isInitialized: false
 };
 
-export const loginReducer = (state: InitialStateType = initialState, action: AppActionsType): InitialStateType => {
-    switch (action.type) {
-        case LOGIN_ACTIONS_TYPES.SET_IS_LOGGED_IN:
-            return {
-                ...state,
-                profile: action.profile,
-                isLoggedIn: action.isLoggedIn,
-            }
-        default:
-            return state
+export const initializeProfileAC = (profile: ProfileResponseType) =>
+    ({type: 'SET_PROFILE', profile} as const)
+
+export const setIsLoggedInAC = (value: boolean) =>
+    ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+
+export const setInitializedAC = (value: boolean) =>
+    ({type: 'SET-IS-INITIALIZED', value} as const)
+
+export const initializeAppTC = () => async (dispatch: ThunkDispatch<any, unknown, ActionLoginType>) => {
+    try {
+        const res = await authAPI.me()
+        debugger
+        dispatch(setIsLoggedInAC(true))
+        dispatch(initializeProfileAC(res))
+
     }
-};
+    catch(e) {
+        const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+        console.log(error)
+    }
+    dispatch(setInitializedAC(true))
 
-// actions
-export const setIsLoggedInAC = (profile: ProfileResponseType, isLoggedIn: boolean) => {
-    return { type: LOGIN_ACTIONS_TYPES.SET_IS_LOGGED_IN, profile, isLoggedIn } as const
+}
+export const loginTC = (email: string, password: string, rememberMe: boolean): ThunkAction <void, AppRootStateType, unknown, ActionLoginType>=> async (dispatch) => {
+    try {
+        const result = await authAPI.login(email, password, rememberMe)
+        dispatch(setIsLoggedInAC(true))
+        dispatch(initializeProfileAC(result.data))
+        console.log(result)
+
+    } catch(e) {
+        const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+        console.log(error)
+    }
 }
 
-// thunks
-export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
-    authAPI.login(email, password, rememberMe)
-        .then((res) => {
-            dispatch(setIsLoggedInAC(res.data, true))
-        })
-        .catch((err) => {
-            alert("Error")
-        })
-}
-
-export const logoutTC = (): ThunkAction<void, AppRootStateType, unknown, AppActionsType> =>
+export const logoutTC = (): ThunkAction<void, AppRootStateType, unknown, ActionLoginType> =>
     async (dispatch) => {
         try {
             const res = await authAPI.logout()
+            dispatch(setIsLoggedInAC(false))
         } catch (e) {
             const error = e.response ? e.response.data.error : (`Logout failed: ${e.message}.`)
             console.log(error)
@@ -84,5 +105,3 @@ export const logoutTC = (): ThunkAction<void, AppRootStateType, unknown, AppActi
         }
     }
 
-// types
-export type LoginReducerActionsType = ReturnType<typeof setIsLoggedInAC>

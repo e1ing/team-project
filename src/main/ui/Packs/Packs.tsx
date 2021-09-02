@@ -10,6 +10,7 @@ import { Button } from "../common/Button/Button";
 import { Input } from "../common/Input/Input";
 import { RequestStatusType } from "../../bll/app-reducer";
 import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
+import styleButton from "../common/Button/Button.module.css";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -19,12 +20,21 @@ export const Packs: React.FC = React.memo(() => {
     const page = useSelector<AppRootStateType, number>(state => state.packs.page);
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
-    const cardPacksTotalCoutn = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
+    const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
 
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>(name);
     const [myPack, setMyPack] = useState<boolean>(false);
+
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [postPerPage, setPostPerPage] = useState<number>(10);
+
+    const indexOfLastPack = currentPage * postPerPage;
+    const indexOfFirstPack = indexOfLastPack - postPerPage;
+
+    const currentPack = packs.slice(indexOfLastPack, indexOfFirstPack)
+
 
     useEffect(() => {
         dispatch(setPacksTC())
@@ -73,19 +83,12 @@ export const Packs: React.FC = React.memo(() => {
                     setActive={setActiveModalAdd}
                 />
             }
-
-
             <div className={s.navBlock}>
-
-               
-
                 <div className={s.allPack}>
-                <Button onClick={openModelWindow}>Add pack</Button>
-                    <Button onClick={allPacks}>All packs</Button>
-                    <Button onClick={myPacks}>My packs</Button>
+                <Button onClick={openModelWindow} className={styleButton.button}>Add pack</Button>
+                    <Button onClick={allPacks} className={styleButton.button}>All packs</Button>
+                    <Button onClick={myPacks} className={styleButton.button}>My packs</Button>
                 </div>
-
-
                 <div className={s.serachBlock}>
                     <Input
                         onChangeText={setInputValuse}
@@ -102,26 +105,26 @@ export const Packs: React.FC = React.memo(() => {
                     </button>
                 </div>
             </div>
-
             {/* Table */}
             <table>
                 <thead className={s.packsHeader}>
                     <tr>
                         <th>username</th>
                         <th>name</th>
-                        <th>count</th>
-                        <th>time</th>
                         <th>cards</th>
+                        <th>time</th>
                         <th>learn</th>
+                        <th></th>
                         <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
                     {cards}
                 </tbody>
             </table>
-
-            {cardPacksTotalCoutn}
+        {/* Pagination */}
+            {cardPacksTotalCount}
 
 
         </div>

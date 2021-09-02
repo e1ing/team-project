@@ -148,6 +148,8 @@ export const deletePacksTC = (_id: string): AppThunk => (dispatch) => {
             alert(error)
         })
 };
+
+// 
 export const updatePacksTC = (_id: string, name: string): AppThunk => (dispatch) => {
     // status
     dispatch(setEntityStatusPacksAC("loading", _id))
