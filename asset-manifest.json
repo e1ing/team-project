@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/team-project/static/css/main.08972fa7.chunk.css",
-    "main.js": "/team-project/static/js/main.80a99296.chunk.js",
-    "main.js.map": "/team-project/static/js/main.80a99296.chunk.js.map",
-    "runtime-main.js": "/team-project/static/js/runtime-main.15818fd5.js",
-    "runtime-main.js.map": "/team-project/static/js/runtime-main.15818fd5.js.map",
-    "static/js/2.c8793b70.chunk.js": "/team-project/static/js/2.c8793b70.chunk.js",
-    "static/js/2.c8793b70.chunk.js.map": "/team-project/static/js/2.c8793b70.chunk.js.map",
-    "static/js/3.f71d3a6d.chunk.js": "/team-project/static/js/3.f71d3a6d.chunk.js",
-    "static/js/3.f71d3a6d.chunk.js.map": "/team-project/static/js/3.f71d3a6d.chunk.js.map",
+    "main.css": "/team-project/static/css/main.d9a9b167.chunk.css",
+    "main.js": "/team-project/static/js/main.bb909aed.chunk.js",
+    "main.js.map": "/team-project/static/js/main.bb909aed.chunk.js.map",
+    "runtime-main.js": "/team-project/static/js/runtime-main.129635b4.js",
+    "runtime-main.js.map": "/team-project/static/js/runtime-main.129635b4.js.map",
+    "static/js/2.7c7b1aa2.chunk.js": "/team-project/static/js/2.7c7b1aa2.chunk.js",
+    "static/js/2.7c7b1aa2.chunk.js.map": "/team-project/static/js/2.7c7b1aa2.chunk.js.map",
+    "static/js/3.f9fcec7d.chunk.js": "/team-project/static/js/3.f9fcec7d.chunk.js",
+    "static/js/3.f9fcec7d.chunk.js.map": "/team-project/static/js/3.f9fcec7d.chunk.js.map",
     "index.html": "/team-project/index.html",
-    "static/css/main.08972fa7.chunk.css.map": "/team-project/static/css/main.08972fa7.chunk.css.map",
-    "static/js/2.c8793b70.chunk.js.LICENSE.txt": "/team-project/static/js/2.c8793b70.chunk.js.LICENSE.txt",
-    "static/media/email.e39fba67.svg": "/team-project/static/media/email.e39fba67.svg"
+    "static/css/main.d9a9b167.chunk.css.map": "/team-project/static/css/main.d9a9b167.chunk.css.map",
+    "static/js/2.7c7b1aa2.chunk.js.LICENSE.txt": "/team-project/static/js/2.7c7b1aa2.chunk.js.LICENSE.txt",
+    "static/media/email.7b2dee87.svg": "/team-project/static/media/email.7b2dee87.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.15818fd5.js",
-    "static/js/2.c8793b70.chunk.js",
-    "static/css/main.08972fa7.chunk.css",
-    "static/js/main.80a99296.chunk.js"
+    "static/js/runtime-main.129635b4.js",
+    "static/js/2.7c7b1aa2.chunk.js",
+    "static/css/main.d9a9b167.chunk.css",
+    "static/js/main.bb909aed.chunk.js"
   ]
 }
