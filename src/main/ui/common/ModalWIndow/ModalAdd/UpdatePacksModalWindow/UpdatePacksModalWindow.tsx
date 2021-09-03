@@ -31,7 +31,7 @@ export const UpdatePacksModalWindow: React.FC<UpdatePacksPT> = React.memo((props
         };
         
         setUpdateActiveModal(false);
-    }, [dispatch, props]);
+    }, [dispatch, props, title]);
     const updateTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
