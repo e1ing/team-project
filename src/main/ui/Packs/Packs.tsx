@@ -98,9 +98,9 @@ export const Packs: React.FC = React.memo(() => {
             }
             <div className={s.navBlock}>
                 <div className={s.allPack}>
-                    <Button onClick={openModalWindow}>Add pack</Button>
-                    <Button onClick={allPacks}>All packs</Button>
-                    <Button onClick={myPacks}>My packs</Button>
+                    <Button onClick={openModalWindow} className={styleButton.button}>Add pack</Button>
+                    <Button onClick={allPacks} className={styleButton.button}>All packs</Button>
+                    <Button onClick={myPacks} className={styleButton.button}>My packs</Button>
                 </div>
                 <div className={s.serachBlock}>
                     <Input
