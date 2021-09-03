@@ -68,8 +68,8 @@ export const initializeAppTC = () => async (dispatch: ThunkDispatch<any, unknown
     try {
         const res = await authAPI.me()
         dispatch(setIsLoggedInAC(true))
-        dispatch(initializeProfileAC(res))
-
+        dispatch(initializeProfileAC(res.data))
+        //debugger
     }
     catch(e) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')

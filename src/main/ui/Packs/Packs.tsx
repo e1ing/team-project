@@ -12,6 +12,9 @@ import { RequestStatusType } from "../../bll/app-reducer";
 import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
 import styleButton from "../common/Button/Button.module.css";
 import {Pagination} from "../common/Pagination/Pagination";
+import {Preloader} from "../common/Preloader/Preloader";
+import {Redirect} from "react-router-dom";
+import {PATH} from "../routes/Routes";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -53,6 +56,7 @@ export const Packs: React.FC = React.memo(() => {
     const setInputValuse = (value: string) => {
         setSearchValue(value);
     };
+
 
     // отправляем поисковый запрос на сервер //send search request to the server 
     const search = () => {

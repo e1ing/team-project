@@ -5,12 +5,15 @@ import App from './main/ui/app/App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import {store} from "./main/bll/store";
+import {HashRouter} from "react-router-dom";
 
 ReactDOM.render(
     <React.StrictMode>
-        <Provider store={store}>
-            <App/>
-        </Provider>
+        <HashRouter basename={process.env.PUBLIC_URL}>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </HashRouter>
     </React.StrictMode>,
     document.getElementById('root')
 );

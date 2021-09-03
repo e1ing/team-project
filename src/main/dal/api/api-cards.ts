@@ -142,7 +142,7 @@ const instance = axios.create({
 
 export const authAPI = {
     me() {
-        return instance.post<ProfileResponseType>(`auth/me`,{}).then(response => response.data)
+        return instance.post<ProfileResponseType>(`auth/me`,{})
     },
     login(email: string, password: string, rememberMe: boolean = false) {
         return instance.post<LoginUserResponseType>(`auth/login`, { email, password, rememberMe })
@@ -177,8 +177,8 @@ export const authAPI = {
 
 
 export const packsApi = {
-    getPacks(pageCoutn: number, page: number, packName: string, min: number, max: number, id: string) {
-        return instance.get<ResponseDataType>(`cards/pack/?packName=${packName}&pageCount=${pageCoutn}&page${page}&sortPacks=&min=${min}&max=${max}&user_id=${id}`)
+    getPacks(pageCount: number, page: number, packName: string, min: number, max: number, id: string) {
+        return instance.get<ResponseDataType>(`cards/pack/?packName=${packName}&pageCount=${pageCount}&page=${page}&sortPacks=&min=${min}&max=${max}&user_id=${id}`)
     },
     deletePacks(id: string) {
         return instance.delete(`cards/pack?id=${id}`)
