@@ -8,10 +8,11 @@ import Checkbox from "../common/Checkbox/Checkbox";
 import {Input} from "../common/Input/Input";
 import {Button} from "../common/Button/Button";
 import {useDispatch, useSelector} from "react-redux";
-import {loginTC} from "../../bll/auth-reducer";
+
 import {AppRootStateType} from "../../bll/store";
 import commonStyles from "../app/App.module.css";
 import styles from "../Registration/Registartion.module.css";
+import {loginTC} from "../../bll/auth-reducer/auth-reducer";
 
 
 
@@ -23,7 +24,7 @@ export const Login = () => {
         rememberMe?: boolean
     }
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
-   const dispatch = useDispatch()
+    const dispatch = useDispatch()
 
     const formik = useFormik({
         initialValues: {

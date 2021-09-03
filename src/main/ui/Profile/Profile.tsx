@@ -4,7 +4,7 @@ import s from './Profile.module.css';
 import { AppRootStateType } from '../../bll/store';
 import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { ProfileResponseType } from '../../bll/auth-reducer';
+import { ProfileResponseType } from '../../bll/auth-reducer/auth-reducer';
 import {Logout} from "../Logout/Logout";
 
 export const Profile: React.FC = React.memo(() => {

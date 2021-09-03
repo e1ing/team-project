@@ -29,7 +29,6 @@ export const Packs: React.FC = React.memo(() => {
     const [myPack, setMyPack] = useState<boolean>(false);
 
     const [currentPage, setCurrentPage] = useState<number>(1);
-    console.log('currentPage: ', currentPage)
     const [sizePage] = useState<number>(10);
 
     const indexOfLastPack = currentPage * sizePage;
@@ -37,6 +36,30 @@ export const Packs: React.FC = React.memo(() => {
 
     const currentPack = packs.slice(indexOfLastPack, indexOfFirstPack)
 
+
+    useEffect(() => {
+        dispatch(setPacksTC())
+    }, [dispatch, page]);
+
+    const openModalWindow = () => {
+        setActiveModalAdd(true);
+    };
+    const allPacks = () => {
+        setMyPack(false);
+        dispatch(setIdAC(''));
+        dispatch(setPacksTC());
+    };
+
+    const setInputValuse = (value: string) => {
+        setSearchValue(value);
+    };
+
+    // отправляем поисковый запрос на сервер //send search request to the server 
+    const search = () => {
+        dispatch(setPackNameAC(searchValue));
+        dispatch(setPacksTC())
+        setSearchValue('')
+    };
     const cards = packs.map(p => {
         return (
             <tr key={p._id}>
@@ -46,33 +69,13 @@ export const Packs: React.FC = React.memo(() => {
     });
 
 
-    useEffect(() => {
-        dispatch(setPacksTC())
-    }, [dispatch, currentPage, page]);
-
-    const openModelWindow = () => {
-        setActiveModalAdd(true);
-    };
-    const allPacks = () => {
-        setMyPack(false);
-        dispatch(setIdAC(''));
-        dispatch(setPacksTC());
-    };
     const myPacks = () => {
         setMyPack(true);
         dispatch(setIdAC(userLoginId));
         dispatch(setPacksTC());
     };
-    const setInputValuse = (value: string) => {
-        setSearchValue(value)
-    };
 
-    // отправляем поисковый запрос на сервер //send search request to the server 
-    const search = () => {
-        dispatch(setPackNameAC(searchValue));
-        dispatch(setPacksTC())
-        setSearchValue('')
-    };
+
 
     //const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
     const paginate = (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber))
@@ -91,9 +94,9 @@ export const Packs: React.FC = React.memo(() => {
             }
             <div className={s.navBlock}>
                 <div className={s.allPack}>
-                <Button onClick={openModelWindow} className={styleButton.button}>Add pack</Button>
-                    <Button onClick={allPacks} className={styleButton.button}>All packs</Button>
-                    <Button onClick={myPacks} className={styleButton.button}>My packs</Button>
+                    <Button onClick={openModalWindow}>Add pack</Button>
+                    <Button onClick={allPacks}>All packs</Button>
+                    <Button onClick={myPacks}>My packs</Button>
                 </div>
                 <div className={s.serachBlock}>
                     <Input
@@ -116,17 +119,16 @@ export const Packs: React.FC = React.memo(() => {
                 <thead className={s.packsHeader}>
                     <tr>
                         <th>username</th>
-                        <th>name</th>
+                        <th>name pack</th>
                         <th>cards</th>
                         <th>time</th>
                         <th>learn</th>
-                        <th></th>
+                        <th>watch</th>
                         <th>actions</th>
                     </tr>
                 </thead>
                 <tbody>
-
-                {cards}
+                    {cards}
                 </tbody>
             </table>
         {/* Pagination */}

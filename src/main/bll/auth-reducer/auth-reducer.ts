@@ -1,6 +1,6 @@
-import {AppRootStateType} from "./store";
+import {AppRootStateType} from "../store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {authAPI} from "../dal/api/api-cards";
+import {authAPI} from "../../dal/api/api-cards";
 
 
 export type ActionLoginType = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setInitializedAC> | ReturnType<typeof initializeProfileAC>

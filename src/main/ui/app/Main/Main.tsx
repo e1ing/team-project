@@ -3,7 +3,7 @@ import Header from "../../Header/Header";
 import {PATH, Routes} from "../../routes/Routes";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../bll/store";
-import {initializeAppTC} from "../../../bll/auth-reducer";
+import {initializeAppTC} from "../../../bll/auth-reducer/auth-reducer";
 import {Preloader} from "../../common/Preloader/Preloader";
 import {Redirect} from "react-router-dom";
 

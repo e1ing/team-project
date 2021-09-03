@@ -3,11 +3,10 @@ import {useFormik} from 'formik'
 import {Input} from '../common/Input/Input';
 import styles from './Registartion.module.css'
 import commonStyles from '../app/App.module.css'
-import {registerUserTC} from "../../bll/registration-reducer";
+import {registerUserTC} from "../../bll/auth-reducer/registration-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {NavLink, Redirect} from "react-router-dom";
 import {AppRootStateType} from "../../bll/store";
-import {PasswordRecovery} from "../PasswordRecovery/PasswordRecovery";
 import {Preloader} from "../common/Preloader/Preloader";
 import styleButton from "../common/Button/Button.module.css";
 
@@ -20,7 +19,7 @@ type FormikErrorType = {
 export const Registration: FC = () => {
 
     const error = useSelector<AppRootStateType, null | string>(state => state.app.error)
-    const isRegistered = useSelector<AppRootStateType, boolean>(state => state.registation.isRegistered)
+    const isRegistered = useSelector<AppRootStateType, boolean>(state => state.registration.isRegistered)
     const dispatch = useDispatch()
 
     const regForm = useFormik({
