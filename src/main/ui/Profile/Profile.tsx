@@ -6,13 +6,22 @@ import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ProfileResponseType } from '../../bll/auth-reducer/auth-reducer';
 import {Logout} from "../Logout/Logout";
+import {Preloader} from "../common/Preloader/Preloader";
+import {PATH} from "../routes/Routes";
 
 export const Profile: React.FC = React.memo(() => {
     const profile = useSelector<AppRootStateType, ProfileResponseType>(state => state.auth.profile);
-
+    const isInitialized = useSelector<AppRootStateType, boolean>(state => state.auth.isInitialized)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
 
     const avatar = profile.avatar ? profile.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYiH8tkuj5i6qW1Vg9W1FlDPTbgg1rDpUNdA&usqp=CAU"
 
+    if (!isInitialized) {
+        return <Preloader/>
+    }
+    if (!isLoggedIn){
+        return <Redirect to={PATH.LOGIN}/>
+    }
 
     return (
         <>

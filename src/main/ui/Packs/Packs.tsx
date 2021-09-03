@@ -11,6 +11,9 @@ import { Input } from "../common/Input/Input";
 import { RequestStatusType } from "../../bll/app-reducer";
 import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
 import {Pagination} from "../common/Pagination/Pagination";
+import {Preloader} from "../common/Preloader/Preloader";
+import {Redirect} from "react-router-dom";
+import {PATH} from "../routes/Routes";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -53,6 +56,7 @@ export const Packs: React.FC = React.memo(() => {
         setSearchValue(value);
     };
 
+
     // отправляем поисковый запрос на сервер //send search request to the server 
     const search = () => {
         dispatch(setPackNameAC(searchValue));
@@ -93,9 +97,9 @@ export const Packs: React.FC = React.memo(() => {
             }
             <div className={s.navBlock}>
                 <div className={s.allPack}>
-                    <Button onClick={openModalWindow}>Add pack</Button>
-                    <Button onClick={allPacks}>All packs</Button>
-                    <Button onClick={myPacks}>My packs</Button>
+                    <Button className={styleButton.button} onClick={openModalWindow}>Add pack</Button>
+                    <Button className={styleButton.button} onClick={allPacks}>All packs</Button>
+                    <Button  className={styleButton.button} onClick={myPacks}>My packs</Button>
                 </div>
                 <div className={s.serachBlock}>
                     <Input
