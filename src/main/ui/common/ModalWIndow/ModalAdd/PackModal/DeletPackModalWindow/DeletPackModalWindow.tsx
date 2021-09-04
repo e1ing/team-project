@@ -1,8 +1,8 @@
 import React, { useCallback, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { deletePacksTC } from '../../../../../bll/packs-reducer/packs-reduser';
-import { Button } from '../../../Button/Button';
-import s from '../../ModalWindow.module.css'
+import { deletePacksTC } from '../../../../../../bll/packs-reducer/packs-reduser';
+import { Button } from '../../../../Button/Button';
+import s from "../../../ModalWindow.module.css";
 
 type DeletPacksPT = {
     setActiveModal: (value: boolean) => void

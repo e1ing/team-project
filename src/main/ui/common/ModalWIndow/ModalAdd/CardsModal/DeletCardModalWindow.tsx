@@ -1,15 +1,13 @@
 import React, { useCallback, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteCardTC } from '../../../../../bll/cards-reducer/cards-reducer';
-import { deletePacksTC } from '../../../../../bll/packs-reducer/packs-reduser';
-import { CardType } from '../../../../../dal/api/api-cards';
 import { Button } from '../../../Button/Button';
 import s from '../../ModalWindow.module.css'
 
 type DeletPacksPT = {
     packId: string
     setActiveModal:(active: boolean) => void
-    card: CardType
+    cardId: string
 };
 
 export const DeletCardModalWindow: React.FC<DeletPacksPT> = React.memo((props) => {
@@ -17,13 +15,13 @@ export const DeletCardModalWindow: React.FC<DeletPacksPT> = React.memo((props) =
     const {
         setActiveModal,
         packId,
-        card,
+        cardId,
     } = props;
 
     const dispatch = useDispatch();
 
     const deletPack = useCallback(() => {
-        dispatch(deleteCardTC(packId, card._id));
+        dispatch(deleteCardTC(packId, cardId));
         setActiveModal(false);
     }, [dispatch, props]);
 

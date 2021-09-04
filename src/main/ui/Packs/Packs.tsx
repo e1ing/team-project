@@ -9,7 +9,7 @@ import { CardPacksDataType } from "../../dal/api/api-cards";
 import { Button } from "../common/Button/Button";
 import { Input } from "../common/Input/Input";
 import { RequestStatusType } from "../../bll/app-reducer";
-import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
+import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow.tsx/CreatePackModalWindow";
 import {Pagination} from "../common/Pagination/Pagination";
 import {Preloader} from "../common/Preloader/Preloader";
 import {Redirect} from "react-router-dom";
