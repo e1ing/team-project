@@ -5,6 +5,7 @@ import { addCardTC } from "../../../../../bll/cards-reducer/cards-reducer";
 import { Button } from "../../../Button/Button";
 import { Input } from "../../../Input/Input";
 import s from "../../ModalWindow.module.css";
+import styleButton from '../../../Button/Button.module.css';
 
 
 type CreatePacksPT = {
@@ -69,7 +70,10 @@ export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props)
                     onKeyPress={onPressEnterAddCard}
                     autoFocus
                 />
-                <Button onClick={addSaveHandler}>Save</Button>
+                <div>
+                    <Button className={styleButton.button} onClick={addSaveHandler}>Save</Button>
+                </div>
+               
             </div>
         </div>
     )

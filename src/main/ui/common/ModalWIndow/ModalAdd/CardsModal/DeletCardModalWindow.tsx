@@ -2,7 +2,8 @@ import React, { useCallback, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteCardTC } from '../../../../../bll/cards-reducer/cards-reducer';
 import { Button } from '../../../Button/Button';
-import s from '../../ModalWindow.module.css'
+import s from '../../ModalWindow.module.css';
+import styleButton from '../../../Button/Button.module.css';
 
 type DeletPacksPT = {
     packId: string
@@ -37,8 +38,8 @@ export const DeletCardModalWindow: React.FC<DeletPacksPT> = React.memo((props) =
                     I hope you thought well?
                 </div>
                 <div className={s.button}>
-                    <Button type={"submit"} onClick={deletPack}>yes</Button>
-                    <Button type={"submit"} onClick={resetPack}>no</Button>
+                    <Button className={styleButton.button} type={"submit"} onClick={deletPack}>yes</Button>
+                    <Button className={styleButton.button} type={"submit"} onClick={resetPack}>no</Button>
                 </div>
 
             </div>

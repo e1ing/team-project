@@ -4,6 +4,7 @@ import s from '../../ModalWindow.module.css'
 import { Input } from './../../../Input/Input';
 import { useDispatch } from "react-redux";
 import { updateCardTC } from "../../../../../bll/cards-reducer/cards-reducer";
+import styleButton from '../../../Button/Button.module.css';
 
 type UpdateCardPT = {
     packId: string
@@ -69,8 +70,8 @@ export const UpdateCardModalWindow: React.FC<UpdateCardPT> = React.memo((props) 
                     onChange={updateAnswerHandler}
                     autoFocus
                 />
-                <div className={s.button}>
-                    <Button onClick={updateCardHandler}>Save</Button>
+                <div>
+                    <Button className={styleButton.button} onClick={updateCardHandler}>Save</Button>
                 </div>
 
             </div>
