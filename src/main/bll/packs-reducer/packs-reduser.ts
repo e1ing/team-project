@@ -95,7 +95,7 @@ export const setPacksTotalCountAC = (count: number) => ({type:  "DIMA/TEAM-PROJE
 export const setPackCardsIdAC = (packId: string) => ({type:"DIMA/TEAM-PROJECT/CARDS/SET-PACK-CARDS-ID", packId} as const);
 // TC
 
-export const setPacksTC = (): AppThunk => (dispatch, getState) => {
+export const getPacksTC = (): AppThunk => (dispatch, getState) => {
     // status
 
     const state = getState();
@@ -129,7 +129,7 @@ export const createPacksTC = (title: string): AppThunk => (dispatch) => {
     // satus
     packsApi.createPacks(title)
         .then(() => {
-            dispatch(setPacksTC())
+            dispatch(getPacksTC())
             // status
         })
         .catch((e) => {
@@ -145,7 +145,7 @@ export const deletePacksTC = (_id: string): AppThunk => (dispatch) => {
     dispatch(setEntityStatusPacksAC("loading", _id))
     packsApi.deletePacks(_id)
         .then(() => {
-            dispatch(setPacksTC())
+            dispatch(getPacksTC())
             // status
         })
         .catch((e) => {
@@ -162,7 +162,7 @@ export const updatePacksTC = (_id: string, name: string): AppThunk => (dispatch)
     packsApi.updatePacks(_id, name)
     
         .then(() => {
-            dispatch(setPacksTC())
+            dispatch(getPacksTC())
             // status
         })
         .catch((e) => {

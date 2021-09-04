@@ -1,7 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, MouseEvent, useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { addCardTC } from "../../../../../bll/cards-reducer/cards-reducer";
-import { AppRootStateType } from "../../../../../bll/store";
 import { Button } from "../../../Button/Button";
 import { Input } from "../../../Input/Input";
 import s from "../../ModalWindow.module.css";
@@ -18,18 +18,21 @@ export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props)
         activeModalAdd,
         setActive
     } = props;
-    debugger
-    const dispatch = useDispatch();
-    const cardsPackId = useSelector<AppRootStateType, string>(state => state.packs.packCardsId);
 
-    const [question, setQuestion] = useState('');
-    const [answer, setAnswer] = useState('');
+    const dispatch = useDispatch();
+
+    const { id } = useParams<{ id: string }>();
+
+    console.log(id)
+
+    const [question, setQuestion] = useState<string>('');
+    const [answer, setAnswer] = useState<string>('');
 
     const addSaveHandler = useCallback(() => {
 
-        dispatch(addCardTC(cardsPackId, question, answer));
+        dispatch(addCardTC(id, question, answer));
         setActive(false);
-    }, [props, cardsPackId, question, answer]);
+    }, [props, id]);
 
     const onPressEnterAddCard = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') addSaveHandler();

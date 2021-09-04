@@ -18,8 +18,6 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
         pack
     } = props;
 
-    // const dispatch = useDispatch();
-
 
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
 
@@ -31,13 +29,6 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
     const openUpdateModalWindow = () => setUpdateActiveModal(true)
     const openDeletModalWindow = () => setDeletActivePackModal(true);
 
-    // const [title, setTitle] = useState<string>(pack.name);
-
-    // const updatePack = useCallback(() => {
-    //     dispatch(updatePacksTC(packId, title));
-    //     if (title !== '') {
-    //         setTitle('');
-    //     };
 
     return (
         <>

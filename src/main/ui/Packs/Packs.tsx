@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {setCurrentPageAC, setPackNameAC, setPacksTC} from "../../bll/packs-reducer/packs-reduser";
+import {setCurrentPageAC, setPackNameAC, getPacksTC} from "../../bll/packs-reducer/packs-reduser";
 import { AppRootStateType } from "../../bll/store";
 import s from "./Packs.module.css"
 import { setIdAC } from './../../bll/packs-reducer/packs-reduser';
@@ -40,7 +40,7 @@ export const Packs: React.FC = React.memo(() => {
 
 
     useEffect(() => {
-        dispatch(setPacksTC())
+        dispatch(getPacksTC())
     }, [dispatch, page]);
 
     const openModalWindow = () => {
@@ -49,21 +49,20 @@ export const Packs: React.FC = React.memo(() => {
     const allPacks = () => {
         setMyPack(false);
         dispatch(setIdAC(''));
-        dispatch(setPacksTC());
+        dispatch(getPacksTC());
     };
 
     const setInputValuse = (value: string) => {
         setSearchValue(value);
     };
 
-
     // отправляем поисковый запрос на сервер //send search request to the server 
     const search = () => {
         dispatch(setPackNameAC(searchValue));
-        dispatch(setPacksTC())
+        dispatch(getPacksTC())
         setSearchValue('')
     };
-    const cards = packs.map(p => {
+    const pack = packs.map(p => {
         return (
             <tr key={p._id}>
                 <Pack pack={p} />
@@ -71,14 +70,11 @@ export const Packs: React.FC = React.memo(() => {
         )
     });
 
-
     const myPacks = () => {
         setMyPack(true);
         dispatch(setIdAC(userLoginId));
-        dispatch(setPacksTC());
+        dispatch(getPacksTC());
     };
-
-
 
     //const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
     const paginate = (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber))
@@ -97,9 +93,9 @@ export const Packs: React.FC = React.memo(() => {
             }
             <div className={s.navBlock}>
                 <div className={s.allPack}>
-                    <Button className={styleButton.button} onClick={openModalWindow}>Add pack</Button>
-                    <Button className={styleButton.button} onClick={allPacks}>All packs</Button>
-                    <Button  className={styleButton.button} onClick={myPacks}>My packs</Button>
+                    <Button onClick={openModalWindow}>Add pack</Button>
+                    <Button onClick={allPacks}>All packs</Button>
+                    <Button  onClick={myPacks}>My packs</Button>
                 </div>
                 <div className={s.serachBlock}>
                     <Input
@@ -131,7 +127,7 @@ export const Packs: React.FC = React.memo(() => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cards}
+                    {pack}
                 </tbody>
             </table>
         {/* Pagination */}

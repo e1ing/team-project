@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Button } from '../../../Button/Button';
 import { Input } from '../../../Input/Input';
 import s from '../../ModalWindow.module.css';
-import { setPacksTC, updatePacksTC } from './../../../../../bll/packs-reducer/packs-reduser';
+import { updatePacksTC } from './../../../../../bll/packs-reducer/packs-reduser';
 
 
 type UpdatePacksPT = {

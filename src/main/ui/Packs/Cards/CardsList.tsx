@@ -15,10 +15,10 @@ export const CardsList: React.FC = React.memo(() => {
     const [activeModalAdd, setActiveModalAdd] = useState(false);
 
     const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards);
-    const userCardId = useSelector<AppRootStateType, string>(state => state.cards.cards[0]?.user_id);
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const cardsTotalCount = useSelector<AppRootStateType, number>(state => state.cards.cardsTotalCount);
     const page = useSelector<AppRootStateType, number>(state => state.cards.page);
+
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -46,10 +46,10 @@ export const CardsList: React.FC = React.memo(() => {
                 </NavLink>
             </div>
             <h2> Cards </h2>
-            {userCardId  ? null
-                : <Button className={s.addCardButton} onClick={openModalWindow}>
+            {userLoginId  ?  <Button className={s.addCardButton} onClick={openModalWindow}>
                     Add Card
-                </Button>}
+                </Button>  : null
+               }
 
             {!cards.length ? <div className={s.titleNoCards}><span> no cards </span></div>
                 : <table>

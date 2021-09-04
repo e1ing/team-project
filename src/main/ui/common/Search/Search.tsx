@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC, useCallback, useEffect, useMemo, useState} from "react";
 import style from "./Search.module.css"
 import debounce from 'lodash.debounce';
-import {setPackNameAC, setPacksTC} from "../../../bll/packs-reducer/packs-reduser";
+import {getPacksTC, setPackNameAC} from "../../../bll/packs-reducer/packs-reduser";
 import {useDispatch} from "react-redux";
 
 type SearchPropsType = {
@@ -19,7 +19,7 @@ export const Search: FC<SearchPropsType> = ({names}) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value);
         dispatch(setPackNameAC(searchValue));
-        dispatch(setPacksTC())
+        dispatch(getPacksTC())
     }
 
     const debouncedHandler = useMemo(() =>
