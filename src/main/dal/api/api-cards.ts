@@ -135,7 +135,7 @@ type UpdateGradeResponseType = {
     card_id: string
     user_id: string
     grade: number
-    shots: 1
+    shots: number
 }
 
 // http://localhost:7542/2.0/

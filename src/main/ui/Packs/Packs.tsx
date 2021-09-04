@@ -15,6 +15,7 @@ import {Pagination} from "../common/Pagination/Pagination";
 import {Preloader} from "../common/Preloader/Preloader";
 import {Redirect} from "react-router-dom";
 import {PATH} from "../routes/Routes";
+import {Search} from "../common/Search/Search";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -42,7 +43,7 @@ export const Packs: React.FC = React.memo(() => {
 
     useEffect(() => {
         dispatch(setPacksTC())
-    }, [dispatch, page]);
+    }, [dispatch, page]); //добавить зависимости
 
     const openModalWindow = () => {
         setActiveModalAdd(true);
@@ -54,16 +55,16 @@ export const Packs: React.FC = React.memo(() => {
     };
 
     const setInputValuse = (value: string) => {
-        setSearchValue(value);
+        dispatch(setPackNameAC(value));
+        dispatch(setPacksTC())  ///засунуть в useEffect
     };
 
 
     // отправляем поисковый запрос на сервер //send search request to the server 
-    const search = () => {
-        dispatch(setPackNameAC(searchValue));
-        dispatch(setPacksTC())
+   /* const search = () => {
+
         setSearchValue('')
-    };
+    };*/
     const cards = packs.map(p => {
         return (
             <tr key={p._id}>
@@ -103,19 +104,12 @@ export const Packs: React.FC = React.memo(() => {
                     <Button  className={styleButton.button} onClick={myPacks}>My packs</Button>
                 </div>
                 <div className={s.serachBlock}>
-                    <Input
-                        onChangeText={setInputValuse}
-                        onEnter={search}
+                    <Search
+                        onChange={setInputValuse}
                         value={searchValue}
                         placeholder="searh packs"
-                        className={s.saerchInput}
                     />
-                    <button
-                        className={s.searchButton}
-                        onClick={search}
-                    >
-                        🔍
-                    </button>
+
                 </div>
             </div>
             {/* Table */}
