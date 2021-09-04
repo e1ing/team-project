@@ -9,11 +9,11 @@ import { CardPacksDataType } from "../../dal/api/api-cards";
 import { Button } from "../common/Button/Button";
 import { Input } from "../common/Input/Input";
 import { RequestStatusType } from "../../bll/app-reducer";
-import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow.tsx/CreatePackModalWindow";
 import {Pagination} from "../common/Pagination/Pagination";
 import {Preloader} from "../common/Preloader/Preloader";
 import {Redirect} from "react-router-dom";
 import {PATH} from "../routes/Routes";
+import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow";
 
 export const Packs: React.FC = React.memo(() => {
 

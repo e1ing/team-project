@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { AppRootStateType } from "../../../bll/store";
 import { CardPacksDataType } from "../../../dal/api/api-cards";
-import { DeletPackModalWindow } from "../../common/ModalWIndow/ModalAdd/PackModal/DeletPackModalWindow/DeletPackModalWindow";
-import { UpdatePacksModalWindow } from "../../common/ModalWIndow/ModalAdd/PackModal/UpdatePacksModalWindow/UpdatePacksModalWindow";
+import { DeletPackModalWindow } from "../../common/ModalWIndow/ModalAdd/PackModal/DeletPackModalWindow";
+import { UpdatePacksModalWindow } from "../../common/ModalWIndow/ModalAdd/PackModal/UpdatePacksModalWindow";
 import { PATH } from "../../routes/Routes";
 import s from "./Pack.module.css";
 
