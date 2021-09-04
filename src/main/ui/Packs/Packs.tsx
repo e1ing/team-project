@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {setCurrentPageAC, setPackNameAC, setPacksTC} from "../../bll/packs-reducer/packs-reduser";
-import { AppRootStateType } from "../../bll/store";
+import {AppRootStateType} from "../../bll/store";
 import s from "./Packs.module.css"
-import { setIdAC } from './../../bll/packs-reducer/packs-reduser';
-import { Pack } from "./Pack/Pack";
-import { CardPacksDataType } from "../../dal/api/api-cards";
-import { Button } from "../common/Button/Button";
-import { Input } from "../common/Input/Input";
-import { RequestStatusType } from "../../bll/app-reducer";
-import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
+import {setIdAC} from './../../bll/packs-reducer/packs-reduser';
+import {Pack} from "./Pack/Pack";
+import {CardPacksDataType} from "../../dal/api/api-cards";
+import {Button} from "../common/Button/Button";
+import {RequestStatusType} from "../../bll/app-reducer";
+import {CreatePackModalWindow} from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
 import styleButton from "../common/Button/Button.module.css";
 import {Pagination} from "../common/Pagination/Pagination";
-import {Preloader} from "../common/Preloader/Preloader";
-import {Redirect} from "react-router-dom";
-import {PATH} from "../routes/Routes";
 import {Search} from "../common/Search/Search";
 
 export const Packs: React.FC = React.memo(() => {
@@ -59,12 +55,6 @@ export const Packs: React.FC = React.memo(() => {
         dispatch(setPacksTC())  ///засунуть в useEffect
     };
 
-
-    // отправляем поисковый запрос на сервер //send search request to the server 
-   /* const search = () => {
-
-        setSearchValue('')
-    };*/
     const cards = packs.map(p => {
         return (
             <tr key={p._id}>
@@ -72,7 +62,6 @@ export const Packs: React.FC = React.memo(() => {
             </tr>
         )
     });
-
 
     const myPacks = () => {
         setMyPack(true);
@@ -84,9 +73,6 @@ export const Packs: React.FC = React.memo(() => {
 
     //const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
     const paginate = (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber))
-
-
-
 
     return (
         <div className={s.packsContainer}>
