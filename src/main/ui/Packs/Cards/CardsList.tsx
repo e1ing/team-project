@@ -8,6 +8,7 @@ import { Button } from "../../common/Button/Button";
 import { CreateCardModalWindow } from "../../common/ModalWIndow/ModalAdd/CardsModal/CreateCardModalWindow";
 import { Card } from "./Card/Card";
 import s from '../Cards/CardsList.module.css';
+import styleButton from './../../common/Button/Button.module.css';
 
 export const CardsList: React.FC = React.memo(() => {
 
@@ -42,11 +43,11 @@ export const CardsList: React.FC = React.memo(() => {
                 <NavLink
                     className={s.link}
                     to={'/packList'}>
-                    <button>Packs</button>
+                    <Button className={styleButton.button}>Packs</Button>
                 </NavLink>
             </div>
             <h2> Cards </h2>
-            {userLoginId  ?  <Button className={s.addCardButton} onClick={openModalWindow}>
+            {userLoginId  ?  <Button className={styleButton.button} onClick={openModalWindow}>
                     Add Card
                 </Button>  : null
                }

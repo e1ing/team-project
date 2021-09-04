@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {setCurrentPageAC, setPackNameAC, getPacksTC} from "../../bll/packs-reducer/packs-reduser";
 import { AppRootStateType } from "../../bll/store";
-import s from "./Packs.module.css"
+import s from "./Packs.module.css";
+import styleButton from './../../ui/common/Button/Button.module.css';
 import { setIdAC } from './../../bll/packs-reducer/packs-reduser';
 import { Pack } from "./Pack/Pack";
 import { CardPacksDataType } from "../../dal/api/api-cards";
@@ -46,7 +47,7 @@ export const Packs: React.FC = React.memo(() => {
     const openModalWindow = () => {
         setActiveModalAdd(true);
     };
-    const allPacks = () => {
+     const allPacks = () => {
         setMyPack(false);
         dispatch(setIdAC(''));
         dispatch(getPacksTC());
@@ -93,9 +94,14 @@ export const Packs: React.FC = React.memo(() => {
             }
             <div className={s.navBlock}>
                 <div className={s.allPack}>
-                    <Button onClick={openModalWindow}>Add pack</Button>
-                    <Button onClick={allPacks}>All packs</Button>
-                    <Button  onClick={myPacks}>My packs</Button>
+                    <div className={s.groupButton}>
+                    <h3>Show decks cards</h3>
+                    <Button className={styleButton.button} onClick={allPacks}>All</Button>
+                    <Button className={styleButton.button}  onClick={myPacks}>My</Button>
+                    </div>
+
+                    
+                    
                 </div>
                 <div className={s.serachBlock}>
                     <Input
@@ -111,6 +117,7 @@ export const Packs: React.FC = React.memo(() => {
                     >
                         🔍
                     </button>
+                    <Button className={styleButton.button} onClick={openModalWindow}>Add pack</Button>
                 </div>
             </div>
             {/* Table */}

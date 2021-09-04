@@ -1,6 +1,7 @@
-import {AppRootStateType} from "../store";
+import {AppRootStateType, AppThunk} from "../store";
 import {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {authAPI} from "../../dal/api/api-cards";
+import { setAppStatusAC } from "../app-reducer";
 
 
 export type ActionLoginType = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setInitializedAC> | ReturnType<typeof initializeProfileAC>
@@ -78,12 +79,14 @@ export const initializeAppTC = () => async (dispatch: ThunkDispatch<any, unknown
     dispatch(setInitializedAC(true))
 
 }
-export const loginTC = (email: string, password: string, rememberMe: boolean): ThunkAction <void, AppRootStateType, unknown, ActionLoginType>=> async (dispatch) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunk=> async (dispatch) => {
     try {
+        dispatch(setAppStatusAC("loading"));
         const result = await authAPI.login(email, password, rememberMe)
         dispatch(setIsLoggedInAC(true))
         dispatch(initializeProfileAC(result.data))
         console.log(result)
+        dispatch(setAppStatusAC("succeeded"))
 
     } catch(e) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
@@ -91,11 +94,13 @@ export const loginTC = (email: string, password: string, rememberMe: boolean): T
     }
 }
 
-export const logoutTC = (): ThunkAction<void, AppRootStateType, unknown, ActionLoginType> =>
+export const logoutTC = (): AppThunk =>
     async (dispatch) => {
         try {
+            dispatch(setAppStatusAC("loading"));
             const res = await authAPI.logout()
             dispatch(setIsLoggedInAC(false))
+            dispatch(setAppStatusAC("succeeded"))
         } catch (e) {
             const error = e.response ? e.response.data.error : (`Logout failed: ${e.message}.`)
             console.log(error)
