@@ -27,7 +27,7 @@ export const CardsList: React.FC = React.memo(() => {
     const openModalWindow = () => setActiveModalAdd(true);
 
     const copyCards = cards.map(el => <tbody key={el._id}>
-        <Card card={el} />
+        <Card card={el} id={id} />
     </tbody>);
 
     return (

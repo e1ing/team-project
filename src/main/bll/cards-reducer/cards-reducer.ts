@@ -66,7 +66,6 @@ export const getCardsTC = (packId: string, page?: number, pageCount?: number, se
     
 export const addCardTC = (packId: string, cardQuestion: string, cardAnswer: string): AppThunk => (dispatch, getState) => {
     const { page, pageCount, searchCardsValue } = getState().cards
-    debugger
     cardsApi.addCard(packId, cardQuestion, cardAnswer)
         // status
         .then(res => {

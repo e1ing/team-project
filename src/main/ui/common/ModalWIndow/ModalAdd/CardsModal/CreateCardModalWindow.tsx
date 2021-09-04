@@ -23,27 +23,28 @@ export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props)
 
     const { id } = useParams<{ id: string }>();
 
-    console.log(id)
+    const [question, setQuestion] = useState<string>("");
+    const [answer, setAnswer] = useState<string>("");
 
-    const [question, setQuestion] = useState<string>('');
-    const [answer, setAnswer] = useState<string>('');
+
 
     const addSaveHandler = useCallback(() => {
 
-        dispatch(addCardTC(id, question, answer));
+        dispatch(addCardTC(id, question, answer))
         setActive(false);
-    }, [props, id]);
+
+    }, [props, id, question, answer]);
 
     const onPressEnterAddCard = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') addSaveHandler();
     };
 
-    const onChangeHandlerQuestion = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const onChangeHandlerQuestion = (e: ChangeEvent<HTMLInputElement>) => {
         setQuestion(e.currentTarget.value);
-    }, []);
-    const onChangeHandlerAnswer = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    };
+    const onChangeHandlerAnswer = (e: ChangeEvent<HTMLInputElement>) => {
         setAnswer(e.currentTarget.value);
-    }, []);
+    };
 
     const onModalHandler = useCallback(() => setActive(false), [props]);
     const offActiveModal = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation();
@@ -68,7 +69,7 @@ export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props)
                     onKeyPress={onPressEnterAddCard}
                     autoFocus
                 />
-                <Button type={"submit"} onClick={addSaveHandler}>okay</Button>
+                <Button onClick={addSaveHandler}>Save</Button>
             </div>
         </div>
     )

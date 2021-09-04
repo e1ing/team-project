@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { AppRootStateType } from "../../../bll/store";
 import { CardPacksDataType } from "../../../dal/api/api-cards";
-import { DeletCardModalWindow } from "../../common/ModalWIndow/ModalAdd/DeletCardModalWindow/DeletCardModalWindow";
+import { DeletPackModalWindow } from "../../common/ModalWIndow/ModalAdd/DeletPackModalWindow/DeletPackModalWindow";
 import { UpdatePacksModalWindow } from "../../common/ModalWIndow/ModalAdd/UpdatePacksModalWindow/UpdatePacksModalWindow";
 import { PATH } from "../../routes/Routes";
 import s from "./Pack.module.css";
@@ -73,7 +73,7 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
                 setUpdateActiveModal={setUpdateActiveModal}
             />}
             {/* delet pack modal window */}
-            {deletActivPackModal && <DeletCardModalWindow
+            {deletActivPackModal && <DeletPackModalWindow
                 packId={pack._id}
                 setActiveModal={setDeletActivePackModal}
             />}

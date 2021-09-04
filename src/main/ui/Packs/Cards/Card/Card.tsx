@@ -2,16 +2,19 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { AppRootStateType } from "../../../../bll/store";
 import { CardType } from "../../../../dal/api/api-cards";
+import { DeletCardModalWindow } from "../../../common/ModalWIndow/ModalAdd/CardsModal/DeletCardModalWindow";
 import s from "../CardsList.module.css";
 
 type CardPropsType = {
     card: CardType
+    id: string
 }
 
 export const Card: React.FC<CardPropsType> = React.memo((props) => {
 
     const {
         card,
+        id
     } = props;
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
 
@@ -24,6 +27,14 @@ export const Card: React.FC<CardPropsType> = React.memo((props) => {
 
     return (
         <>
+
+        {activeDeleteCardModal && 
+        <DeletCardModalWindow
+                packId={id}
+                setActiveModal={setActiveDeleteCardModal}
+                card={ card}
+        
+        />}
             <tr>
                 <td>{card.question}</td>
                 <td>{card.answer}</td>
@@ -35,12 +46,12 @@ export const Card: React.FC<CardPropsType> = React.memo((props) => {
                             <button
                                 className={s.link}
                                 onClick={openDeleteCardModalWindow}>
-                                opDel
+                                Del
                             </button>
                             <button
                                 className={s.link}
                                 onClick={openUpdateCardModalWindow}>
-                                opUp
+                                Up
                             </button>
                         </>
                     }
