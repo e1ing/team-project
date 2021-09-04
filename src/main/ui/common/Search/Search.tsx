@@ -2,11 +2,9 @@ import React, {ChangeEvent, FC, useEffect, useState} from "react";
 import style from "./Search.module.css"
 
 type SearchPropsType = {
-    names: string
 }
 
-export const Search: FC<SearchPropsType> = ({names}) => {
-    /*const dispatch = useDispatch();*/
+export const Search: FC<SearchPropsType> = () => {
     const [searchValue, setSearchValue] = useState<string>("");
 
     useEffect(() => {
