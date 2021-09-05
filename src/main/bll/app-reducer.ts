@@ -1,6 +1,5 @@
-import { AppActionsType, AppThunk } from "./store"
-import {authAPI} from "../dal/api/api-cards";
-import {setIsLoggedInAC} from "./auth-reducer/auth-reducer";
+import { AppActionsType } from "./store"
+
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 type InitialStateType = typeof initialState
@@ -18,17 +17,17 @@ const initialState = {
 export const appReducer = (state: InitialStateType = initialState, action: AppActionsType): InitialStateType => {
     switch (action.type) {
         case 'app/SET-STATUS':
-            return {...state, status: action.status}
+            return { ...state, status: action.status }
         case "app/SET-ERROR":
-            return {...state, error: action.error}
+            return { ...state, error: action.error }
         case "app/SET-INITIALIZED":
-            return {...state, isInitialized: action.isInitialized}
+            return { ...state, isInitialized: action.isInitialized }
         default:
-            return {...state}
+            return { ...state }
     }
 }
 
-export const setAppStatusAC = (status: RequestStatusType) => ({type: 'app/SET-STATUS', status} as const);
-export const setAppErrorAC = (error: string | null) => ({type: 'app/SET-ERROR', error} as const);
-export const setIsInitializedAC = (isInitialized: boolean) => ({type: "app/SET-INITIALIZED", isInitialized} as const);
+export const setAppStatusAC = (status: RequestStatusType) => ({ type: 'app/SET-STATUS', status } as const);
+export const setAppErrorAC = (error: string | null) => ({ type: 'app/SET-ERROR', error } as const);
+export const setIsInitializedAC = (isInitialized: boolean) => ({ type: "app/SET-INITIALIZED", isInitialized } as const);
 

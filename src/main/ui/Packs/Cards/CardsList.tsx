@@ -8,6 +8,7 @@ import { Button } from "../../common/Button/Button";
 import { CreateCardModalWindow } from "../../common/ModalWIndow/ModalAdd/CardsModal/CreateCardModalWindow";
 import { Card } from "./Card/Card";
 import s from '../Cards/CardsList.module.css';
+import styleButton from './../../common/Button/Button.module.css';
 
 export const CardsList: React.FC = React.memo(() => {
 
@@ -15,10 +16,10 @@ export const CardsList: React.FC = React.memo(() => {
     const [activeModalAdd, setActiveModalAdd] = useState(false);
 
     const cards = useSelector<AppRootStateType, Array<CardType>>(state => state.cards.cards);
-    const userCardId = useSelector<AppRootStateType, string>(state => state.cards.cards[0]?.user_id);
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const cardsTotalCount = useSelector<AppRootStateType, number>(state => state.cards.cardsTotalCount);
     const page = useSelector<AppRootStateType, number>(state => state.cards.page);
+
     const { id } = useParams<{ id: string }>();
 
     useEffect(() => {
@@ -27,7 +28,7 @@ export const CardsList: React.FC = React.memo(() => {
     const openModalWindow = () => setActiveModalAdd(true);
 
     const copyCards = cards.map(el => <tbody key={el._id}>
-        <Card card={el} />
+        <Card card={el} id={id} />
     </tbody>);
 
     return (
@@ -42,14 +43,14 @@ export const CardsList: React.FC = React.memo(() => {
                 <NavLink
                     className={s.link}
                     to={'/packList'}>
-                    <button>Packs</button>
+                    <Button className={styleButton.button}>Packs</Button>
                 </NavLink>
             </div>
             <h2> Cards </h2>
-            {userCardId  ? null
-                : <Button className={s.addCardButton} onClick={openModalWindow}>
+            {userLoginId  ?  <Button className={styleButton.button} onClick={openModalWindow}>
                     Add Card
-                </Button>}
+                </Button>  : null
+               }
 
             {!cards.length ? <div className={s.titleNoCards}><span> no cards </span></div>
                 : <table>

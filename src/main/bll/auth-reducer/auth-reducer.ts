@@ -1,6 +1,7 @@
-import {AppRootStateType} from "../store";
-import {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {authAPI} from "../../dal/api/api-cards";
+import { AppRootStateType, AppThunk } from "../store";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { authAPI } from "../../dal/api/api-cards";
+import { setAppStatusAC } from "../app-reducer";
 
 
 export type ActionLoginType = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setInitializedAC> | ReturnType<typeof initializeProfileAC>
@@ -8,11 +9,11 @@ export type ActionLoginType = ReturnType<typeof setIsLoggedInAC> | ReturnType<ty
 export const authReducer = (state: InitialStateType = initialState, action: ActionLoginType): InitialStateType => {
     switch (action.type) {
         case 'login/SET-IS-LOGGED-IN':
-            return {...state, isLoggedIn: action.value}
+            return { ...state, isLoggedIn: action.value }
         case 'SET-IS-INITIALIZED':
-            return {...state, isInitialized: action.value}
+            return { ...state, isInitialized: action.value }
         case "SET_PROFILE":
-            return {...state, profile: action.profile}
+            return { ...state, profile: action.profile }
         default:
             return state
     }
@@ -56,13 +57,13 @@ const initialState = {
 };
 
 export const initializeProfileAC = (profile: ProfileResponseType) =>
-    ({type: 'SET_PROFILE', profile} as const)
+    ({ type: 'SET_PROFILE', profile } as const)
 
 export const setIsLoggedInAC = (value: boolean) =>
-    ({type: 'login/SET-IS-LOGGED-IN', value} as const)
+    ({ type: 'login/SET-IS-LOGGED-IN', value } as const)
 
 export const setInitializedAC = (value: boolean) =>
-    ({type: 'SET-IS-INITIALIZED', value} as const)
+    ({ type: 'SET-IS-INITIALIZED', value } as const)
 
 export const initializeAppTC = () => async (dispatch: ThunkDispatch<any, unknown, ActionLoginType>) => {
     try {
@@ -71,31 +72,36 @@ export const initializeAppTC = () => async (dispatch: ThunkDispatch<any, unknown
         dispatch(initializeProfileAC(res.data))
         //debugger
     }
-    catch(e) {
+    catch (e) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         console.log(error)
     }
     dispatch(setInitializedAC(true))
 
 }
-export const loginTC = (email: string, password: string, rememberMe: boolean): ThunkAction <void, AppRootStateType, unknown, ActionLoginType>=> async (dispatch) => {
+export const loginTC = (email: string, password: string, rememberMe: boolean): AppThunk => async (dispatch) => {
     try {
+        dispatch(setAppStatusAC("loading"));
         const result = await authAPI.login(email, password, rememberMe)
         dispatch(setIsLoggedInAC(true))
         dispatch(initializeProfileAC(result.data))
         console.log(result)
+        dispatch(setAppStatusAC("succeeded"))
 
-    } catch(e) {
+    } catch (e) {
         const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
         console.log(error)
+        dispatch(setAppStatusAC("succeeded"))
     }
 }
 
-export const logoutTC = (): ThunkAction<void, AppRootStateType, unknown, ActionLoginType> =>
+export const logoutTC = (): AppThunk =>
     async (dispatch) => {
         try {
+            dispatch(setAppStatusAC("loading"));
             const res = await authAPI.logout()
             dispatch(setIsLoggedInAC(false))
+            dispatch(setAppStatusAC("succeeded"))
         } catch (e) {
             const error = e.response ? e.response.data.error : (`Logout failed: ${e.message}.`)
             console.log(error)

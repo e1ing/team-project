@@ -18,18 +18,18 @@
     align-items: center;
 }
 .allPack {
-    margin: 15px 0;
-    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column-reverse;
+    align-items: flex-end;
 }
+
 .serachBlock {
     margin: 20px;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    border: 1px white solid;
+    border: 2px white solid;
     border-radius: 20px;
 }
 .searchButton {
@@ -71,4 +71,11 @@
     border-bottom: 1px solid #3b5781;
     text-align: center;
     padding: 10px;
+}
+
+.groupButton{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 0 125px 0 120px;
 }

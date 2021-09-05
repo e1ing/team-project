@@ -83,6 +83,7 @@ export type UpdatePackResponseType = {
 }
 
 
+
 // cards
 export type SortPacksAndCardsOrderType = 0 | 1 | "default";
 export type CardType = {
@@ -129,20 +130,11 @@ export type GetCardsResponseType = {
     tokenDeathTime: number
 };
 
-type UpdateGradeResponseType = {
-    _id: string
-    cardsPack_id: string
-    card_id: string
-    user_id: string
-    grade: number
-    shots: number
-}
-
 // http://localhost:7542/2.0/
 // https://neko-back.herokuapp.com/2.0/
 
 const instance = axios.create({
-    baseURL: 'https://neko-back.herokuapp.com/2.0/',
+    baseURL: 'https://neko-back.herokuapp.com/2.0/', 
     withCredentials: true,
 });
 
@@ -150,10 +142,10 @@ const instance = axios.create({
 
 export const authAPI = {
     me() {
-        return instance.post<ProfileResponseType>(`auth/me`, {})
+        return instance.post<ProfileResponseType>(`auth/me`,{})
     },
     login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post<LoginUserResponseType>(`auth/login`, {email, password, rememberMe})
+        return instance.post<LoginUserResponseType>(`auth/login`, { email, password, rememberMe })
     },
     logout() {
         return instance.delete<LogoutResponseType>(`auth/me`, {})
@@ -179,7 +171,7 @@ export const authAPI = {
     },
 
     updateUserData(name: string, avatar: string | undefined | null) {
-        return instance.put<UpdateUserDataResponseType>(`auth/me`, {name, avatar})
+        return instance.put<UpdateUserDataResponseType>(`auth/me`, { name, avatar })
     },
 };
 
@@ -206,21 +198,17 @@ export const packsApi = {
 };
 
 export const cardsApi = {
-    getCards(packId: string, page?: number, pageCount?: number, question?: string, sortCardsOrder?: SortPacksAndCardsOrderType, sortCardsFilter?: string, answer?: string, min?: number, max?: number) {
+    getCards(packId: string, page?: number, pageCount?: number, question?: string, sortCardsOrder?: SortPacksAndCardsOrderType, sortCardsFilter?: string, answer?: string, min?: number, max?:number){
         return instance.get<GetCardsResponseType>(`cards/card?cardQuestion=${question ? question : ""}&cardsPack_id=${packId}&pageCount=${pageCount}&sortCards=${sortCardsOrder}${sortCardsFilter}`)
     },
 
-    addCard(packId: string, question?: string, answer?: string) {
+    addCard(packId: string, question?: string, answer?: string){
         return instance.post<AddCardResponseType>(`cards/card`, {card: {cardsPack_id: packId, question, answer,}})
     },
-    deleteCard(cardId: string) {
+    deleteCard(cardId: string){
         return instance.delete<DeleteCardResponseType>(`cards/card?id=${cardId}`)
     },
-    updateCard(cardId: string, question: string, answer: string) {
+    updateCard(cardId: string, question: string, answer: string){
         return instance.put<UpdateCardResponseType>(`cards/card`, {card: {_id: cardId, question, answer}})
     },
-    updateGrade(grade: number, card_id: string) {
-        return instance.put<UpdateGradeResponseType>(`cards/grade`, {grade, card_id})
-    }
-
 }

@@ -1,34 +1,35 @@
-.profile {
-    min-width: 80%;
+.packsList{
+  min-height: 100vh;
+    background: linear-gradient( 180deg, #E6D4DE 0%, #9890C7 100%);
+    
+}
+  .aside{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 20px 100px ;
+  }
+  
 
-    margin-left: auto;
-    color: rgb(7, 7, 37);
+  .content{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-}
+    align-items: stretch;
+  }
 
-.title {
-    text-align: center;
-}
+  .button{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
 
-.greeting {
-    text-align: center;
-    font-size: 1.3em;
-}
 
-.numberOfPacks {
-    text-align: center;
-}
 
-.ava img {
-    width: 256px;
-    height: 256px;
-    border-radius: 50%;
-}
 
-.userPacks {
-    color: #e92539;
-    font-size: 1.3em;
-}
+
+
+

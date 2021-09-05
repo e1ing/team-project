@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { AppRootStateType } from "../../../bll/store";
 import { CardPacksDataType } from "../../../dal/api/api-cards";
-import { DeletCardModalWindow } from "../../common/ModalWIndow/ModalAdd/DeletCardModalWindow/DeletCardModalWindow";
-import { UpdatePacksModalWindow } from "../../common/ModalWIndow/ModalAdd/UpdatePacksModalWindow/UpdatePacksModalWindow";
+import { DeletPackModalWindow } from "../../common/ModalWIndow/ModalAdd/PackModal/DeletPackModalWindow";
+import { UpdatePacksModalWindow } from "../../common/ModalWIndow/ModalAdd/PackModal/UpdatePacksModalWindow";
 import { PATH } from "../../routes/Routes";
 import s from "./Pack.module.css";
 
@@ -18,8 +18,6 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
         pack
     } = props;
 
-    // const dispatch = useDispatch();
-
 
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
 
@@ -31,13 +29,6 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
     const openUpdateModalWindow = () => setUpdateActiveModal(true)
     const openDeletModalWindow = () => setDeletActivePackModal(true);
 
-    // const [title, setTitle] = useState<string>(pack.name);
-
-    // const updatePack = useCallback(() => {
-    //     dispatch(updatePacksTC(packId, title));
-    //     if (title !== '') {
-    //         setTitle('');
-    //     };
 
     return (
         <>
@@ -52,13 +43,13 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
                 <NavLink
                     className={s.link}
                     to={PATH.CARDS + `/${pack._id}`}>
-                    watch
+                    👀
                 </NavLink>
             </td>
             <td>
 
                 {userLoginId === pack.user_id ?
-                     <>
+                    <>
                         <button
                             className={s.Button}
                             onClick={openUpdateModalWindow}
@@ -71,7 +62,7 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
                         >🗑
                         </button>
                     </>
-                    :  null
+                    : null
                 }
             </td>
 
@@ -82,7 +73,7 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
                 setUpdateActiveModal={setUpdateActiveModal}
             />}
             {/* delet pack modal window */}
-            {deletActivPackModal && <DeletCardModalWindow
+            {deletActivPackModal && <DeletPackModalWindow
                 packId={pack._id}
                 setActiveModal={setDeletActivePackModal}
             />}

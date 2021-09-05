@@ -1,4 +1,5 @@
 import { CardPacksDataType, EntityStatusType, packsApi, ResponseDataType } from "../../dal/api/api-cards"
+import { setAppStatusAC } from "../app-reducer";
 import { AppThunk } from "../store";
 
 export type PacksActionType =
@@ -38,35 +39,35 @@ const initialState = {
 
 export const packsReducer = (state: InitialPacksStateType = initialState, action: PacksActionType): InitialPacksStateType => {
     switch (action.type) {
-        case "DIMA/TEAM-PROJECT/CARDS/SET-MAX-CARDS-NUMBER": 
-            return {...state, maxCardsCount: action.maxCount}
-        case "DIMA/TEAM-PROJECT/CARDS/SET-MIN-CARDS-NUMBER": 
-            return {...state, minCardsCount: action.minCount}
+        case "DIMA/TEAM-PROJECT/CARDS/SET-MAX-CARDS-NUMBER":
+            return { ...state, maxCardsCount: action.maxCount }
+        case "DIMA/TEAM-PROJECT/CARDS/SET-MIN-CARDS-NUMBER":
+            return { ...state, minCardsCount: action.minCount }
         case "DIMA/TEAM-PROJECT/CARDS/SET-ID":
-            return {...state, _id: action._id}
+            return { ...state, _id: action._id }
         case "DIMA/TEAM-PROJECT/CARDS/SET-MIN":
-            return {...state, minCardsCount: action.min}
+            return { ...state, minCardsCount: action.min }
         case "DIMA/TEAM-PROJECT/CARDS/SET-MAX":
-            return {...state, maxCardsCount: action.max}
+            return { ...state, maxCardsCount: action.max }
         case "DIMA/TEAM-PROJECT/CARDS/SET-PACK-NAME":
-            return {...state, name: action.name}
+            return { ...state, name: action.name }
         case "DIMA/TEAM-PROJECT/CARDS/SET-PACKS":
-            return {...state, cardPacks: action.paks}
+            return { ...state, cardPacks: action.paks }
         case "DIMA/TEAM-PROJECT/CARDS/SET-ENTITY-STATUS-PACKS":
             return {
                 ...state,
                 cardPacks: state.cardPacks.map(c => c._id === action.id
-                    ? {...c, entityStatus: action.entityStatus} : c)
+                    ? { ...c, entityStatus: action.entityStatus } : c)
             }
         case "DIMA/TEAM-PROJECT/CARDS/SET-ACTIVE-MODAL":
-            return {...state, activeModal: action.active}
+            return { ...state, activeModal: action.active }
         case 'DIMA/TEAM-PROJECT/CARDS/SET-CARENT-PAGE': {
-            return {...state, page: action.value}
+            return { ...state, page: action.value }
         }
         case 'DIMA/TEAM-PROJECT/CARDS/SET-CARDS-TOTAL-COUNT':
-            return {...state, cardPacksTotalCount: action.count}
+            return { ...state, cardPacksTotalCount: action.count }
         case 'DIMA/TEAM-PROJECT/CARDS/SET-PACK-CARDS-ID': {
-            return {...state, packCardsId: action.packId}
+            return { ...state, packCardsId: action.packId }
         }
         default:
             return state
@@ -74,29 +75,29 @@ export const packsReducer = (state: InitialPacksStateType = initialState, action
 }
 
 // AC
-export const setMaxCardsCoutnAC = (maxCount: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX-CARDS-NUMBER", maxCount} as const);
-export const setMinCardsCoutnAC = (minCount: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN-CARDS-NUMBER", minCount} as const);
+export const setMaxCardsCoutnAC = (maxCount: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX-CARDS-NUMBER", maxCount } as const);
+export const setMinCardsCoutnAC = (minCount: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN-CARDS-NUMBER", minCount } as const);
 
-export const setIdAC = (_id: string) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-ID", _id} as const);
-export const setPackNameAC = (name: string) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-PACK-NAME", name} as const);
+export const setIdAC = (_id: string) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-ID", _id } as const);
+export const setPackNameAC = (name: string) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-PACK-NAME", name } as const);
 
-export const setMinAC = (min: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN", min} as const);
-export const setMaxAC = (max: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX", max} as const);
+export const setMinAC = (min: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN", min } as const);
+export const setMaxAC = (max: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX", max } as const);
 
-export const setPacksAC = (paks: Array<CardPacksDataType>) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-PACKS", paks} as const);
+export const setPacksAC = (paks: Array<CardPacksDataType>) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-PACKS", paks } as const);
 export const setEntityStatusPacksAC = (entityStatus: EntityStatusType, id: string) =>
-    ({type: "DIMA/TEAM-PROJECT/CARDS/SET-ENTITY-STATUS-PACKS", entityStatus, id} as const);
+    ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-ENTITY-STATUS-PACKS", entityStatus, id } as const);
 
 export const setActivModalAC = (active: boolean) =>
-    ({type: "DIMA/TEAM-PROJECT/CARDS/SET-ACTIVE-MODAL", active} as const);
-export const setCurrentPageAC = (value: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-CARENT-PAGE", value} as const);
+    ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-ACTIVE-MODAL", active } as const);
+export const setCurrentPageAC = (value: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-CARENT-PAGE", value } as const);
 
-export const setPacksTotalCountAC = (count: number) => ({type:  "DIMA/TEAM-PROJECT/CARDS/SET-CARDS-TOTAL-COUNT", count} as const);
-export const setPackCardsIdAC = (packId: string) => ({type:"DIMA/TEAM-PROJECT/CARDS/SET-PACK-CARDS-ID", packId} as const);
+export const setPacksTotalCountAC = (count: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-CARDS-TOTAL-COUNT", count } as const);
+export const setPackCardsIdAC = (packId: string) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-PACK-CARDS-ID", packId } as const);
 // TC
 
-export const setPacksTC = (): AppThunk => (dispatch, getState) => {
-    // status
+export const getPacksTC = (): AppThunk => (dispatch, getState) => {
+    dispatch(setAppStatusAC("loading"));
 
     const state = getState();
     const currentPage = state.packs.page;
@@ -111,13 +112,14 @@ export const setPacksTC = (): AppThunk => (dispatch, getState) => {
             dispatch(setPacksAC(res.data.cardPacks))
             dispatch(setPacksTotalCountAC(res.data.cardPacksTotalCount))
 
-            // status
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch((e) => {
             const error = e.response
                 ? e.response.data.error
                 : (e.message + ', more details in the console');
             alert(error)
+            dispatch(setAppStatusAC("succeeded"))
         })
         .finally(
             // some code
@@ -126,11 +128,11 @@ export const setPacksTC = (): AppThunk => (dispatch, getState) => {
 
 
 export const createPacksTC = (title: string): AppThunk => (dispatch) => {
-    // satus
+    dispatch(setAppStatusAC("loading"));
     packsApi.createPacks(title)
         .then(() => {
-            dispatch(setPacksTC())
-            // status
+            dispatch(getPacksTC())
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch((e) => {
             const error = e.response
@@ -141,12 +143,12 @@ export const createPacksTC = (title: string): AppThunk => (dispatch) => {
 };
 
 export const deletePacksTC = (_id: string): AppThunk => (dispatch) => {
-    // status
+    dispatch(setAppStatusAC("loading"));
     dispatch(setEntityStatusPacksAC("loading", _id))
     packsApi.deletePacks(_id)
         .then(() => {
-            dispatch(setPacksTC())
-            // status
+            dispatch(getPacksTC())
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch((e) => {
             const error = e.response
@@ -157,13 +159,13 @@ export const deletePacksTC = (_id: string): AppThunk => (dispatch) => {
         })
 };
 export const updatePacksTC = (_id: string, name: string): AppThunk => (dispatch) => {
-    // status
-    
+    dispatch(setAppStatusAC("loading"));
+
     packsApi.updatePacks(_id, name)
-    
+
         .then(() => {
-            dispatch(setPacksTC())
-            // status
+            dispatch(getPacksTC())
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch((e) => {
             const error = e.response
