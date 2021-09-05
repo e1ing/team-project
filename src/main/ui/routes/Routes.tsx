@@ -1,6 +1,3 @@
-//сделать пути константами
-
-import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import { Login } from '../Login/Login';
 import {Registration} from "../Registration/Registration";

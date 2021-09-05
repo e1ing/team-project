@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {setCurrentPageAC, setPackNameAC, getPacksTC} from "../../bll/packs-reducer/packs-reduser";
+import { setCurrentPageAC, setPackNameAC, getPacksTC } from "../../bll/packs-reducer/packs-reduser";
 import { AppRootStateType } from "../../bll/store";
 import s from "./Packs.module.css";
 import styleButton from './../../ui/common/Button/Button.module.css';
@@ -10,11 +10,12 @@ import { CardPacksDataType } from "../../dal/api/api-cards";
 import { Button } from "../common/Button/Button";
 import { Input } from "../common/Input/Input";
 import { RequestStatusType } from "../../bll/app-reducer";
-import {Pagination} from "../common/Pagination/Pagination";
-import {Preloader} from "../common/Preloader/Preloader";
-import {Redirect} from "react-router-dom";
-import {PATH} from "../routes/Routes";
+import { Pagination } from "../common/Pagination/Pagination";
+
 import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow";
+import { PackListTable } from "./PackListTadle";
+import { Redirect } from "react-router-dom";
+import { PATH } from "../routes/Routes";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -25,7 +26,8 @@ export const Packs: React.FC = React.memo(() => {
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status);
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
 
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>(name);
@@ -41,13 +43,15 @@ export const Packs: React.FC = React.memo(() => {
 
 
     useEffect(() => {
-        dispatch(getPacksTC())
+        setMyPack(false);
+        dispatch(setIdAC(''));
+        dispatch(getPacksTC());
     }, [dispatch, page]);
 
     const openModalWindow = () => {
         setActiveModalAdd(true);
     };
-     const allPacks = () => {
+    const allPacks = () => {
         setMyPack(false);
         dispatch(setIdAC(''));
         dispatch(getPacksTC());
@@ -80,7 +84,9 @@ export const Packs: React.FC = React.memo(() => {
     //const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
     const paginate = (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber))
 
-
+    if (!isLoggedIn) {
+        return <Redirect to={PATH.LOGIN} />
+    }
 
 
     return (
@@ -95,14 +101,15 @@ export const Packs: React.FC = React.memo(() => {
             <div className={s.navBlock}>
                 <div className={s.allPack}>
                     <div className={s.groupButton}>
-                    <h3>Show decks cards</h3>
-                    <Button className={styleButton.button} onClick={allPacks}>All</Button>
-                    <Button className={styleButton.button}  onClick={myPacks}>My</Button>
+                        <h3>Show decks cards</h3>
+                        <Button className={styleButton.button} onClick={allPacks}>All</Button>
+                        <Button className={styleButton.button} onClick={myPacks}>My</Button>
                     </div>
 
-                    
-                    
+
+
                 </div>
+
                 <div className={s.serachBlock}>
                     <Input
                         onChangeText={setInputValuse}
@@ -119,27 +126,13 @@ export const Packs: React.FC = React.memo(() => {
                     </button>
                     <Button className={styleButton.button} onClick={openModalWindow}>Add pack</Button>
                 </div>
+
             </div>
             {/* Table */}
-            <table>
-                <thead className={s.packsHeader}>
-                    <tr>
-                        <th>username</th>
-                        <th>name pack</th>
-                        <th>cards</th>
-                        <th>time</th>
-                        <th>learn</th>
-                        <th>watch</th>
-                        <th>actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {pack}
-                </tbody>
-            </table>
-        {/* Pagination */}
-        {/*    {cardPacksTotalCount}*/}
-            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10}/>
+            <PackListTable />
+            {/* Pagination */}
+            {/*    {cardPacksTotalCount}*/}
+            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} />
 
 
         </div>

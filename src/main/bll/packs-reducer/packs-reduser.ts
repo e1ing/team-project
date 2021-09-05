@@ -119,6 +119,7 @@ export const getPacksTC = (): AppThunk => (dispatch, getState) => {
                 ? e.response.data.error
                 : (e.message + ', more details in the console');
             alert(error)
+            dispatch(setAppStatusAC("succeeded"))
         })
         .finally(
             // some code

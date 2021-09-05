@@ -43,7 +43,7 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
                 <NavLink
                     className={s.link}
                     to={PATH.CARDS + `/${pack._id}`}>
-                    watch
+                    👀
                 </NavLink>
             </td>
             <td>
