@@ -1,6 +1,7 @@
 import { CardType, GetCardsResponseType, SortPacksAndCardsOrderType } from "../../dal/api/api-cards";
 import { AppThunk } from "../store";
 import { cardsApi } from './../../dal/api/api-cards';
+import {setAppStatusAC} from "../app-reducer";
 
 export type CardsReducerActionType =
     ReturnType<typeof setCardsAC>

@@ -1,34 +1,75 @@
-.packsList{
-  min-height: 100vh;
-    background: linear-gradient( 180deg, #E6D4DE 0%, #9890C7 100%);
-    
+.packsList {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #E6D4DE 0%, #9890C7 100%);
+    display: flex;
+    justify-content: space-evenly;
+
 }
-  .aside{
+
+
+.container {
+    width: 1008px;
+    height: 636px;
+    left: 136px;
+    top: 84px;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
-    align-items: stretch;
-    padding: 20px 100px ;
-  }
-  
+    justify-content: center;
+margin-bottom: 20px;
+}
 
-  .content{
+
+.packsBlock {
+    width: 1008px;
+    height: 636px;
+    left: 136px;
+    top: 84px;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 0 8px 8px 0;
+    background: #FEFEFF;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-content: space-between;
     align-items: stretch;
-  }
+}
 
-  .button{
+.button {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-end;
-  }
+}
 
+.avaBlock {
+    width: 243px;
+    height: 216px;
+    left: 136px;
+    top: 84px;
+    background: #D9D9F1;
+    border-radius: 8px 0 0 0;
 
+}
 
+.settingsBlock {
+    width: 243px;
+    height: 636px;
+    left: 136px;
+    top: 84px;
+    background: #ECECF9;
+    border-radius: 0 0 0 8px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profileBlock {
+    display: flex;
+    flex-direction: column;
+}
 
 
 

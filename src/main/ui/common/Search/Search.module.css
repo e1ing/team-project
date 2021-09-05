@@ -1,8 +1,11 @@
 .searchInput {
-    height: 50px;
-    width: 800px;
-    left: 0px;
-    top: 46.42px;
-    border: 0px;
-    background-color: #F9F9FE;
+    height: 36px;
+    width: 669px;
+    left: 427px;
+    top: 156px;
+    background: #ECECF9;
+    opacity: 0.5;
+    border: 1px solid #635D80;
+    box-sizing: border-box;
+    border-radius: 2px;
 }
