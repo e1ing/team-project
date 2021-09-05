@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPageAC, setPackNameAC, getPacksTC } from "../../bll/packs-reducer/packs-reduser";
-import { AppRootStateType } from "../../bll/store";
+import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getPacksTC, setCurrentPageAC, setPackNameAC} from "../../bll/packs-reducer/packs-reduser";
+import {AppRootStateType} from "../../bll/store";
 import s from "./Packs.module.css";
 import styleButton from './../../ui/common/Button/Button.module.css';
-import { setIdAC } from './../../bll/packs-reducer/packs-reduser';
-import { Pack } from "./Pack/Pack";
-import { CardPacksDataType } from "../../dal/api/api-cards";
-import { Button } from "../common/Button/Button";
-import { Input } from "../common/Input/Input";
-import { RequestStatusType } from "../../bll/app-reducer";
-import { Pagination } from "../common/Pagination/Pagination";
+import {setIdAC} from './../../bll/packs-reducer/packs-reduser';
+import {Pack} from "./Pack/Pack";
+import {CardPacksDataType} from "../../dal/api/api-cards";
+import {Button} from "../common/Button/Button";
+import {RequestStatusType} from "../../bll/app-reducer";
+import {Pagination} from "../common/Pagination/Pagination";
 
-import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow";
-import { PackListTable } from "./PackListTadle";
-import { Redirect } from "react-router-dom";
-import { PATH } from "../routes/Routes";
+import {CreatePackModalWindow} from "../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow";
+import {PackListTable} from "./PackListTadle";
+import {Search} from "../common/Search/Search";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -58,8 +56,7 @@ export const Packs: React.FC = React.memo(() => {
     };
 
     const setInputValuse = (value: string) => {
-        dispatch(setPackNameAC(value));
-        dispatch(setPacksTC())  ///засунуть в useEffect
+        setSearchValue(value);
     };
 
     // отправляем поисковый запрос на сервер //send search request to the server
@@ -114,7 +111,6 @@ export const Packs: React.FC = React.memo(() => {
                         onChange={setInputValuse}
                         value={searchValue}
                         placeholder="searh packs"
-                        className={s.saerchInput}
                     />
 
                 </div>
