@@ -1,8 +1,9 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom';
 import {PATH} from "../routes/Routes";
 import s from "./HeaderInMockup.module.css"
-
+import {LinkButton} from "./Link/Link";
+import packs from "../../../assets/images/packs.svg"
+import profile from "../../../assets/images/profile.svg"
 
 function HeaderInMockup() {
 
@@ -10,10 +11,10 @@ function HeaderInMockup() {
     return (
         <div className={s.containerHeader}>
             <span className={s.title}>IT-incubator</span>
-            <div className={s.linksBlock}>
-                <NavLink className={s.links} to={PATH.PROFILE}>Profile</NavLink>
-                <NavLink to={PATH.PACKS_LIST}>Packs list</NavLink>
-            </div>
+            <nav>
+                <LinkButton path={PATH.PROFILE} icon={profile} title={"Profile"}/>
+                <LinkButton path={PATH.PACKS_LIST} icon={packs} title={"Packs list"}/>
+            </nav>
         </div>
     )
 }

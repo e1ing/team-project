@@ -5,10 +5,8 @@
     top: 0px;
     background: #EBE0E9;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    background: #EBE0E9;
-
+    flex-direction: row;
+    justify-content: center;
 }
 
 .links {
@@ -16,8 +14,10 @@
     height: 60px;
     display: flex;
     justify-content: space-around;
+    background: #EBE0E9;
 }
 
-.linksBlock{
-    block
+.header{
+    position: absolute;
+    left: 10px;
 }

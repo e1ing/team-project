@@ -1,6 +1,6 @@
 import loader from "../../assets/loader.gif";
 import React from "react";
-import commonStyles from '../../app/App.module.css'
+import s from './Preloader.module.css'
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../bll/store";
 import {RequestStatusType} from "../../../bll/app-reducer";
@@ -13,8 +13,8 @@ export const Preloader = () => {
         return null
 
     return (
-        <div  className={commonStyles.loaderContainer}>
-            <div className={commonStyles.loader}>
+        <div  className={s.loaderContainer}>
+            <div className={s.loader}>
             <img src={loader}/>
             </div>
         </div>
