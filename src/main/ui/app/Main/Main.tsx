@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
-import Header from "../../Header/Header";
-import {PATH, Routes} from "../../routes/Routes";
+import {PATH} from "../../routes/Routes";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "../../../bll/store";
 import {initializeAppTC} from "../../../bll/auth-reducer/auth-reducer";
@@ -14,7 +13,7 @@ export const Main = () => {
 
     useEffect(()=> {
         dispatch(initializeAppTC())
-    }, [])
+    }, [dispatch])
 
 
     if (!isInitialized) {
