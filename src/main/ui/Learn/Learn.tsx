@@ -24,6 +24,7 @@ export const Learn = () => {
                     <h2>Question: how r u</h2>
                 </div>
                 <div className={style.bottom}>
+                    <Button>cansel</Button>
                         <Button  className={styleButton.button}>
                             show answer
                         </Button>

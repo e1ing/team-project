@@ -42,8 +42,8 @@ export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portion
         dispatch(setCardsPerPageAC(+value)) //передаем в юзффкт в диспатч экшн который сетает в pageCount value из select
     }, [dispatch, value]);
     return (
-        <nav>
-            <ul>
+        <nav className={styles.paginationWrapper}>
+            <ul style={{display: 'flex'}}>
                 { portionNumber > 1 &&
                 <button className={styles.button}
                         onClick={()=> {setPortionNumber(portionNumber-1)}} >

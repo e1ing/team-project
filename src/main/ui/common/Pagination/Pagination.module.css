@@ -4,21 +4,36 @@
 
 .paginationA {
     color: black;
-    float: left;
-    padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color .3s;
     border: 1px solid #ddd;
     font-size: 15px;
+    width: 43px;
+    height: 43px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .active {
     background-color: #232480;
     color: white;
     border-radius: 5px;
-    padding: 8px 16px;
+
+
+    display: block;
+    width: 100%;
+
+    text-align: center;
+    /* margin: 0 auto; */
+    padding: 22px 0;
 }
+
+/*.paginationA some.active{*/
+/*    color: green;*/
+/*}*/
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
 
@@ -40,11 +55,7 @@
     text-align: center;
     border-radius: 5px;
 }
-
-/*.selectBody {*/
-/*    top: 100%;*/
-/*    left: 0;*/
-/*    position: absolute;*/
-/*    border: 1px solid #cccc;*/
-
-/*}*/
+.paginationWrapper {
+    display: flex;
+    align-items: center;
+}
