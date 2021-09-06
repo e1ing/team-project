@@ -14,6 +14,7 @@ export type PacksActionType =
     | ReturnType<typeof setActivModalAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setPackCardsIdAC>
+    |ReturnType<typeof setCardsPerPageAC>
 
 export type InitialPacksStateType = ResponseDataType & {
     activeModal: boolean
@@ -68,12 +69,16 @@ export const packsReducer = (state: InitialPacksStateType = initialState, action
         case 'DIMA/TEAM-PROJECT/CARDS/SET-PACK-CARDS-ID': {
             return {...state, packCardsId: action.packId}
         }
+        case 'NIGAR/TEAM-PROJECT/CARDS/CARDS-PER-PAGE':
+            return {...state, pageCount: action.pageCount}
         default:
             return state
     }
 }
 
 // AC
+export const setCardsPerPageAC = (pageCount: number) => ({type:"NIGAR/TEAM-PROJECT/CARDS/CARDS-PER-PAGE", pageCount} as const);
+
 export const setMaxCardsCoutnAC = (maxCount: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX-CARDS-NUMBER", maxCount} as const);
 export const setMinCardsCoutnAC = (minCount: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN-CARDS-NUMBER", minCount} as const);
 

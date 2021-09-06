@@ -26,11 +26,9 @@ export const Packs: React.FC = React.memo(() => {
     const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
-
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>(name);
     const [myPack, setMyPack] = useState<boolean>(false);
-
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [sizePage] = useState<number>(10);
 
@@ -82,7 +80,11 @@ export const Packs: React.FC = React.memo(() => {
 
 
     //const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-    const paginate = (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber))
+    const paginate = (pageNumber: number) => {
+        dispatch(setCurrentPageAC(pageNumber))
+        setCurrentPage(pageNumber)
+    }
+
 
 
 
@@ -135,9 +137,8 @@ export const Packs: React.FC = React.memo(() => {
                     {cards}
                 </tbody>
             </table>
-        {/* Pagination */}
         {/*    {cardPacksTotalCount}*/}
-            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10}/>
+            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage}/>
 
 
         </div>
