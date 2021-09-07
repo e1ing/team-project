@@ -138,7 +138,7 @@ export const Packs: React.FC = React.memo(() => {
             <PackListTable />
             {/* Pagination */}
             {/*    {cardPacksTotalCount}*/}
-            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} />
+            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage}/>
 
 
         </div>

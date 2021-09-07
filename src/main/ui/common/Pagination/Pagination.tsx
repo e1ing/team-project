@@ -4,7 +4,7 @@ import left from "./../Images/left.png"
 import right from "./../Images/right.png"
 import styles from "./Pagination.module.css"
 import {useDispatch, useSelector} from "react-redux";
-import {setCardsPerPageAC, setPacksTC} from "../../../bll/packs-reducer/packs-reduser";
+import {setCardsPerPageAC, getPacksTC} from "../../../bll/packs-reducer/packs-reduser";
 import {AppRootStateType} from "../../../bll/store";
 
 type pageType = {
@@ -35,7 +35,7 @@ export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portion
     let rightPortionPageNumber = portionNumber * portionSize;
 
     useEffect(() => {
-        dispatch(setPacksTC())
+        dispatch(getPacksTC())
     }, [dispatch, pageCount]); //передаем в юзэффект экщн который ветает packs
 
     useEffect(() => {

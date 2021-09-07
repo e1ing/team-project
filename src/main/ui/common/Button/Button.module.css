@@ -13,6 +13,19 @@
     
 }
 
+.cancelButton {
+    min-width: 190px;
+    font-family: inherit;
+    appearance: none;
+    border: 0;
+    border-radius: 40px;
+    background: #d7d8ef;
+    color: #232480;
+    padding: 13px;
+    font-size: 1rem;
+    cursor: auto;
+}
+
 .button:hover {
     background: #1d49aa;
 }
