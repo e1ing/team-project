@@ -2,16 +2,20 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { AppRootStateType } from "../../../../bll/store";
 import { CardType } from "../../../../dal/api/api-cards";
+import { DeletCardModalWindow } from "../../../common/ModalWIndow/ModalAdd/CardsModal/DeletCardModalWindow";
+import { UpdateCardModalWindow } from "../../../common/ModalWIndow/ModalAdd/CardsModal/UpdateCardModalWIndow";
 import s from "../CardsList.module.css";
 
 type CardPropsType = {
     card: CardType
+    id: string
 }
 
 export const Card: React.FC<CardPropsType> = React.memo((props) => {
 
     const {
         card,
+        id
     } = props;
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
 
@@ -24,6 +28,23 @@ export const Card: React.FC<CardPropsType> = React.memo((props) => {
 
     return (
         <>
+            {activeUpdateCardModal &&
+                <UpdateCardModalWindow
+                    packId={id}
+                    setActiveModal={setActiveUpdateCardModal}
+                    cardId={card._id}
+                    question={card.question}
+                    answer={card.answer}
+                />}
+
+            {activeDeleteCardModal &&
+                <DeletCardModalWindow
+                    packId={id}
+                    setActiveModal={setActiveDeleteCardModal}
+                    cardId={card._id}
+
+                />}
+
             <tr>
                 <td>{card.question}</td>
                 <td>{card.answer}</td>
@@ -34,14 +55,15 @@ export const Card: React.FC<CardPropsType> = React.memo((props) => {
                         : <>
                             <button
                                 className={s.link}
-                                onClick={openDeleteCardModalWindow}>
-                                opDel
+                                onClick={openUpdateCardModalWindow}>
+                                📝
                             </button>
                             <button
                                 className={s.link}
-                                onClick={openUpdateCardModalWindow}>
-                                opUp
+                                onClick={openDeleteCardModalWindow}>
+                                🗑
                             </button>
+
                         </>
                     }
                 </td>

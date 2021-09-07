@@ -1,5 +1,3 @@
-//сделать пути константами
-
 import React from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
 import { Login } from '../Login/Login';
@@ -30,7 +28,7 @@ export const Routes = () => {
     return (
         <div>
             <Switch>
-                <Route path={"/"} exact render={() => <Redirect to={"/"}/>}/>
+                <Route path={"/"} exact render={() => <Redirect to={"/login"}/>}/>
                 <Route path={PATH.LOGIN} render={() => <Login/>}/>
                 <Route path={PATH.SIGN_UP} render={() => <Registration/>}/>
                 <Route path={PATH.PROFILE} render={() => <Profile/>}/>

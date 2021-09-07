@@ -1,11 +1,11 @@
 import { Dispatch } from "redux"
 
-import {setAppErrorAC, setAppStatusAC} from "../app-reducer";
-import {authAPI} from "../../dal/api/api-cards";
+import { setAppErrorAC, setAppStatusAC } from "../app-reducer";
+import { authAPI } from "../../dal/api/api-cards";
 
 type InitialStateType = typeof initialState
 type ActionType = ReturnType<typeof registerUserAC>
-export type RegistrationDataType ={
+export type RegistrationDataType = {
     email: string
     password: string
 }
@@ -14,18 +14,18 @@ const initialState = {
     isRegistered: false
 }
 
-export const registrationReducer = (state: InitialStateType = initialState, action: ActionType):InitialStateType => {
-    switch (action.type){
+export const registrationReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
+    switch (action.type) {
         case "registration/REGISTER":
-            return {...state, isRegistered: action.isRegistered}
+            return { ...state, isRegistered: action.isRegistered }
         default:
-            return {...state}
+            return { ...state }
     }
 }
 
 
 //action creators
-export const registerUserAC = (isRegistered: boolean) => ({type:"registration/REGISTER", isRegistered: isRegistered} as const )
+export const registerUserAC = (isRegistered: boolean) => ({ type: "registration/REGISTER", isRegistered: isRegistered } as const)
 
 
 //thunks creators
@@ -34,13 +34,13 @@ export const registerUserTC = (regData: RegistrationDataType) => (dispatch: Disp
     authAPI.signUp(regData)
         .then(res => {
             console.log('Res', res)
-        dispatch(registerUserAC(true))
+            dispatch(registerUserAC(true))
             dispatch(setAppStatusAC("succeeded"))
-    })
+        })
         .catch((e) => {
-           const error = e.response
-            ?e.response.data.error
-               : (e.message+ ', more details in the console')
+            const error = e.response
+                ? e.response.data.error
+                : (e.message + ', more details in the console')
             dispatch(setAppErrorAC(error))
             dispatch(setAppStatusAC("failed"))
         })

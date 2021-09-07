@@ -1,12 +1,14 @@
 import React, { useCallback, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { deletePacksTC } from '../../../../../bll/packs-reducer/packs-reduser';
+import { deleteCardTC } from '../../../../../bll/cards-reducer/cards-reducer';
 import { Button } from '../../../Button/Button';
-import s from '../../ModalWindow.module.css'
+import s from '../../ModalWindow.module.css';
+import styleButton from '../../../Button/Button.module.css';
 
 type DeletPacksPT = {
-    setActiveModal: (value: boolean) => void
     packId: string
+    setActiveModal:(active: boolean) => void
+    cardId: string
 };
 
 export const DeletCardModalWindow: React.FC<DeletPacksPT> = React.memo((props) => {
@@ -14,12 +16,13 @@ export const DeletCardModalWindow: React.FC<DeletPacksPT> = React.memo((props) =
     const {
         setActiveModal,
         packId,
+        cardId,
     } = props;
 
     const dispatch = useDispatch();
 
     const deletPack = useCallback(() => {
-        dispatch(deletePacksTC(packId));
+        dispatch(deleteCardTC(packId, cardId));
         setActiveModal(false);
     }, [dispatch, props]);
 
@@ -35,8 +38,8 @@ export const DeletCardModalWindow: React.FC<DeletPacksPT> = React.memo((props) =
                     I hope you thought well?
                 </div>
                 <div className={s.button}>
-                    <Button type={"submit"} onClick={deletPack}>yes</Button>
-                    <Button type={"submit"} onClick={resetPack}>no</Button>
+                    <Button className={styleButton.button} type={"submit"} onClick={deletPack}>yes</Button>
+                    <Button className={styleButton.button} type={"submit"} onClick={resetPack}>no</Button>
                 </div>
 
             </div>

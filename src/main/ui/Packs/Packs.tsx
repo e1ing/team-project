@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {setCurrentPageAC, setPackNameAC, setPacksTC} from "../../bll/packs-reducer/packs-reduser";
+import { setCurrentPageAC, setPackNameAC, getPacksTC } from "../../bll/packs-reducer/packs-reduser";
 import { AppRootStateType } from "../../bll/store";
-import s from "./Packs.module.css"
+import s from "./Packs.module.css";
+import styleButton from './../../ui/common/Button/Button.module.css';
 import { setIdAC } from './../../bll/packs-reducer/packs-reduser';
 import { Pack } from "./Pack/Pack";
 import { CardPacksDataType } from "../../dal/api/api-cards";
 import { Button } from "../common/Button/Button";
 import { Input } from "../common/Input/Input";
 import { RequestStatusType } from "../../bll/app-reducer";
-import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/CreatePackModalWindow.tsx/CreatePackModalWindow";
-import styleButton from "../common/Button/Button.module.css";
-import {Pagination} from "../common/Pagination/Pagination";
-import {Preloader} from "../common/Preloader/Preloader";
-import {Redirect} from "react-router-dom";
-import {PATH} from "../routes/Routes";
+import { Pagination } from "../common/Pagination/Pagination";
+
+import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow";
+import { PackListTable } from "./PackListTadle";
+import { Redirect } from "react-router-dom";
+import { PATH } from "../routes/Routes";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -25,10 +26,13 @@ export const Packs: React.FC = React.memo(() => {
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
+    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status);
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
+
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>(name);
     const [myPack, setMyPack] = useState<boolean>(false);
+
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [sizePage] = useState<number>(10);
 
@@ -39,7 +43,9 @@ export const Packs: React.FC = React.memo(() => {
 
 
     useEffect(() => {
-        dispatch(setPacksTC())
+        setMyPack(false);
+        dispatch(setIdAC(''));
+        dispatch(getPacksTC());
     }, [dispatch, page]);
 
     const openModalWindow = () => {
@@ -48,7 +54,7 @@ export const Packs: React.FC = React.memo(() => {
     const allPacks = () => {
         setMyPack(false);
         dispatch(setIdAC(''));
-        dispatch(setPacksTC());
+        dispatch(getPacksTC());
     };
 
     const setInputValuse = (value: string) => {
@@ -59,10 +65,10 @@ export const Packs: React.FC = React.memo(() => {
     // отправляем поисковый запрос на сервер //send search request to the server 
     const search = () => {
         dispatch(setPackNameAC(searchValue));
-        dispatch(setPacksTC())
+        dispatch(getPacksTC())
         setSearchValue('')
     };
-    const cards = packs.map(p => {
+    const pack = packs.map(p => {
         return (
             <tr key={p._id}>
                 <Pack pack={p} />
@@ -74,7 +80,7 @@ export const Packs: React.FC = React.memo(() => {
     const myPacks = () => {
         setMyPack(true);
         dispatch(setIdAC(userLoginId));
-        dispatch(setPacksTC());
+        dispatch(getPacksTC());
     };
 
 
@@ -86,7 +92,9 @@ export const Packs: React.FC = React.memo(() => {
     }
 
 
-
+    if (!isLoggedIn) {
+        return <Redirect to={PATH.LOGIN} />
+    }
 
 
     return (
@@ -100,9 +108,14 @@ export const Packs: React.FC = React.memo(() => {
             }
             <div className={s.navBlock}>
                 <div className={s.allPack}>
-                    <Button onClick={openModalWindow} className={styleButton.button}>Add pack</Button>
-                    <Button onClick={allPacks} className={styleButton.button}>All packs</Button>
-                    <Button onClick={myPacks} className={styleButton.button}>My packs</Button>
+                    <div className={s.groupButton}>
+                        <h3>Show decks cards</h3>
+                        <Button className={styleButton.button} onClick={allPacks}>All</Button>
+                        <Button className={styleButton.button} onClick={myPacks}>My</Button>
+                    </div>
+
+
+
                 </div>
                 <div className={s.serachBlock}>
                     <Input
@@ -118,27 +131,14 @@ export const Packs: React.FC = React.memo(() => {
                     >
                         🔍
                     </button>
+                    <Button className={styleButton.button} onClick={openModalWindow}>Add pack</Button>
                 </div>
             </div>
             {/* Table */}
-            <table>
-                <thead className={s.packsHeader}>
-                    <tr>
-                        <th>username</th>
-                        <th>name pack</th>
-                        <th>cards</th>
-                        <th>time</th>
-                        <th>learn</th>
-                        <th>watch</th>
-                        <th>actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {cards}
-                </tbody>
-            </table>
-        {/*    {cardPacksTotalCount}*/}
-            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage}/>
+            <PackListTable />
+            {/* Pagination */}
+            {/*    {cardPacksTotalCount}*/}
+            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} />
 
 
         </div>

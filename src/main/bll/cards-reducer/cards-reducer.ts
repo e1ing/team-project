@@ -1,4 +1,5 @@
 import { CardType, GetCardsResponseType, SortPacksAndCardsOrderType } from "../../dal/api/api-cards";
+import { setAppStatusAC } from "../app-reducer";
 import { AppThunk } from "../store";
 import { cardsApi } from './../../dal/api/api-cards';
 
@@ -53,56 +54,62 @@ export const setSearchCardsValueAC = (searchCardsValue: string) => ({ type: "DIM
 // thunk
 export const getCardsTC = (packId: string, page?: number, pageCount?: number, searchCardsValue?: string, sortCardsOrder?: SortPacksAndCardsOrderType, sortCardsFilter?: string): AppThunk =>
     (dispatch) => {
+        dispatch(setAppStatusAC("loading"));
         cardsApi.getCards(packId, page, pageCount, searchCardsValue, sortCardsOrder, sortCardsFilter)
             .then(res => {
                 dispatch(setCardsAC(res.data))
                 dispatch(setCardsCountAC(res.data.cardsTotalCount))
+                dispatch(setAppStatusAC("succeeded"))
             })
             .catch(e => {
-                const error = e.res ? e.res.data.error : (`Get cards failed: ${e.message}.`)
-                alert(error)
+                const error = e.res ? e.res.data.error : (`Get cards failed: ${e.message}.`);
+                alert(error);
+                dispatch(setAppStatusAC("failed"));
             })
     };
-    
+
 export const addCardTC = (packId: string, cardQuestion: string, cardAnswer: string): AppThunk => (dispatch, getState) => {
-    const { page, pageCount, searchCardsValue } = getState().cards
-    debugger
+    const { page, pageCount, searchCardsValue } = getState().cards;
+    dispatch(setAppStatusAC("loading"));
     cardsApi.addCard(packId, cardQuestion, cardAnswer)
-        // status
+
         .then(res => {
             dispatch(getCardsTC(packId, page, pageCount, searchCardsValue))
-            // status
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch(e => {
-            const error = e.res ? e.res.data.error : (`Add card faild: ${e.message}.`)
-            alert(error)
+            const error = e.res ? e.res.data.error : (`Add card faild: ${e.message}.`);
+            alert(error);
+            dispatch(setAppStatusAC("failed"));
         })
 };
 
 export const updateCardTC = (packId: string, cardId: string, newCardQuestion: string, newCardAnswer: string): AppThunk => (dispatch, getState) => {
-    const { page, pageCount, searchCardsValue } = getState().cards
+    const { page, pageCount, searchCardsValue } = getState().cards;
+    dispatch(setAppStatusAC("loading"));
     cardsApi.updateCard(cardId, newCardQuestion, newCardAnswer)
-        // status
         .then(res => {
             dispatch(getCardsTC(packId, page, pageCount, searchCardsValue))
-            // status
+            dispatch(setAppStatusAC("succeeded"))
         })
         .catch(e => {
             const error = e.res ? e.res.data.error : (`Update card faild: ${e.message}.`)
-            alert(error)
+            alert(error);
+            dispatch(setAppStatusAC("failed"));
         })
 };
 
 export const deleteCardTC = (packId: string, cardId: string): AppThunk => (dispatch, getState) => {
-    const { page, pageCount, searchCardsValue } = getState().cards
+    const { page, pageCount, searchCardsValue } = getState().cards;
+    dispatch(setAppStatusAC("loading"));
     cardsApi.deleteCard(cardId)
-        // status
         .then(res => {
-            dispatch(getCardsTC(packId, page, pageCount, searchCardsValue))
-            // status
+            dispatch(getCardsTC(packId, page, pageCount, searchCardsValue));
+            dispatch(setAppStatusAC("succeeded"));
         })
         .catch(e => {
             const error = e.res ? e.res.data.error : (`Delete card faild: ${e.message}.`)
-            alert(error)
+            alert(error);
+            dispatch(setAppStatusAC("failed"));
         })
 };

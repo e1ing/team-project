@@ -1,0 +1,23 @@
+.learnQuestion {
+    margin: 8vh 0;
+    padding: 25px 35px;
+    max-width: 415px;
+    width: 100%;
+    background-color: #f9f9fe;
+    border-radius: 8px;
+    text-align: center;
+
+    min-height: 295px;
+}
+
+.caption {
+    margin-bottom: 25px;
+    font-size: 22px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+  }
+  
+  .block {
+    margin-bottom: 80px;
+    text-align: left;
+  }

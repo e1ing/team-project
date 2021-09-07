@@ -2,8 +2,9 @@ import React, { useCallback, useState, MouseEvent, ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button } from '../../../Button/Button';
 import { Input } from '../../../Input/Input';
-import s from '../../ModalWindow.module.css';
-import { setPacksTC, updatePacksTC } from './../../../../../bll/packs-reducer/packs-reduser';
+import s from '../../ModalWindow.module.css'
+import { updatePacksTC } from '../../../../../bll/packs-reducer/packs-reduser';
+import styleButton from '../../../Button/Button.module.css';
 
 
 type UpdatePacksPT = {
@@ -31,7 +32,7 @@ export const UpdatePacksModalWindow: React.FC<UpdatePacksPT> = React.memo((props
         };
         
         setUpdateActiveModal(false);
-    }, [dispatch, props]);
+    }, [dispatch, props, title]);
     const updateTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
@@ -46,8 +47,8 @@ export const UpdatePacksModalWindow: React.FC<UpdatePacksPT> = React.memo((props
         <div className={s.modalContainer} onClick={activeModal}>
             <div className={s.modalBlock} onClick={offActiveModal}>
                 <div className={s.title}> Update name of pack</div>
-                <Input  value={title} onChange={updateTitle} autoFocus />
-                <Button onClick={updatePack}>Okay</Button>
+                <Input value={title} onChange={updateTitle} autoFocus />
+                <Button className={styleButton.button} onClick={updatePack}>Okay</Button>
             </div>
         </div>
     )
