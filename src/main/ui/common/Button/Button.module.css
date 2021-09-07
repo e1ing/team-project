@@ -30,6 +30,10 @@
     background: #1d49aa;
 }
 
+.cancelButton:hover {
+    background-color: lightgray;
+}
+
 .button:focus {
     outline: none;
     box-shadow: 0 0 0 4px #cbd6ee;

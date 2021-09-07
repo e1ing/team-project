@@ -13,7 +13,9 @@ import { LearnAnswer } from './LearnAnswer';
 export const Learn = () => {
 
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
-
+    const setNextAnswer = () => {}
+    const question = "chocolate or sugar?"
+    const answer = "sugar"
 
 
     return (
@@ -21,10 +23,13 @@ export const Learn = () => {
                 {!showAnswer
                     ? <LearnQuestion
                         setShowAnswer={setShowAnswer}
+                        question={question}
 
                     />
                     : <LearnAnswer
-                        setShowAnswer={setShowAnswer}
+                        setNextAnswer={setNextAnswer}
+                        question={question}
+                        answer={answer}
                     />}
         </div >
         // <div className={styles.container}>

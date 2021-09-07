@@ -8,7 +8,9 @@ import styleButton from "../common/Button/Button.module.css";
 
 
 type LearnAnswerPropsType = {
-    setShowAnswer: (value: boolean) => void
+    setNextAnswer: (value: boolean) => void
+    question: string
+    answer: string
 }
 
 
@@ -20,19 +22,40 @@ export const LearnAnswer: React.FC<LearnAnswerPropsType> = React.memo((props) =>
                     <h1 className={commonStyles.h1}>Learn "Pack Name"</h1>
                     <div style={{display: 'flex', alignItems: 'center'}}>
                         <h2>Question: </h2>
+                        <div>{props.question}</div>
+                    </div>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        <h2>Answer: </h2>
+                        <div>{props.answer}</div>
                     </div>
                 </div>
-                <div className={style.bottom}>
+
+                <div style={{display: 'flex'}}>
+                    <input type="radio" className="custom-checkbox" id="haveNoIdea" name="haveNoIdea" value="1"/>
+                    <label htmlFor="haveNoIdea">без понятия</label>
+                </div>
+                <div style={{display: 'flex'}}>
+                    <input type="radio" className="custom-checkbox" id="doubt" name="doubt" value="2"/>
+                    <label htmlFor="doubt">сомневаюсь</label>
+                </div>
+                <div style={{display: 'flex'}}>
+                    <input type="radio" className="custom-checkbox" id="canForget" name="canForget" value="3"/>
+                    <label htmlFor="canForget">могу забыть</label>
+                </div>
+                <div style={{display: 'flex'}}>
+                    <input type="radio" className="custom-checkbox" id="sure" name="sure" value="4"/>
+                    <label htmlFor="doubt">знаю</label>
+                </div>
+                <div>
                     <div style={{display: 'flex'}}>
                         <Button className={styleButton.cancelButton}>cancel</Button>
                         <Button className={styleButton.button}
-                                onClick={() => props.setShowAnswer(true)}>
-                            show answer
+                                onClick={() => props.setNextAnswer(true)}>
+                            next
                         </Button>
                     </div>
                 </div>
             </div>
-
         </div>
     )
 })
