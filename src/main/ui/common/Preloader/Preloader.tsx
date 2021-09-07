@@ -1,4 +1,4 @@
-import loader from "../../assets/loader.gif";
+import loader from "../../../../assets/images/loader.gif";
 import React from "react";
 import s from './Preloader.module.css'
 import {useSelector} from "react-redux";

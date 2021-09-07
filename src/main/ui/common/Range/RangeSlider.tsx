@@ -1,13 +1,16 @@
 import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from "react";
-import style from "./Range.module.css";
+import s from "./RangeSlider.module.css";
+
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-type RangePropsType = DefaultInputPropsType & { // и + ещё пропсы которых нет в стандартном инпуте
+
+
+type RangeSliderPropsType = DefaultInputPropsType & {
     onChangeRange?: (value: number) => void
 };
 
-const Range: React.FC<RangePropsType> = (
+const RangeSlider: React.FC<RangeSliderPropsType> = (
     {
-        type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
+        type, // достаём и игнорируем чтобы нельзя было задать другой тип инпута
         onChange, onChangeRange,
         className,
 
@@ -20,10 +23,11 @@ const Range: React.FC<RangePropsType> = (
         onChangeRange && onChangeRange(+e.currentTarget.value);
     }
 
-    const finalRangeClassName = `${style.range} ${className ? className : ""}`;
+    const finalRangeClassName = `${s.range} ${className ? className : ""}`;
 
     return (
-        <>
+        <div>
+            <span>
             <input
                 type={"range"}
                 onChange={onChangeCallback}
@@ -31,8 +35,18 @@ const Range: React.FC<RangePropsType> = (
 
                 {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
             />
-        </>
+                </span>
+            <span>
+            <input
+                type={"range"}
+                onChange={onChangeCallback}
+                className={finalRangeClassName}
+
+                {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
+            />
+                </span>
+        </div>
     );
 }
 
-export default Range;
+export default RangeSlider;
