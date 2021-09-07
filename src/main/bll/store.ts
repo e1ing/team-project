@@ -7,6 +7,7 @@ import {ActionType, appReducer} from "./app-reducer";
 import { PacksActionType, packsReducer } from './packs-reducer/packs-reduser';
 import { CardsReducerActionType, cardsReducer } from './cards-reducer/cards-reducer';
 import {ActionLoginType, authReducer} from "./auth-reducer/auth-reducer";
+import { LearnPackReducerActionsType } from './learnPack-reduser';
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 
@@ -34,6 +35,7 @@ export type AppActionsType = RestorePasswordReducerActionsType
                             | CardsReducerActionType
                             | ActionType
                             | ActionLoginType
+                            | LearnPackReducerActionsType
 
 
 // чтобы можно было в консоли браузера обращаться к store в любой момент
