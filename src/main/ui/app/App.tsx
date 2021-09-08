@@ -5,6 +5,7 @@ import { Preloader } from "../common/Preloader/Preloader";
 import { useDispatch, useSelector } from "react-redux";
 import { AppRootStateType } from "../../bll/store";
 import { initializeAppTC } from "../../bll/auth-reducer/auth-reducer";
+import HeaderInMockup from "../Header/HeaderInMockup";
 
 function App() {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <div className="App">
+
           <HeaderInMockup/>
           <Routes/>
           <Preloader/>
