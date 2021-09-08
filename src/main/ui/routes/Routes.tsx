@@ -36,7 +36,7 @@ export const Routes = () => {
                 <Route path={PATH.PASSWORD_CHANGE} render={() => <PasswordChange/>}/>
                 <Route path={PATH.ERROR_404} render={() => <Error404/>}/>
                 <Route path={PATH.UPDATE_PASSWORD} render={() => <UpdatePassword/>} />
-                <Route path={PATH.LEARN} render={() => <Learn/>} />
+                <Route path={PATH.LEARN + `/:id`} render={() => <Learn/>} />
 
                 <Route path={PATH.PACKS_LIST} render={() => <Packs/>}/>
                 <Route path={PATH.CARDS + `/:id`} render={() => <CardsList/>}/>

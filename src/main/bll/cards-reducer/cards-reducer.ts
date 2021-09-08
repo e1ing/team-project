@@ -9,6 +9,7 @@ export type CardsReducerActionType =
     | ReturnType<typeof setCardsNewCurrentPageAC>
     | ReturnType<typeof setCardsNewCardsPageCountAC>
     | ReturnType<typeof setSearchCardsValueAC>
+    | ReturnType<typeof getCardQuestionAC>
 
 type InstanceStateType = typeof initialState;
 
@@ -19,6 +20,8 @@ const initialState = {
     page: 1,
     maxGrade: 0,
     minGrade: 0,
+    question: "",
+    answer: "",
 
     packUserId: "",
     token: "",
@@ -39,6 +42,8 @@ export const cardsReducer = (state: InstanceStateType = initialState, action: Ca
             return { ...state, pageCount: action.newPageCount }
         case "DIMA/TEAM-PROJECT/SET-SEARCH-CARDS-VALUE":
             return { ...state, searchCardsValue: action.searchCardsValue }
+        case "NIGAR/TEAM-PROJECT/GET-CARD-QUESTION":
+            return {...state, question: action.question}
         default:
             return state
     }
@@ -50,6 +55,10 @@ export const setCardsCountAC = (cardsTotalCount: number) => ({ type: "DIMA/TEAM-
 export const setCardsNewCurrentPageAC = (newCurrentPage: number) => ({ type: "DIMA/TEAM-PROJECT/SET-CARDS-NEW-CURRENT-PAGE", newCurrentPage } as const);
 export const setCardsNewCardsPageCountAC = (newPageCount: number) => ({ type: "DIMA/TEAM-PROJECT/SET-CARDS-NEW-CARDS-PAGE-COUNT", newPageCount } as const);
 export const setSearchCardsValueAC = (searchCardsValue: string) => ({ type: "DIMA/TEAM-PROJECT/SET-SEARCH-CARDS-VALUE", searchCardsValue } as const);
+
+
+export const getCardQuestionAC = (question: string) => ({type:"NIGAR/TEAM-PROJECT/GET-CARD-QUESTION", question} as const);
+
 
 // thunk
 export const getCardsTC = (packId: string, page?: number, pageCount?: number, searchCardsValue?: string, sortCardsOrder?: SortPacksAndCardsOrderType, sortCardsFilter?: string): AppThunk =>

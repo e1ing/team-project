@@ -68,13 +68,6 @@ export const Packs: React.FC = React.memo(() => {
         dispatch(getPacksTC())
         setSearchValue('')
     };
-    const pack = packs.map(p => {
-        return (
-            <tr key={p._id}>
-                <Pack pack={p} />
-            </tr>
-        )
-    });
 
 
     const myPacks = () => {
