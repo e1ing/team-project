@@ -8,6 +8,7 @@ import {Error404} from "../Error404/Error404";
 import { UpdatePassword } from '../UpdatePassword/UpdatePassword';
 import { Packs } from '../Packs/Packs';
 import { CardsList } from '../Packs/Cards/CardsList';
+import { Learn } from '../Learn/Learn';
 
 export const PATH = {
     LOGIN: "/login",
@@ -19,13 +20,14 @@ export const PATH = {
     UPDATE_PASSWORD: "/updatePassword/:token",
     PACKS_LIST: '/packList',
     CARDS: '/cards',
+    LEARN: '/learn'
     // add paths
 }
 export const Routes = () => {
     return (
         <div>
             <Switch>
-                <Route path={"/"} exact render={() => <Redirect to={"/"}/>}/>
+                <Route path={"/"} exact render={() => <Redirect to={"/login"}/>}/>
                 <Route path={PATH.LOGIN} render={() => <Login/>}/>
                 <Route path={PATH.SIGN_UP} render={() => <Registration/>}/>
                 <Route path={PATH.PROFILE} render={() => <Profile/>}/>
@@ -33,6 +35,7 @@ export const Routes = () => {
                 <Route path={PATH.PASSWORD_CHANGE} render={() => <PasswordChange/>}/>
                 <Route path={PATH.ERROR_404} render={() => <Error404/>}/>
                 <Route path={PATH.UPDATE_PASSWORD} render={() => <UpdatePassword/>} />
+                <Route path={PATH.LEARN + `/:id`} render={() => <Learn/>} />
 
                 <Route path={PATH.PACKS_LIST} render={() => <Packs/>}/>
                 <Route path={PATH.CARDS + `/:id`} render={() => <CardsList/>}/>

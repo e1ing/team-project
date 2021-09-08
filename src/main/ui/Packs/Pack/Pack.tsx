@@ -38,6 +38,11 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
             <td>{update}</td>
 
             <td>
+            <NavLink
+                    className={s.link}
+                    to={PATH.LEARN + `/:${pack._id}`}>
+                    learn
+                </NavLink>
             </td>
             <td>
                 <NavLink
