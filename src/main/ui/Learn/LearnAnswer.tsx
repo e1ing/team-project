@@ -74,7 +74,6 @@ export const LearnAnswer: React.FC<LearnAnswerPropsType> = React.memo((props) =>
                 </div>
                 <div>
                     <div style={{display: 'flex'}}>
-                        <Button className={styleButton.cancelButton}>cancel</Button>
                         <Button className={styleButton.button}
                                 onClick={() => props.setShowAnswer(false)}>
                             next
