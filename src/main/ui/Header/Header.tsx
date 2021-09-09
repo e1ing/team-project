@@ -1,11 +1,11 @@
 import React from 'react'
 import {PATH} from "../routes/Routes";
-import s from "./HeaderInMockup.module.css"
+import s from "./Header.module.css"
 import {LinkButton} from "./Link/Link";
 import packs from "../../../assets/images/packs.svg"
 import profile from "../../../assets/images/profile.svg"
 
-function HeaderInMockup() {
+function Header() {
 
     
     return (
@@ -19,4 +19,4 @@ function HeaderInMockup() {
     )
 }
 
-export default HeaderInMockup;
+export default Header;

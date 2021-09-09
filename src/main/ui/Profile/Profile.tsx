@@ -14,7 +14,7 @@ import {PackListTable} from '../Packs/PackListTadle';
 import {getPacksTC, setIdAC, setPackNameAC} from '../../bll/packs-reducer/packs-reduser';
 import {CreatePackModalWindow} from '../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow';
 import {Search} from "../common/Search/Search";
-import HeaderInMockup from "../Header/HeaderInMockup";
+import Header from "../Header/Header";
 import {Button} from "../common/Button/Button";
 import RangeSlider from "../common/Range/RangeSlider";
 import styleButton from "../common/Button/Button.module.css"
