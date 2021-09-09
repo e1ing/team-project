@@ -15,6 +15,7 @@ export type PacksActionType =
     | ReturnType<typeof setActivModalAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setPackCardsIdAC>
+    |ReturnType<typeof setCardsPerPageAC>
 
 export type InitialPacksStateType = ResponseDataType & {
     activeModal: boolean
@@ -69,24 +70,28 @@ export const packsReducer = (state: InitialPacksStateType = initialState, action
         case 'DIMA/TEAM-PROJECT/CARDS/SET-PACK-CARDS-ID': {
             return { ...state, packCardsId: action.packId }
         }
+        case 'NIGAR/TEAM-PROJECT/CARDS/CARDS-PER-PAGE':
+            return {...state, pageCount: action.pageCount}
         default:
             return state
     }
 }
 
 // AC
-export const setMaxCardsCoutnAC = (maxCount: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX-CARDS-NUMBER", maxCount } as const);
-export const setMinCardsCoutnAC = (minCount: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN-CARDS-NUMBER", minCount } as const);
+export const setCardsPerPageAC = (pageCount: number) => ({type:"NIGAR/TEAM-PROJECT/CARDS/CARDS-PER-PAGE", pageCount} as const);
 
-export const setIdAC = (_id: string) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-ID", _id } as const);
-export const setPackNameAC = (name: string) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-PACK-NAME", name } as const);
+export const setMaxCardsCoutnAC = (maxCount: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX-CARDS-NUMBER", maxCount} as const);
+export const setMinCardsCoutnAC = (minCount: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN-CARDS-NUMBER", minCount} as const);
 
-export const setMinAC = (min: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN", min } as const);
-export const setMaxAC = (max: number) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX", max } as const);
+export const setIdAC = (_id: string) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-ID", _id} as const);
+export const setPackNameAC = (name: string) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-PACK-NAME", name} as const);
 
-export const setPacksAC = (paks: Array<CardPacksDataType>) => ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-PACKS", paks } as const);
+export const setMinAC = (min: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MIN", min} as const);
+export const setMaxAC = (max: number) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-MAX", max} as const);
+
+export const setPacksAC = (paks: Array<CardPacksDataType>) => ({type: "DIMA/TEAM-PROJECT/CARDS/SET-PACKS", paks} as const);
 export const setEntityStatusPacksAC = (entityStatus: EntityStatusType, id: string) =>
-    ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-ENTITY-STATUS-PACKS", entityStatus, id } as const);
+    ({type: "DIMA/TEAM-PROJECT/CARDS/SET-ENTITY-STATUS-PACKS", entityStatus, id} as const);
 
 export const setActivModalAC = (active: boolean) =>
     ({ type: "DIMA/TEAM-PROJECT/CARDS/SET-ACTIVE-MODAL", active } as const);
@@ -162,7 +167,7 @@ export const updatePacksTC = (_id: string, name: string): AppThunk => (dispatch)
     dispatch(setAppStatusAC("loading"));
 
     packsApi.updatePacks(_id, name)
-
+    
         .then(() => {
             dispatch(getPacksTC())
             dispatch(setAppStatusAC("succeeded"))

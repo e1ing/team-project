@@ -13,7 +13,7 @@ export const Main = () => {
 
     useEffect(()=> {
         dispatch(initializeAppTC())
-    }, [])
+    }, [dispatch])
 
 
     if (!isInitialized) {

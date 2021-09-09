@@ -61,19 +61,14 @@ export const Packs: React.FC = React.memo(() => {
         setSearchValue(value);
     };
 
+
     // отправляем поисковый запрос на сервер //send search request to the server 
     const search = () => {
         dispatch(setPackNameAC(searchValue));
         dispatch(getPacksTC())
         setSearchValue('')
     };
-    const pack = packs.map(p => {
-        return (
-            <tr key={p._id}>
-                <Pack pack={p} />
-            </tr>
-        )
-    });
+
 
     const myPacks = () => {
         setMyPack(true);
@@ -81,8 +76,14 @@ export const Packs: React.FC = React.memo(() => {
         dispatch(getPacksTC());
     };
 
+
+
     //const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-    const paginate = (pageNumber: number) => dispatch(setCurrentPageAC(pageNumber))
+    const paginate = (pageNumber: number) => {
+        dispatch(setCurrentPageAC(pageNumber))
+        setCurrentPage(pageNumber)
+    }
+
 
     if (!isLoggedIn) {
         return <Redirect to={PATH.LOGIN} />
@@ -109,7 +110,6 @@ export const Packs: React.FC = React.memo(() => {
 
 
                 </div>
-
                 <div className={s.serachBlock}>
                     <Input
                         onChangeText={setInputValuse}
@@ -126,13 +126,12 @@ export const Packs: React.FC = React.memo(() => {
                     </button>
                     <Button className={styleButton.button} onClick={openModalWindow}>Add pack</Button>
                 </div>
-
             </div>
             {/* Table */}
             <PackListTable />
             {/* Pagination */}
             {/*    {cardPacksTotalCount}*/}
-            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} />
+            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage}/>
 
 
         </div>

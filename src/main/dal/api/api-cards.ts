@@ -211,11 +211,12 @@ export const cardsApi = {
     updateCard(cardId: string, question: string, answer: string){
         return instance.put<UpdateCardResponseType>(`cards/card`, {card: {_id: cardId, question, answer}})
     },
-}
+
+};
 
 
 export const learnPackAPI = {
     gradeCard(card_id: string, grade: number) {
         return instance.put(`/cards/grade`, {card_id, grade})
     }
-}
+};
