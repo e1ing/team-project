@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Button } from "../common/Button/Button";
 import s from "./LearnAnswer.module.css"
 import styles from "../Registration/Registartion.module.css";
@@ -15,6 +15,9 @@ type LearnAnswerPropsType = {
 
 
 export const LearnAnswer: React.FC<LearnAnswerPropsType> = React.memo((props) => {
+
+    const [valueChoice, setValueChoice] = useState<boolean>(false);
+
     return (
         <div className={styles.container}>
             <div className={styles.form}>
@@ -31,19 +34,42 @@ export const LearnAnswer: React.FC<LearnAnswerPropsType> = React.memo((props) =>
                 </div>
 
                 <div style={{display: 'flex'}}>
-                    <input type="radio" className={style.customRadio} id="haveNoIdea" name="haveNoIdea" value="1"/>
+                    <input type="radio" className={style.customRadio}
+                           id="haveNoIdea" name="haveNoIdea"
+                           value="1"
+                           onChange={()=> {
+                               console.log(1)}}
+                    />
                     <label htmlFor="haveNoIdea">без понятия</label>
                 </div>
                 <div style={{display: 'flex'}}>
-                    <input type="radio" className={style.customRadio} id="doubt" name="doubt" value="2"/>
+                    <input type="radio"
+                           className={style.customRadio}
+                           id="doubt" name="haveNoIdea"
+                           value="2"
+                           onChange={()=> {
+                               console.log(2)}}/>
                     <label htmlFor="doubt">сомневаюсь</label>
                 </div>
                 <div style={{display: 'flex'}}>
-                    <input type="radio" className={style.customRadio} id="canForget" name="canForget" value="3"/>
+                    <input type="radio"
+                           className={style.customRadio}
+                           id="canForget"
+                           name="haveNoIdea"
+                           value="3"
+                           onChange={()=> {
+                               console.log(3)}}/>
                     <label htmlFor="canForget">могу забыть</label>
                 </div>
                 <div style={{display: 'flex'}}>
-                    <input type="radio" className={style.customRadio} id="sure" name="sure" value="4"/>
+                    <input type="radio"
+                           className={style.customRadio}
+                           id="sure"
+                           name="haveNoIdea"
+                           value="4"
+                           onChange={()=> {
+                               console.log(4)}}
+                    />
                     <label htmlFor="sure">знаю</label>
                 </div>
                 <div>

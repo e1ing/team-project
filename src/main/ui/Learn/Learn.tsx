@@ -30,8 +30,6 @@ const getRandomCard = (cards: CardType[]) => {
     let i = 0;
 
     while(s < rand && cards.length > i) {
-        console.log('cards i ' ,cards[i])
-        console.log('i', i)
         s+= 6-(cards[i].grade);
         i++;
     }
