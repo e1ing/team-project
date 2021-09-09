@@ -16,6 +16,7 @@ import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/PackModal/
 import { PackListTable } from "./PackListTadle";
 import { Redirect } from "react-router-dom";
 import { PATH } from "../routes/Routes";
+import { Search } from "../common/Search/Search";
 
 export const Packs: React.FC = React.memo(() => {
 
