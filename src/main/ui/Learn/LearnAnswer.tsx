@@ -1,7 +1,6 @@
 import { CardType } from "../../dal/api/api-cards";
 import React, { ChangeEvent, useCallback, useState } from "react";
 import { Button } from "../common/Button/Button";
-import s from "./LearnAnswer.module.css"
 import styles from "../Registration/Registartion.module.css";
 import commonStyles from "../app/App.module.css";
 import style from "./LearnAnswer.module.css";
@@ -44,7 +43,7 @@ const mappedOptions = grades ? grades.map((option, index) => (
         />
         {option}
     </label>
-)) : [];
+)) : []
 
     return (
 

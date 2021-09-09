@@ -24,7 +24,7 @@ import { learnCardTC } from '../../bll/learn-card-reducer/learn-card-reducer';
 // }
 
 // getting rid of duplicate code
-export type AnswerType = -1 | 1 | 2 | 3 | 4 | 5;
+export type AnswerType = -1 | 0 | 1 | 2 | 3 | 4 | 5;
 
 const grades = ["без понятия", "сомневаюсь", "могу забыть", "знаю"];
 
@@ -69,19 +69,18 @@ export const Learn = React.memo(() => {
         }
     }, [dispatch, cards, firstCard, id])
 
+
     const onNextCard = useCallback((grade: number) => {
         setShowAnswer(false)
-        if(cards.length > 0){
-            if(grade){
+        if (cards.length > 0) {
+            if (grade !== -1) {
                 dispatch(learnCardTC(card._id, grade))
-                console.log(card._id)
             }
             setCard(getRandomCard(cards))
         }
-    }, [])
+    }, [dispatch, cards, card])
 
-// обрати внимание что выводит. сразу становиться для чего на slice
-    console.log(cards)
+
 
     if (!isLoggedIn) {
         return <Redirect to={"/login"}/>

@@ -5,11 +5,8 @@ import { AppRootStateType } from "../../bll/store";
 import s from "./Packs.module.css";
 import styleButton from './../../ui/common/Button/Button.module.css';
 import { setIdAC } from './../../bll/packs-reducer/packs-reduser';
-import { Pack } from "./Pack/Pack";
 import { CardPacksDataType } from "../../dal/api/api-cards";
 import { Button } from "../common/Button/Button";
-import { Input } from "../common/Input/Input";
-import { RequestStatusType } from "../../bll/app-reducer";
 import { Pagination } from "../common/Pagination/Pagination";
 
 import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow";
@@ -27,7 +24,6 @@ export const Packs: React.FC = React.memo(() => {
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
-    const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status);
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
 
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
@@ -112,6 +108,7 @@ export const Packs: React.FC = React.memo(() => {
 
                 <div className={s.serachBlock}>
                     <Search
+                    // @ts-ignore
                         onChange={setInputValuse}
                         value={searchValue}
                         placeholder="searh packs"
