@@ -16,6 +16,7 @@ import { CreatePackModalWindow } from "../common/ModalWIndow/ModalAdd/PackModal/
 import { PackListTable } from "./PackListTadle";
 import { Redirect } from "react-router-dom";
 import { PATH } from "../routes/Routes";
+import { Search } from "../common/Search/Search";
 
 export const Packs: React.FC = React.memo(() => {
 
@@ -62,7 +63,7 @@ export const Packs: React.FC = React.memo(() => {
     };
 
 
-    // отправляем поисковый запрос на сервер //send search request to the server 
+    // отправляем поисковый запрос на сервер //send search request to the server
     const search = () => {
         dispatch(setPackNameAC(searchValue));
         dispatch(getPacksTC())
@@ -75,8 +76,6 @@ export const Packs: React.FC = React.memo(() => {
         dispatch(setIdAC(userLoginId));
         dispatch(getPacksTC());
     };
-
-
 
     //const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
     const paginate = (pageNumber: number) => {
@@ -110,22 +109,16 @@ export const Packs: React.FC = React.memo(() => {
 
 
                 </div>
+
                 <div className={s.serachBlock}>
-                    <Input
-                        onChangeText={setInputValuse}
-                        onEnter={search}
+                    <Search
+                        onChange={setInputValuse}
                         value={searchValue}
                         placeholder="searh packs"
-                        className={s.saerchInput}
                     />
-                    <button
-                        className={s.searchButton}
-                        onClick={search}
-                    >
-                        🔍
-                    </button>
-                    <Button className={styleButton.button} onClick={openModalWindow}>Add pack</Button>
+
                 </div>
+
             </div>
             {/* Table */}
             <PackListTable />

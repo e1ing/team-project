@@ -1,38 +1,48 @@
-import React, {ChangeEvent, FC, useCallback, useEffect, useMemo, useState} from "react";
+import React, {ChangeEvent, FC, useEffect, useState} from "react";
 import style from "./Search.module.css"
-import debounce from 'lodash.debounce';
-import {getPacksTC, setPackNameAC} from "../../../bll/packs-reducer/packs-reduser";
-import {useDispatch} from "react-redux";
 
 type SearchPropsType = {
-    names: string
+    value: string
+    placeholder: string
+    onChange: (text: string) => void
+
 }
 
-export const Search: FC<SearchPropsType> = ({names}) => {
-    const dispatch = useDispatch();
-    const [searchValue, setSearchValue] = useState<string>("");
-    let changedName = names;
-    if (searchValue !== "") {
-       changedName = names.toLowerCase();
-       }
+export const Search: FC<SearchPropsType> = ({value, placeholder, onChange}) => {
+    // state for keepign search text
+    const [searchText, setSearchText] = useState<string>(value);
+    // state for keeping the timeout
+    const [searchTextTimeout, setSearchTextTimeout] = useState<number>(0);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setSearchValue(e.target.value);
-        dispatch(setPackNameAC(searchValue));
-        dispatch(getPacksTC())
-    }
+    // onChange handler
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+        // cancelling previous timeouts
+        if (searchTextTimeout) {
+            clearTimeout(searchTextTimeout);
+        }
+        // first update the input text as user type
+        setSearchText(e.currentTarget.value);
+        // initialize a setimeout by wrapping in our searchTextTimeout so that we can clear it out using clearTimeout
+        setSearchTextTimeout(
+            +setTimeout(() => {
+                onChange(e.target.value);
+                // timeout is 2500ms, change it to less or more.
+            }, 1500),
+        );
+    };
 
-    const debouncedHandler = useMemo(() =>
-        debounce(handleChange, 1000),
-        [ names, setSearchValue]);
+    // making sure that we clear the timeout if/when the component unmount
+    useEffect(() => {
+        return () => clearTimeout(searchTextTimeout);
+    }, [searchTextTimeout]);
 
     return (
         <input
             className={style.searchInput}
-            name = {"search"}
-            type={"text"}
-            placeholder={"Searh packs"}
-            onChange ={debouncedHandler}
+            placeholder={placeholder}
+            type="text"
+            value={searchText}
+            onChange={handleOnChange}
         />
     )
 }

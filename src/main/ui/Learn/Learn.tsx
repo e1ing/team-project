@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import s from './Learn.module.css'
 
-
 import { LearnQuestion } from './LearnQuestion';
 import { LearnAnswer } from './LearnAnswer';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,6 +8,7 @@ import { AppRootStateType } from '../../bll/store';
 import { Redirect, useParams } from 'react-router-dom';
 import { CardType } from '../../dal/api/api-cards';
 import { getCardsTC } from '../../bll/cards-reducer/cards-reducer';
+import { learnCardTC } from '../../bll/learn-card-reducer/learn-card-reducer';
 
 
 //формула от игната
@@ -23,14 +23,19 @@ import { getCardsTC } from '../../bll/cards-reducer/cards-reducer';
 //     return cards[res.id + 1]
 // }
 
+// getting rid of duplicate code
+export type AnswerType = -1 | 1 | 2 | 3 | 4 | 5;
+
+const grades = ["без понятия", "сомневаюсь", "могу забыть", "знаю"];
+
 const getRandomCard = (cards: CardType[]) => {
-    const sum = cards.reduce((acc, card) => acc + (4-card.grade)**2, 0)
+    const sum = cards.reduce((acc, card) => acc + (5-card.grade)**2, 0)
     const rand = Math.random() * sum //33
     let s = 0;
     let i = 0;
 
     while(s < rand && cards.length > i) {
-        s+= 6-(cards[i].grade);
+        s+= 5-(cards[i].grade);
         i++;
     }
     return cards[i-1]
@@ -49,19 +54,31 @@ export const Learn = React.memo(() => {
 
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const [firstCard, setFirstCard] = useState<boolean>(true)
-    const [card, setCard] = useState<CardType>({} as CardType)
+    const [card, setCard] = useState<CardType>({_id: ""} as CardType)
 
     const {id} = useParams<{ id: string }>() //получается здесь массив из двух айдищников?
-    console.log('до слайса здесь айдишник юзера', id, 'после айдишник карты', id.slice(1))
+
+    
     useEffect(() => {
         if (firstCard) {
-            dispatch(getCardsTC(id.slice(1))) // <- эта жесть пока другой костыль не придумал .slice(1)
+            dispatch(getCardsTC(id.slice(1))) 
             setFirstCard(false)
         }
         if (cards.length > 0) {
             setCard(getRandomCard(cards))
         }
     }, [dispatch, cards, firstCard, id])
+
+    const onNextCard = useCallback((grade: number) => {
+        setShowAnswer(false)
+        if(cards.length > 0){
+            if(grade){
+                dispatch(learnCardTC(card._id, grade))
+                console.log(card._id)
+            }
+            setCard(getRandomCard(cards))
+        }
+    }, [])
 
 // обрати внимание что выводит. сразу становиться для чего на slice
     console.log(cards)
@@ -83,69 +100,10 @@ export const Learn = React.memo(() => {
                 : <LearnAnswer
                     setShowAnswer={setShowAnswer}
                     card={card}
+                    onNextCard={onNextCard}
+                    grades={grades}
                 />}
         </div >
 
     )
 })
-
-
-
-
-
-
-// import React, {useEffect, useState} from 'react';
-// import s from './Learn.module.css'
-// import { LearnQuestion } from './LearnQuestion';
-// import { LearnAnswer } from './LearnAnswer';
-// import App from "../app/App";
-// import {useDispatch, useSelector} from "react-redux";
-// import {useParams} from "react-router-dom";
-// import {AppRootStateType} from "../../bll/store";
-// import {getCardsTC} from "../../bll/cards-reducer/cards-reducer";
-// import {CardType} from "../../dal/api/api-cards";
-//
-//
-//
-// export const Learn = () => {
-//     //const { cardId } = useParams<{ cardId: string }>();
-//     const cardId = '6137585819cc8600049362aa'
-//     const [showAnswer, setShowAnswer] = useState<boolean>(false)
-//     const [firstCard, setFirstCard] = useState<boolean>(true)
-//     const setNextAnswer = () => {}
-//     const cards = useSelector<AppRootStateType, CardType[]>(state => state.cards.cards);
-//
-//
-//
-//     const [card, setCard] = useState<CardType>({_id: ""} as CardType)
-//
-//
-//     const dispatch = useDispatch();
-//
-//     useEffect(()=> {
-//         if(firstCard) {
-//             dispatch(getCardsTC(cardId))
-//             setFirstCard(false)
-//         }
-//         // if(cards.length === 0){
-//         //      setFirstCard(true)
-//         // }
-//     }, [])
-//
-//     console.log(cardId)
-//
-//     return (
-//         <div className={s.container}>
-//                 {!showAnswer
-//                     ? <LearnQuestion
-//                         setShowAnswer={setShowAnswer}
-//                         card={card}
-//
-//                     />
-//                     : <LearnAnswer
-//                         setNextAnswer={setNextAnswer}
-//                         card={card}
-//                     />}
-//         </div >
-//     )
-// }

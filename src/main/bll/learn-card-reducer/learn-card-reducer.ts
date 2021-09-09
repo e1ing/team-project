@@ -1,7 +1,6 @@
-import {CardType, GetCardsResponseType, learnPackAPI, SortPacksAndCardsOrderType} from "../../dal/api/api-cards";
+import { learnPackAPI} from "../../dal/api/api-cards";
 import { setAppStatusAC } from "../app-reducer";
 import { AppThunk } from "../store";
-import { cardsApi } from './../../dal/api/api-cards';
 
 export type LearnCardReducerActionType =
     ReturnType<typeof getInfoCardAC>
@@ -10,25 +9,20 @@ export type LearnCardReducerActionType =
 type InstanceStateType = typeof initialState;
 
 const initialState = {
-
-
+    grade: 0
 };
 
 export const learnCardReducer = (state: InstanceStateType = initialState, action: LearnCardReducerActionType): InstanceStateType => {
     switch (action.type) {
         case "DIMA/TEAM-PROJECT/GET-INFO-CARD":
-            return { ...state}
+            return { ...state, grade: action.grade}
         default:
             return state
     }
 };
 
 // AC
-export const getInfoCardAC = () => ({ type: "DIMA/TEAM-PROJECT/GET-INFO-CARD"} as const);
-
-
-
-
+export const getInfoCardAC = (grade: number) => ({ type: "DIMA/TEAM-PROJECT/GET-INFO-CARD", grade} as const);
 
 
 // thunk
@@ -37,6 +31,7 @@ export const learnCardTC = (cardId: string, grade: number): AppThunk =>
         dispatch(setAppStatusAC("loading"));
         learnPackAPI.gradeCard(cardId, grade)
             .then(res => {
+                dispatch(getInfoCardAC(grade))
                 dispatch(setAppStatusAC("succeeded"))
             })
             .catch(e => {

@@ -15,6 +15,7 @@ type LearnQuestionPropsType = {
 
 export const LearnQuestion: React.FC<LearnQuestionPropsType> = React.memo((props) => {
     return (
+
         <div className={styles.container}>
             <div className={styles.form}>
                 <div className={styles.content}>
