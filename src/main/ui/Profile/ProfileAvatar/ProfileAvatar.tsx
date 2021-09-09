@@ -12,15 +12,11 @@ export const ProfileAvatar = React.memo(() => {
     const avatar = profile.avatar ? profile.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYiH8tkuj5i6qW1Vg9W1FlDPTbgg1rDpUNdA&usqp=CAU"
     
     return (
-        <div className={s.profileAvatar}>
+        <div className={s.avaContainer}>
             <div className={s.ava}>
                     <img src={avatar} alt="avatar" title={"avatar"}/>
                 </div>
             <h2 className={s.name}>{profile.name}</h2>
-
-            <div className={s.profileAvatarButtonContainer}>
-
-            </div>
         </div>
     )
 })

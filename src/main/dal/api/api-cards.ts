@@ -1,6 +1,6 @@
 import axios from "axios";
-import { ProfileResponseType } from "../../bll/auth-reducer/auth-reducer";
-import { RegistrationDataType } from "../../bll/auth-reducer/registration-reducer";
+import {ProfileResponseType} from "../../bll/auth-reducer/auth-reducer";
+import {RegistrationDataType} from "../../bll/auth-reducer/registration-reducer";
 
 export type UserDataType = {
     _id: string
@@ -198,11 +198,11 @@ export const packsApi = {
 };
 
 export const cardsApi = {
-    getCards(packId: string, page?: number, pageCount: number = 10, question?: string, sortCardsOrder?: SortPacksAndCardsOrderType, sortCardsFilter?: string, answer?: string, min?: number, max?:number){
+    getCards(packId: string, page?: number, pageCount?: number, question?: string, sortCardsOrder?: SortPacksAndCardsOrderType, sortCardsFilter?: string, answer?: string, min?: number, max?:number){
         return instance.get<GetCardsResponseType>(`cards/card?cardQuestion=${question ? question : ""}&cardsPack_id=${packId}&pageCount=${pageCount}&sortCards=${sortCardsOrder}${sortCardsFilter}`)
     },
 
-    addCard(packId: string, question: string, answer: string){
+    addCard(packId: string, question?: string, answer?: string){
         return instance.post<AddCardResponseType>(`cards/card`, {card: {cardsPack_id: packId, question, answer,}})
     },
     deleteCard(cardId: string){
