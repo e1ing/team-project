@@ -1,23 +1,27 @@
 {
   "files": {
-    "main.css": "/team-project/static/css/main.d9a9b167.chunk.css",
-    "main.js": "/team-project/static/js/main.170a1067.chunk.js",
-    "main.js.map": "/team-project/static/js/main.170a1067.chunk.js.map",
-    "runtime-main.js": "/team-project/static/js/runtime-main.129635b4.js",
-    "runtime-main.js.map": "/team-project/static/js/runtime-main.129635b4.js.map",
-    "static/js/2.7e9484ff.chunk.js": "/team-project/static/js/2.7e9484ff.chunk.js",
-    "static/js/2.7e9484ff.chunk.js.map": "/team-project/static/js/2.7e9484ff.chunk.js.map",
-    "static/js/3.f9fcec7d.chunk.js": "/team-project/static/js/3.f9fcec7d.chunk.js",
-    "static/js/3.f9fcec7d.chunk.js.map": "/team-project/static/js/3.f9fcec7d.chunk.js.map",
+    "main.css": "/team-project/static/css/main.5c658379.chunk.css",
+    "main.js": "/team-project/static/js/main.9f1cb578.chunk.js",
+    "main.js.map": "/team-project/static/js/main.9f1cb578.chunk.js.map",
+    "runtime-main.js": "/team-project/static/js/runtime-main.879442c2.js",
+    "runtime-main.js.map": "/team-project/static/js/runtime-main.879442c2.js.map",
+    "static/js/2.656c6d94.chunk.js": "/team-project/static/js/2.656c6d94.chunk.js",
+    "static/js/2.656c6d94.chunk.js.map": "/team-project/static/js/2.656c6d94.chunk.js.map",
+    "static/js/3.7bf3e18e.chunk.js": "/team-project/static/js/3.7bf3e18e.chunk.js",
+    "static/js/3.7bf3e18e.chunk.js.map": "/team-project/static/js/3.7bf3e18e.chunk.js.map",
     "index.html": "/team-project/index.html",
-    "static/css/main.d9a9b167.chunk.css.map": "/team-project/static/css/main.d9a9b167.chunk.css.map",
-    "static/js/2.7e9484ff.chunk.js.LICENSE.txt": "/team-project/static/js/2.7e9484ff.chunk.js.LICENSE.txt",
-    "static/media/email.7b2dee87.svg": "/team-project/static/media/email.7b2dee87.svg"
+    "static/css/main.5c658379.chunk.css.map": "/team-project/static/css/main.5c658379.chunk.css.map",
+    "static/js/2.656c6d94.chunk.js.LICENSE.txt": "/team-project/static/js/2.656c6d94.chunk.js.LICENSE.txt",
+    "static/media/email.7b2dee87.svg": "/team-project/static/media/email.7b2dee87.svg",
+    "static/media/left.b1ce4bad.png": "/team-project/static/media/left.b1ce4bad.png",
+    "static/media/packs.9cff790b.svg": "/team-project/static/media/packs.9cff790b.svg",
+    "static/media/profile.6166565d.svg": "/team-project/static/media/profile.6166565d.svg",
+    "static/media/right.f75f4196.png": "/team-project/static/media/right.f75f4196.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.129635b4.js",
-    "static/js/2.7e9484ff.chunk.js",
-    "static/css/main.d9a9b167.chunk.css",
-    "static/js/main.170a1067.chunk.js"
+    "static/js/runtime-main.879442c2.js",
+    "static/js/2.656c6d94.chunk.js",
+    "static/css/main.5c658379.chunk.css",
+    "static/js/main.9f1cb578.chunk.js"
   ]
 }
