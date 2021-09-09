@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import s from './Learn.module.css'
 
-
 import { LearnQuestion } from './LearnQuestion';
 import { LearnAnswer } from './LearnAnswer';
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,14 +23,19 @@ import { learnCardTC } from '../../bll/learn-card-reducer/learn-card-reducer';
 //     return cards[res.id + 1]
 // }
 
+// getting rid of duplicate code
+export type AnswerType = -1 | 1 | 2 | 3 | 4 | 5;
+
+const grades = ["без понятия", "сомневаюсь", "могу забыть", "знаю"];
+
 const getRandomCard = (cards: CardType[]) => {
-    const sum = cards.reduce((acc, card) => acc + (4-card.grade)**2, 0)
+    const sum = cards.reduce((acc, card) => acc + (5-card.grade)**2, 0)
     const rand = Math.random() * sum //33
     let s = 0;
     let i = 0;
 
     while(s < rand && cards.length > i) {
-        s+= 6-(cards[i].grade);
+        s+= 5-(cards[i].grade);
         i++;
     }
     return cards[i-1]
@@ -50,14 +54,14 @@ export const Learn = React.memo(() => {
 
     const [showAnswer, setShowAnswer] = useState<boolean>(false)
     const [firstCard, setFirstCard] = useState<boolean>(true)
-    const [card, setCard] = useState<CardType>({} as CardType)
+    const [card, setCard] = useState<CardType>({_id: ""} as CardType)
 
     const {id} = useParams<{ id: string }>() //получается здесь массив из двух айдищников?
 
-    console.log('до слайса здесь айдишник юзера', id, 'после айдишник карты', id.slice(1))
+    
     useEffect(() => {
         if (firstCard) {
-            dispatch(getCardsTC(id.slice(1))) // <- эта жесть пока другой костыль не придумал .slice(1)
+            dispatch(getCardsTC(id.slice(1))) 
             setFirstCard(false)
         }
         if (cards.length > 0) {
@@ -68,7 +72,11 @@ export const Learn = React.memo(() => {
     const onNextCard = useCallback((grade: number) => {
         setShowAnswer(false)
         if(cards.length > 0){
-            setCard(learnCardTC(card._id, grade))
+            if(grade){
+                dispatch(learnCardTC(card._id, grade))
+                console.log(card._id)
+            }
+            setCard(getRandomCard(cards))
         }
     }, [])
 
@@ -92,6 +100,8 @@ export const Learn = React.memo(() => {
                 : <LearnAnswer
                     setShowAnswer={setShowAnswer}
                     card={card}
+                    onNextCard={onNextCard}
+                    grades={grades}
                 />}
         </div >
 
