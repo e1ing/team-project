@@ -9,20 +9,19 @@ export type LearnCardReducerActionType =
 type InstanceStateType = typeof initialState;
 
 const initialState = {
-    grade: 0
 };
 
 export const learnCardReducer = (state: InstanceStateType = initialState, action: LearnCardReducerActionType): InstanceStateType => {
     switch (action.type) {
         case "DIMA/TEAM-PROJECT/GET-INFO-CARD":
-            return { ...state, grade: action.grade}
+            return {...state}
         default:
             return state
     }
 };
 
 // AC
-export const getInfoCardAC = (grade: number) => ({ type: "DIMA/TEAM-PROJECT/GET-INFO-CARD", grade} as const);
+export const getInfoCardAC = () => ({ type: "DIMA/TEAM-PROJECT/GET-INFO-CARD"} as const);
 
 
 // thunk
@@ -31,7 +30,7 @@ export const learnCardTC = (cardId: string, grade: number): AppThunk =>
         dispatch(setAppStatusAC("loading"));
         learnPackAPI.gradeCard(cardId, grade)
             .then(res => {
-                dispatch(getInfoCardAC(grade))
+                dispatch(getInfoCardAC())
                 dispatch(setAppStatusAC("succeeded"))
             })
             .catch(e => {

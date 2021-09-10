@@ -27,14 +27,12 @@ export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props)
     const [question, setQuestion] = useState<string>("");
     const [answer, setAnswer] = useState<string>("");
 
-
-
     const addSaveHandler = useCallback(() => {
 
         dispatch(addCardTC(id, question, answer))
         setActive(false);
 
-    }, [props, id, question, answer]);
+    }, [addCardTC, id, question, answer]);
 
     const onPressEnterAddCard = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') addSaveHandler();
