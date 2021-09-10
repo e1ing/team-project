@@ -9,13 +9,14 @@ import { PATH } from "../routes/Routes";
 import { ProfileAvatar } from './ProfileAvatar/ProfileAvatar';
 import { MainTitle } from '../PasswordRecovery/PasswordRecovery';
 import { PackListTable } from '../Packs/PackListTadle';
-import { getPacksTC, setIdAC } from '../../bll/packs-reducer/packs-reduser';
+import {getPacksTC, setCurrentPageAC, setIdAC} from '../../bll/packs-reducer/packs-reduser';
 import { Button } from "../common/Button/Button";
 import styleButton from "../common/Button/Button.module.css"
 import { Preloader } from '../common/Preloader/Preloader';
 import { CreatePackModalWindow } from '../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow';
 import RangeSlider from '../common/Range/RangeSlider';
 import { Search } from '../common/Search/Search';
+import {Pagination} from "../common/Pagination/Pagination";
 
 export const Profile: React.FC = React.memo(() => {
 
@@ -27,6 +28,7 @@ export const Profile: React.FC = React.memo(() => {
 
     const [myPack, setMyPack] = useState<boolean>(false);
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
     useEffect(() => {
         setMyPack(true);
@@ -43,7 +45,7 @@ export const Profile: React.FC = React.memo(() => {
 
 
     //search logic
-    const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
+   /* const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
     const name = useSelector<AppRootStateType, string>(state => state.packs.name);
     const [searchValue, setSearchValue] = useState<string>(name);
     const setInputValuse = (value: string) => {
@@ -61,7 +63,7 @@ export const Profile: React.FC = React.memo(() => {
                 <Pack pack={p} />
             </tr>
         )
-    });
+    });*/
 
     //
     if (!isInitialized) {
