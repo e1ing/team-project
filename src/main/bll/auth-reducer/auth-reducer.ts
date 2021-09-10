@@ -1,5 +1,5 @@
-import { AppRootStateType, AppThunk } from "../store";
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import { AppThunk } from "../store";
+import { ThunkDispatch } from "redux-thunk";
 import { authAPI } from "../../dal/api/api-cards";
 import { setAppStatusAC } from "../app-reducer";
 
@@ -99,7 +99,7 @@ export const logoutTC = (): AppThunk =>
     async (dispatch) => {
         try {
             dispatch(setAppStatusAC("loading"));
-            const res = await authAPI.logout()
+            await authAPI.logout()
             dispatch(setIsLoggedInAC(false))
             dispatch(setAppStatusAC("succeeded"))
         } catch (e) {

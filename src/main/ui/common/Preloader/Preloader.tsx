@@ -15,7 +15,7 @@ export const Preloader = () => {
     return (
         <div  className={s.loaderContainer}>
             <div className={s.loader}>
-            <img src={loader}/>
+            <img alt="icon" src={loader}/>
             </div>
         </div>
     )

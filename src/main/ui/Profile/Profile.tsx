@@ -35,7 +35,7 @@ export const Profile: React.FC = React.memo(() => {
         dispatch(setIdAC(userLoginId));
         dispatch(getPacksTC());
 
-    }, [dispatch, userLoginId]);
+    }, [dispatch, setMyPack, userLoginId]);
 
     const openModalWindow = () => {
         setActiveModalAdd(true);
