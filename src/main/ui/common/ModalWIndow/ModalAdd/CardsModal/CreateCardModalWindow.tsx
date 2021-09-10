@@ -16,7 +16,6 @@ type CreatePacksPT = {
 export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props) => {
 
     const {
-        activeModalAdd,
         setActive
     } = props;
 
@@ -32,7 +31,7 @@ export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props)
         dispatch(addCardTC(id, question, answer))
         setActive(false);
 
-    }, [addCardTC, id, question, answer]);
+    }, [id, question, answer, dispatch, setActive]);
 
     const onPressEnterAddCard = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') addSaveHandler();
@@ -45,7 +44,7 @@ export const CreateCardModalWindow: React.FC<CreatePacksPT> = React.memo((props)
         setAnswer(e.currentTarget.value);
     };
 
-    const onModalHandler = useCallback(() => setActive(false), [props]);
+    const onModalHandler = useCallback(() => setActive(false), [setActive]);
     const offActiveModal = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation();
 
     return (

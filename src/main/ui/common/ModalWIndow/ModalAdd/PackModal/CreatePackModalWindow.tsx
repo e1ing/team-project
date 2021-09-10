@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, MouseEvent } from "react";
+import React, { ChangeEvent, useState, MouseEvent, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { createPacksTC } from "../../../../../bll/packs-reducer/packs-reduser";
 import { Button } from "../../../Button/Button";
@@ -14,7 +14,6 @@ type CreatePacksType = {
 export const CreatePackModalWindow: React.FC<CreatePacksType> = React.memo((props) => {
 
     const {
-        activeModal,
         setActive
     } = props;
 
@@ -22,17 +21,18 @@ export const CreatePackModalWindow: React.FC<CreatePacksType> = React.memo((prop
 
     const [title, setTitle] = useState<string>('');
 
-    const createCardsHandler = () => {
+    const createCardsHandler = useCallback(() => {
         dispatch(createPacksTC(title))
         if (title !== '') {
             setTitle('');
         }
         setActive(false);
-    };
+    }, [title, setActive, dispatch]);
+
     const changeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     };
-    const activeModalHandler = () => setActive(false);
+    const activeModalHandler = useCallback(() => setActive(false), [setActive])
     const offActiveModal = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation();
 
     return (

@@ -53,8 +53,8 @@ export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portion
                     {pageNumbers
                         .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                         .map(number => (
-                            <div className={styles.paginationA}>
-                            <span key={number} className={currentPage === number ? styles.active : ''}
+                            <div key={number.toString()} className={styles.paginationA}>
+                            <span  className={currentPage === number ? styles.active : ''}
                                   onClick={(e) => paginate(number)}>
                             {number}
 

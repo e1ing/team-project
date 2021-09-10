@@ -22,11 +22,11 @@ export const DeletPackModalWindow: React.FC<DeletPacksPT> = React.memo((props) =
     const deletPack = useCallback(() => {
         dispatch(deletePacksTC(packId));
         setActiveModal(false);
-    }, [dispatch, props]);
+    }, [dispatch, packId, setActiveModal]);
 
     const stopModal = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation();
-    const resetPack = useCallback(() => setActiveModal(false), [props]);
-    const activeModal = useCallback(() => setActiveModal(false), [props]);
+    const resetPack = useCallback(() => setActiveModal(false), [setActiveModal]);
+    const activeModal = useCallback(() => setActiveModal(false), [setActiveModal]);
 
 
     return (

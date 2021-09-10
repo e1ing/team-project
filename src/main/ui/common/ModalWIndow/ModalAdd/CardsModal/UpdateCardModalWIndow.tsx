@@ -14,8 +14,6 @@ type UpdateCardPT = {
     answer: string
 }
 
-
-
 export const UpdateCardModalWindow: React.FC<UpdateCardPT> = React.memo((props) => {
 
     const {
@@ -37,7 +35,7 @@ export const UpdateCardModalWindow: React.FC<UpdateCardPT> = React.memo((props) 
             setNewQuestion("");
         }
         setActiveModal(false);
-    }, [props, newQestion, newAnswer]);
+    }, [cardId, dispatch, newQestion, newAnswer, setNewQuestion, packId, setActiveModal]);
 
     const updateQuestionHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setNewQuestion(e.currentTarget.value);
@@ -51,7 +49,7 @@ export const UpdateCardModalWindow: React.FC<UpdateCardPT> = React.memo((props) 
 
 
     return (
-        <div className={s.modalContainer}  onClick={activeModalHandler}>
+        <div className={s.modalContainer} onClick={activeModalHandler}>
             <div className={s.modalBlock} onClick={stopModal}>
                 <div className={s.title}>
                     Update this card?
