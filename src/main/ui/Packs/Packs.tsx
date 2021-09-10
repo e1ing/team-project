@@ -59,16 +59,17 @@ export const Packs: React.FC = React.memo(() => {
     };
 
     const setInputValuse = (value: string) => {
-        setSearchValue(value);
+        dispatch(setPackNameAC(value));
+        dispatch(getPacksTC())  ///засунуть в useEffect
     };
 
 
     // отправляем поисковый запрос на сервер //send search request to the server
-    const search = () => {
+    /*const search = () => {
         dispatch(setPackNameAC(searchValue));
         dispatch(getPacksTC())
         setSearchValue('')
-    };
+    };*/
 
 
     const myPacks = () => {
