@@ -17,7 +17,7 @@ import { Search } from "../common/Search/Search";
 export const Packs: React.FC = React.memo(() => {
 
     const dispatch = useDispatch();
-
+    const pageCount = useSelector<AppRootStateType, number>(state => state.packs.pageCount)
     const name = useSelector<AppRootStateType, string>(state => state.packs.name);
     const page = useSelector<AppRootStateType, number>(state => state.packs.page);
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
