@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {inspect} from "util";
 import left from "./../Images/left.png"
 import right from "./../Images/right.png"
 import styles from "./Pagination.module.css"
@@ -12,12 +13,13 @@ type pageType = {
     paginate: (pageNumber: number)=> void
     portionSize: number
     currentPage: number
+    pageCount: number
 }
-export const Pagination = React.memo(({currentPage, sizePage, totalPacks, paginate, portionSize = 10}: pageType)  => {
+export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portionSize = 10, pageCount}: pageType)  => {
 
     const pageNumbers = [];
 
-    const pageCount = useSelector<AppRootStateType, number>(state => state.packs.pageCount) //добавили юселектор на pageCount(чтоб смотреть изменения)
+
 
     const pagesCount = Math.ceil(totalPacks/ sizePage);
 
@@ -33,9 +35,9 @@ export const Pagination = React.memo(({currentPage, sizePage, totalPacks, pagina
     let leftPortionPageNumber = (portionNumber-1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize;
 
-    useEffect(() => {
-        dispatch(getPacksTC())
-    }, [dispatch, pageCount]); //передаем в юзэффект экщн который ветает packs
+    // useEffect(() => {
+    //     dispatch(getPacksTC())
+    // }, [dispatch, pageCount]); //передаем в юзэффект экщн который ветает packs
 
     useEffect(() => {
         dispatch(setCardsPerPageAC(+value)) //передаем в юзффкт в диспатч экшн который сетает в pageCount value из select
@@ -46,14 +48,14 @@ export const Pagination = React.memo(({currentPage, sizePage, totalPacks, pagina
                 { portionNumber > 1 &&
                 <button className={styles.button}
                         onClick={()=> {setPortionNumber(portionNumber-1)}} >
-                    <img alt="icon" className={styles.img} src={left}/>
+                    <img className={styles.img} src={left}/>
                 </button>}
 
                     {pageNumbers
                         .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                         .map(number => (
-                            <div key={number.toString()} className={styles.paginationA}>
-                            <span  className={currentPage === number ? styles.active : ''}
+                            <div className={styles.paginationA}>
+                            <span key={number} className={currentPage === number ? styles.active : ''}
                                   onClick={(e) => paginate(number)}>
                             {number}
 
@@ -64,7 +66,7 @@ export const Pagination = React.memo(({currentPage, sizePage, totalPacks, pagina
                 {portionCount > portionNumber &&
                 <button className={styles.button}  onClick={() => {
                     setPortionNumber(portionNumber + 1)
-                }}><img alt="icon" className={styles.img} src={right}/></button>
+                }}><img className={styles.img} src={right}/></button>
                 }
             </ul>
             Show <select value={value} className={styles.select} onChange={(e)=> {
@@ -76,4 +78,4 @@ export const Pagination = React.memo(({currentPage, sizePage, totalPacks, pagina
         </select> Cards per Page
         </nav>
     )
-})
+}

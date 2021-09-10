@@ -34,8 +34,8 @@ export const Packs: React.FC = React.memo(() => {
     useEffect(() => {
         setMyPack(false);
         dispatch(setIdAC(''));
-        // dispatch(getPacksTC());
-    }, [dispatch, page]);
+        dispatch(getPacksTC());
+    }, [dispatch, page, pageCount]);
 
     const allPacks = () => {
         setMyPack(false);
@@ -111,7 +111,7 @@ export const Packs: React.FC = React.memo(() => {
             <PackListTable />
             {/* Pagination */}
             {/*    {cardPacksTotalCount}*/}
-            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage} />
+            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage} pageCount={pageCount}/>
 
 
         </div>

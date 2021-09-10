@@ -25,7 +25,7 @@ export const Profile: React.FC = React.memo(() => {
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
     const dispatch = useDispatch();
-
+    const pageCount = useSelector<AppRootStateType, number>(state => state.packs.pageCount)
     const [myPack, setMyPack] = useState<boolean>(false);
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -111,7 +111,7 @@ export const Profile: React.FC = React.memo(() => {
                     </div>
                     <div className={css.packsContainer}>
                         <PackListTable />
-                        <Pagination sizePage={10} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage}/>
+                        <Pagination sizePage={10} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage} pageCount={pageCount}/>
                     </div>
                 </div>
             </div>
