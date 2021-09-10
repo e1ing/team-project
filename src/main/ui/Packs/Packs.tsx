@@ -23,7 +23,7 @@ export const Packs: React.FC = React.memo(() => {
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
-
+    const pageCount = useSelector<AppRootStateType, number>(state => state.packs.pageCount) //добавили юселектор на pageCount(чтоб смотреть изменения)
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>(name);
     const [myPack, setMyPack] = useState<boolean>(false);
@@ -35,7 +35,7 @@ export const Packs: React.FC = React.memo(() => {
         setMyPack(false);
         dispatch(setIdAC(''));
         dispatch(getPacksTC());
-    }, [dispatch, page]);
+    }, [dispatch, page, pageCount]);
 
     const allPacks = () => {
         setMyPack(false);
@@ -111,7 +111,7 @@ export const Packs: React.FC = React.memo(() => {
             <PackListTable />
             {/* Pagination */}
             {/*    {cardPacksTotalCount}*/}
-            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage} />
+            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage} pageCount={pageCount}/>
 
 
         </div>

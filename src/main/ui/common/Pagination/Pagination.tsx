@@ -13,12 +13,13 @@ type pageType = {
     paginate: (pageNumber: number)=> void
     portionSize: number
     currentPage: number
+    pageCount: number
 }
-export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portionSize = 10}: pageType)  => {
+export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portionSize = 10, pageCount}: pageType)  => {
 
     const pageNumbers = [];
 
-    const pageCount = useSelector<AppRootStateType, number>(state => state.packs.pageCount) //добавили юселектор на pageCount(чтоб смотреть изменения)
+
 
     const pagesCount = Math.ceil(totalPacks/ sizePage);
 
@@ -34,9 +35,9 @@ export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portion
     let leftPortionPageNumber = (portionNumber-1) * portionSize + 1;
     let rightPortionPageNumber = portionNumber * portionSize;
 
-    useEffect(() => {
-        dispatch(getPacksTC())
-    }, [dispatch, pageCount]); //передаем в юзэффект экщн который ветает packs
+    // useEffect(() => {
+    //     dispatch(getPacksTC())
+    // }, [dispatch, pageCount]); //передаем в юзэффект экщн который ветает packs
 
     useEffect(() => {
         dispatch(setCardsPerPageAC(+value)) //передаем в юзффкт в диспатч экшн который сетает в pageCount value из select
