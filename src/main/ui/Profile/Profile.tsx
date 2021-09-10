@@ -11,7 +11,7 @@ import {PATH} from "../routes/Routes";
 import {ProfileAvatar} from './ProfileAvatar/ProfileAvatar';
 import {MainTitle} from '../PasswordRecovery/PasswordRecovery';
 import {PackListTable} from '../Packs/PackListTadle';
-import {getPacksTC, setIdAC, setPackNameAC} from '../../bll/packs-reducer/packs-reduser';
+import {getPacksTC, setCurrentPageAC, setIdAC, setPackNameAC} from '../../bll/packs-reducer/packs-reduser';
 import {CreatePackModalWindow} from '../common/ModalWIndow/ModalAdd/PackModal/CreatePackModalWindow';
 import {Search} from "../common/Search/Search";
 import Header from "../Header/Header";
@@ -20,6 +20,7 @@ import RangeSlider from "../common/Range/RangeSlider";
 import styleButton from "../common/Button/Button.module.css"
 import {Pack} from "../Packs/Pack/Pack";
 import {CardPacksDataType} from "../../dal/api/api-cards";
+import {Pagination} from "../common/Pagination/Pagination";
 
 export const Profile: React.FC = React.memo(() => {
 
@@ -27,7 +28,7 @@ export const Profile: React.FC = React.memo(() => {
     const isInitialized = useSelector<AppRootStateType, boolean>(state => state.auth.isInitialized);
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
-
+    const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
     const dispatch = useDispatch();
 
     const [myPack, setMyPack] = useState<boolean>(false);
@@ -57,6 +58,7 @@ export const Profile: React.FC = React.memo(() => {
     const setInputValuse = (value: string) => {
         setSearchValue(value);
     };
+    const [currentPage, setCurrentPage] = useState<number>(1);
     const search = () => {
         dispatch(setPackNameAC(searchValue));
         dispatch(getPacksTC())
@@ -76,6 +78,10 @@ export const Profile: React.FC = React.memo(() => {
     }
     if (!isLoggedIn) {
         return <Redirect to={PATH.LOGIN}/>
+    }
+    const paginate = (pageNumber: number) => {
+        dispatch(setCurrentPageAC(pageNumber))
+        setCurrentPage(pageNumber)
     }
 
     return (
@@ -112,6 +118,7 @@ export const Profile: React.FC = React.memo(() => {
                     </div>
                     <div className={css.packsContainer}>
                         <PackListTable/>
+                        <Pagination sizePage={10} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage}/>
                     </div>
                 </div>
             </div>
