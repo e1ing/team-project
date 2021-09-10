@@ -44,8 +44,19 @@ export const Packs: React.FC = React.memo(() => {
     };
 
     const setInputValuse = (value: string) => {
-        setSearchValue(value);
+       /* setSearchValue(value);*/
+        dispatch(setPackNameAC(value));
+        dispatch(getPacksTC())  ///засунуть в useEffect
     };
+
+
+    // отправляем поисковый запрос на сервер //send search request to the server
+    /*const search = () => {
+        dispatch(setPackNameAC(searchValue));
+        dispatch(getPacksTC())
+        setSearchValue('')
+    };*/
+
 
     const myPacks = () => {
         setMyPack(true);
@@ -88,7 +99,6 @@ export const Packs: React.FC = React.memo(() => {
 
                 <div className={s.serachBlock}>
                     <Search
-                        // @ts-ignore
                         onChange={setInputValuse}
                         value={searchValue}
                         placeholder="searh packs"

@@ -38,7 +38,6 @@ export const Search: FC<SearchPropsType> = ({value, placeholder, onChange}) => {
 
     return (
         <input
-            className={style.searchInput}
             placeholder={placeholder}
             type="text"
             value={searchText}
