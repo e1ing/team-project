@@ -3,7 +3,6 @@ import React, { ChangeEvent, useCallback, useState } from "react";
 import { Button } from "../common/Button/Button";
 import styles from "../Registration/Registartion.module.css";
 import commonStyles from "../app/App.module.css";
-import style from "./LearnAnswer.module.css";
 import styleButton from "../common/Button/Button.module.css";
 import { AnswerType } from "./Learn";
 

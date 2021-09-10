@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { useSelector } from 'react-redux';
 import { NavLink } from "react-router-dom";
 import { AppRootStateType } from "../../../bll/store";
 import { CardPacksDataType } from "../../../dal/api/api-cards";
@@ -38,7 +38,7 @@ export const Pack: React.FC<PackPT> = React.memo((props) => {
             <td>{update}</td>
 
             <td>
-            <NavLink
+                <NavLink
                     className={s.link}
                     to={PATH.LEARN + `/:${pack._id}`}>
                     learn

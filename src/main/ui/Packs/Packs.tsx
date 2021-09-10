@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPageAC, setPackNameAC, getPacksTC } from "../../bll/packs-reducer/packs-reduser";
+import { setCurrentPageAC, getPacksTC } from "../../bll/packs-reducer/packs-reduser";
 import { AppRootStateType } from "../../bll/store";
 import s from "./Packs.module.css";
 import styleButton from './../../ui/common/Button/Button.module.css';
 import { setIdAC } from './../../bll/packs-reducer/packs-reduser';
-import { CardPacksDataType } from "../../dal/api/api-cards";
 import { Button } from "../common/Button/Button";
 import { Pagination } from "../common/Pagination/Pagination";
 
@@ -22,7 +21,6 @@ export const Packs: React.FC = React.memo(() => {
     const name = useSelector<AppRootStateType, string>(state => state.packs.name);
     const page = useSelector<AppRootStateType, number>(state => state.packs.page);
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
-    const packs = useSelector<AppRootStateType, Array<CardPacksDataType>>(state => state.packs.cardPacks);
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
 
@@ -33,21 +31,12 @@ export const Packs: React.FC = React.memo(() => {
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [sizePage] = useState<number>(10);
 
-    const indexOfLastPack = currentPage * sizePage;
-    const indexOfFirstPack = indexOfLastPack - sizePage;
-
-    const currentPack = packs.slice(indexOfLastPack, indexOfFirstPack)
-
-
     useEffect(() => {
         setMyPack(false);
         dispatch(setIdAC(''));
         dispatch(getPacksTC());
     }, [dispatch, page]);
 
-    const openModalWindow = () => {
-        setActiveModalAdd(true);
-    };
     const allPacks = () => {
         setMyPack(false);
         dispatch(setIdAC(''));
@@ -57,15 +46,6 @@ export const Packs: React.FC = React.memo(() => {
     const setInputValuse = (value: string) => {
         setSearchValue(value);
     };
-
-
-    // отправляем поисковый запрос на сервер //send search request to the server
-    const search = () => {
-        dispatch(setPackNameAC(searchValue));
-        dispatch(getPacksTC())
-        setSearchValue('')
-    };
-
 
     const myPacks = () => {
         setMyPack(true);
@@ -108,7 +88,7 @@ export const Packs: React.FC = React.memo(() => {
 
                 <div className={s.serachBlock}>
                     <Search
-                    // @ts-ignore
+                        // @ts-ignore
                         onChange={setInputValuse}
                         value={searchValue}
                         placeholder="searh packs"
@@ -121,7 +101,7 @@ export const Packs: React.FC = React.memo(() => {
             <PackListTable />
             {/* Pagination */}
             {/*    {cardPacksTotalCount}*/}
-            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage}/>
+            <Pagination sizePage={sizePage} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage} />
 
 
         </div>

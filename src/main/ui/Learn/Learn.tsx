@@ -58,17 +58,15 @@ export const Learn = React.memo(() => {
 
     const {id} = useParams<{ id: string }>() //получается здесь массив из двух айдищников?
 
-    
     useEffect(() => {
         if (firstCard) {
-            dispatch(getCardsTC(id.slice(1))) 
+            dispatch(getCardsTC(id.slice(1)))
             setFirstCard(false)
         }
         if (cards.length > 0) {
             setCard(getRandomCard(cards))
         }
-    }, [dispatch, cards, firstCard, id])
-
+    }, [dispatch, cards, firstCard, id,]);
 
     const onNextCard = useCallback((grade: number) => {
         setShowAnswer(false)
@@ -78,9 +76,7 @@ export const Learn = React.memo(() => {
             }
             setCard(getRandomCard(cards))
         }
-    }, [dispatch, cards, card])
-
-
+    }, [dispatch, cards, card]);
 
     if (!isLoggedIn) {
         return <Redirect to={"/login"}/>
