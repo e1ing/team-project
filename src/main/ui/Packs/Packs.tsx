@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPageAC, getPacksTC } from "../../bll/packs-reducer/packs-reduser";
+import {setCurrentPageAC, getPacksTC, setPackNameAC} from "../../bll/packs-reducer/packs-reduser";
 import { AppRootStateType } from "../../bll/store";
 import s from "./Packs.module.css";
 import styleButton from './../../ui/common/Button/Button.module.css';
