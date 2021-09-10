@@ -34,7 +34,7 @@ export const Packs: React.FC = React.memo(() => {
     useEffect(() => {
         setMyPack(false);
         dispatch(setIdAC(''));
-        dispatch(getPacksTC());
+        // dispatch(getPacksTC());
     }, [dispatch, page]);
 
     const allPacks = () => {

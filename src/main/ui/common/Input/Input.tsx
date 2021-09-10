@@ -34,9 +34,6 @@ export const Input: React.FC<SuperInputTextPropsType> = (
         && onEnter() // то вызвать его
     }
 
-    const finalSpanClassName = `${styles.error}`
-    const finalInputClassName = `${styles.errorInput} ${className? className: ""}`
-
     return (
         <>
             <input

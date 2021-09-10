@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {inspect} from "util";
 import left from "./../Images/left.png"
 import right from "./../Images/right.png"
 import styles from "./Pagination.module.css"
@@ -14,7 +13,7 @@ type pageType = {
     portionSize: number
     currentPage: number
 }
-export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portionSize = 10}: pageType)  => {
+export const Pagination = React.memo(({currentPage, sizePage, totalPacks, paginate, portionSize = 10}: pageType)  => {
 
     const pageNumbers = [];
 
@@ -47,14 +46,14 @@ export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portion
                 { portionNumber > 1 &&
                 <button className={styles.button}
                         onClick={()=> {setPortionNumber(portionNumber-1)}} >
-                    <img className={styles.img} src={left}/>
+                    <img alt="icon" className={styles.img} src={left}/>
                 </button>}
 
                     {pageNumbers
                         .filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
                         .map(number => (
-                            <div className={styles.paginationA}>
-                            <span key={number} className={currentPage === number ? styles.active : ''}
+                            <div key={number.toString()} className={styles.paginationA}>
+                            <span  className={currentPage === number ? styles.active : ''}
                                   onClick={(e) => paginate(number)}>
                             {number}
 
@@ -65,7 +64,7 @@ export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portion
                 {portionCount > portionNumber &&
                 <button className={styles.button}  onClick={() => {
                     setPortionNumber(portionNumber + 1)
-                }}><img className={styles.img} src={right}/></button>
+                }}><img alt="icon" className={styles.img} src={right}/></button>
                 }
             </ul>
             Show <select value={value} className={styles.select} onChange={(e)=> {
@@ -77,4 +76,4 @@ export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portion
         </select> Cards per Page
         </nav>
     )
-}
+})

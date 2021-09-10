@@ -33,7 +33,7 @@ export const Profile: React.FC = React.memo(() => {
     useEffect(() => {
         setMyPack(true);
         dispatch(setIdAC(userLoginId));
-        dispatch(getPacksTC());
+        // dispatch(getPacksTC());
 
     }, [dispatch, setMyPack, userLoginId]);
 
