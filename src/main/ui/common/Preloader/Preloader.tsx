@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../../../bll/store";
 import {RequestStatusType} from "../../../bll/app-reducer";
 
-export const Preloader = () => {
+export const Preloader = React.memo(() => {
 
     const status = useSelector<AppRootStateType, RequestStatusType>(state => state.app.status)
 
@@ -19,5 +19,5 @@ export const Preloader = () => {
             </div>
         </div>
     )
-}
+})
 

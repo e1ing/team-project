@@ -13,7 +13,7 @@ type pageType = {
     portionSize: number
     currentPage: number
 }
-export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portionSize = 10}: pageType)  => {
+export const Pagination = React.memo(({currentPage, sizePage, totalPacks, paginate, portionSize = 10}: pageType)  => {
 
     const pageNumbers = [];
 
@@ -76,4 +76,4 @@ export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portion
         </select> Cards per Page
         </nav>
     )
-}
+})

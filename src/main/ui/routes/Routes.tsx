@@ -9,7 +9,7 @@ import {Error404} from "../Error404/Error404";
 import { UpdatePassword } from '../UpdatePassword/UpdatePassword';
 import { Packs } from '../Packs/Packs';
 import { CardsList } from '../Packs/Cards/CardsList';
-import {Learn} from "../Learn/Learn";
+import { Learn } from '../Learn/Learn';
 
 export const PATH = {
     LOGIN: "/login",
