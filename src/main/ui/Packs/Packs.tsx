@@ -24,6 +24,8 @@ export const Packs: React.FC = React.memo(() => {
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
 
+   
+
     const [activeModalAdd, setActiveModalAdd] = useState<boolean>(false);
     const [searchValue, setSearchValue] = useState<string>(name);
     const [myPack, setMyPack] = useState<boolean>(false);
@@ -34,7 +36,7 @@ export const Packs: React.FC = React.memo(() => {
     useEffect(() => {
         setMyPack(false);
         dispatch(setIdAC(''));
-        // dispatch(getPacksTC());
+        dispatch(getPacksTC());
     }, [dispatch, page]);
 
     const allPacks = () => {

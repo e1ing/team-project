@@ -34,7 +34,7 @@ export const Pagination = React.memo(({currentPage, sizePage, totalPacks, pagina
     let rightPortionPageNumber = portionNumber * portionSize;
 
     useEffect(() => {
-        dispatch(getPacksTC())
+        // dispatch(getPacksTC())
     }, [dispatch, pageCount]); //передаем в юзэффект экщн который ветает packs
 
     useEffect(() => {

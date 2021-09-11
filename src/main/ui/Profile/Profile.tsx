@@ -24,6 +24,9 @@ export const Profile: React.FC = React.memo(() => {
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
+
+    const idPack = useSelector<AppRootStateType, string>(state => state.packs._id);
+
     const dispatch = useDispatch();
 
     const [myPack, setMyPack] = useState<boolean>(false);
@@ -32,8 +35,11 @@ export const Profile: React.FC = React.memo(() => {
 
     useEffect(() => {
         setMyPack(true);
-        dispatch(setIdAC(userLoginId));
-        // dispatch(getPacksTC());
+       
+        if(userLoginId === idPack){
+            dispatch(getPacksTC())
+        }
+       dispatch(setIdAC(userLoginId));
 
     }, [dispatch, setMyPack, userLoginId]);
 
