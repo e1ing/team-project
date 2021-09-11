@@ -17,6 +17,7 @@ import { CreatePackModalWindow } from '../common/ModalWIndow/ModalAdd/PackModal/
 import RangeSlider from '../common/Range/RangeSlider';
 import { Search } from '../common/Search/Search';
 import {Pagination} from "../common/Pagination/Pagination";
+import { CardPacksDataType } from '../../dal/api/api-cards';
 
 export const Profile: React.FC = React.memo(() => {
 
@@ -26,6 +27,7 @@ export const Profile: React.FC = React.memo(() => {
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
 
     const idPack = useSelector<AppRootStateType, string>(state => state.packs._id);
+    const packs = useSelector<AppRootStateType, CardPacksDataType[]>(state => state.packs.cardPacks);
 
     const dispatch = useDispatch();
 
@@ -35,13 +37,12 @@ export const Profile: React.FC = React.memo(() => {
 
     useEffect(() => {
         setMyPack(true);
-       
         if(userLoginId === idPack){
             dispatch(getPacksTC())
         }
        dispatch(setIdAC(userLoginId));
 
-    }, [dispatch, setMyPack, userLoginId]);
+    }, [dispatch, setMyPack, userLoginId, idPack]);
 
     const openModalWindow = () => {
         setActiveModalAdd(true);
@@ -70,6 +71,8 @@ export const Profile: React.FC = React.memo(() => {
             </tr>
         )
     });*/
+
+    
 
     //
     if (!isInitialized) {
@@ -116,7 +119,7 @@ export const Profile: React.FC = React.memo(() => {
                         <Button className={styleButton.button} onClick={openModalWindow}>Add pack</Button>
                     </div>
                     <div className={css.packsContainer}>
-                        <PackListTable />
+                        {!packs.find((pack) => pack.user_id !==  userLoginId) ? <PackListTable /> : undefined}
                         <Pagination sizePage={10} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage}/>
                     </div>
                 </div>
