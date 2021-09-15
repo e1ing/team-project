@@ -7,7 +7,7 @@ import styleButton from '../../../Button/Button.module.css';
 
 type DeletPacksPT = {
     packId: string
-    setActiveModal:(active: boolean) => void
+    setActiveModal: (active: boolean) => void
     cardId: string
 };
 
@@ -24,11 +24,11 @@ export const DeletCardModalWindow: React.FC<DeletPacksPT> = React.memo((props) =
     const deletPack = useCallback(() => {
         dispatch(deleteCardTC(packId, cardId));
         setActiveModal(false);
-    }, [dispatch, props]);
+    }, [dispatch, cardId, packId, setActiveModal]);
 
     const stopModal = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation();
-    const resetPack = useCallback(() => setActiveModal(false), [props]);
-    const activeModal = useCallback(() => setActiveModal(false), [props]);
+    const resetPack = useCallback(() => setActiveModal(false), [setActiveModal]);
+    const activeModal = useCallback(() => setActiveModal(false), [setActiveModal]);
 
 
     return (

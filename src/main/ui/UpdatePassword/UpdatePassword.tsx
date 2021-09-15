@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "../common/Button/Button";
 import { Input } from "../common/Input/Input";
 import { MainTitle } from "../PasswordRecovery/PasswordRecovery";
@@ -18,12 +18,9 @@ export const UpdatePassword: React.FC = React.memo(() => {
     const isloggenIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     const dispatch = useDispatch();
 
-    const [showPassword, setShowPassword] = useState<boolean>(false);
-    const { token } = useParams<{ token: string }>();
+    const showPassword = false;
 
-    const mouseDownPasswordHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault()
-    };
+    const { token } = useParams<{ token: string }>();
 
     const formik = useFormik({
         initialValues: {

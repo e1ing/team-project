@@ -17,7 +17,7 @@ export const PasswordChange: React.FC = React.memo(() => {
         <div className={s.checkEmailBlock}>
             <div className={s.checkEmail}>
                 <div className={s.iconBg}>
-                    <img src={icon} />
+                    <img alt="icon" src={icon} />
                 </div>
                 <h2 className={s.caption}>Check Email</h2>
                 <p className={s.text}>We've sent an Email with instructions to example to</p>

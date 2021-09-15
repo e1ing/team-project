@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {inspect} from "util";
 import left from "./../Images/left.png"
 import right from "./../Images/right.png"
 import styles from "./Pagination.module.css"
@@ -16,6 +15,7 @@ type pageType = {
     pageCount: number
 }
 export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portionSize = 10, pageCount}: pageType)  => {
+export const Pagination = React.memo(({currentPage, sizePage, totalPacks, paginate, portionSize = 10}: pageType)  => {
 
     const pageNumbers = [];
 
@@ -78,4 +78,4 @@ export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portion
         </select> Cards per Page
         </nav>
     )
-}
+})

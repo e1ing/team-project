@@ -31,7 +31,7 @@ export const updatePasswordTC = (newPassword: string, token: string): ThunkActio
     async (dispatch) => {
         try{
             dispatch(setAppStatusAC("loading"));
-            const res = await authAPI.setNewPassword(newPassword, token)
+            await authAPI.setNewPassword(newPassword, token)
             dispatch(isSuccessAC(true))
             dispatch(setAppStatusAC("succeeded"))
         } catch(e){

@@ -22,7 +22,7 @@ export const UpdatePacksModalWindow: React.FC<UpdatePacksPT> = React.memo((props
     } = props;
 
     const dispatch = useDispatch();
-    
+
     const [title, setTitle] = useState<string>(name);
 
     const updatePack = useCallback(() => {
@@ -30,16 +30,16 @@ export const UpdatePacksModalWindow: React.FC<UpdatePacksPT> = React.memo((props
         if (title !== '') {
             setTitle('');
         };
-        
+
         setUpdateActiveModal(false);
-    }, [dispatch, props, title]);
+    }, [dispatch, packId, title, setTitle, setUpdateActiveModal]);
     const updateTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
 
     const activeModal = useCallback(() => {
         setUpdateActiveModal(false);
-    }, [props]);
+    }, [setUpdateActiveModal]);
     const offActiveModal = (e: MouseEvent<HTMLDivElement>) => e.stopPropagation();
 
 
