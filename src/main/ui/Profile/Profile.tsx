@@ -23,6 +23,7 @@ export const Profile: React.FC = React.memo(() => {
     const isInitialized = useSelector<AppRootStateType, boolean>(state => state.auth.isInitialized);
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn);
     const userLoginId = useSelector<AppRootStateType, string>(state => state.auth.profile._id);
+    const idPack = useSelector<AppRootStateType, string>(state => state.packs._id);
     const cardPacksTotalCount = useSelector<AppRootStateType, number>(state => state.packs.cardPacksTotalCount);
     const dispatch = useDispatch();
     const pageCount = useSelector<AppRootStateType, number>(state => state.packs.pageCount)
@@ -33,7 +34,9 @@ export const Profile: React.FC = React.memo(() => {
     useEffect(() => {
         setMyPack(true);
         dispatch(setIdAC(userLoginId));
-        // dispatch(getPacksTC());
+        if(userLoginId === idPack) {
+            dispatch(getPacksTC());
+        }
 
     }, [dispatch, setMyPack, userLoginId]);
 
