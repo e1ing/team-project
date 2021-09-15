@@ -119,7 +119,8 @@ export const Profile: React.FC = React.memo(() => {
                     </div>
                     <div className={css.packsContainer}>
                         {!packs.find((pack) => pack.user_id !==  userLoginId) ? <PackListTable /> : undefined}
-                        <Pagination sizePage={10} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage}/>
+                        {/*{packs.find((pack) => pack.user_id ===  userLoginId) ? <PackListTable /> : undefined}*/}
+                        <Pagination sizePage={10} totalPacks={cardPacksTotalCount} paginate={paginate} portionSize={10} currentPage={currentPage} pageCount={pageCount}/>
                     </div>
                 </div>
             </div>

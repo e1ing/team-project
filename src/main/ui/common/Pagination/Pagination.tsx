@@ -14,9 +14,9 @@ type pageType = {
     currentPage: number
     pageCount: number
 }
-export const Pagination = ({currentPage, sizePage, totalPacks, paginate, portionSize = 10, pageCount}: pageType)  => {
-export const Pagination = React.memo(({currentPage, sizePage, totalPacks, paginate, portionSize = 10}: pageType)  => {
 
+export const Pagination = React.memo(({currentPage, sizePage, totalPacks, paginate, portionSize = 10, pageCount}: pageType)  => {
+    console.log("i want see rerender of pagination")
     const pageNumbers = [];
 
 
